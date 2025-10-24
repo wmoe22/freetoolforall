@@ -1,6 +1,7 @@
 'use client'
 
-import * as Sentry from "@sentry/nextjs";
+import { Button } from "@/components/ui/button";
+import *sentry from "@sentry/nextjs";
 import { AlertTriangle, RefreshCw } from "lucide-react";
 import { Component, ErrorInfo, ReactNode } from "react";
 
@@ -58,13 +59,13 @@ export default class ErrorBoundary extends Component<Props, State> {
                         </p>
 
                         <div className="space-y-3">
-                            <button
+                            <Button
                                 onClick={() => window.location.reload()}
-                                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+                                className="w-full"
                             >
-                                <RefreshCw size={16} />
+                                <RefreshCw size={16} className="mr-2" />
                                 Reload Page
-                            </button>
+                            </Button>
 
                             {this.state.eventId && (
                                 <p className="text-xs text-slate-500 dark:text-slate-400">

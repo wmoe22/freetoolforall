@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { AdminUsageDashboard } from '@/components/lazy/LazyUsageDashboard';
 import { Eye, EyeOff, Lock } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -62,12 +64,12 @@ export default function AdminPage() {
                         <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
                             Admin Dashboard
                         </h1>
-                        <button
+                        <Button
                             onClick={handleLogout}
-                            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                            variant="destructive"
                         >
                             Logout
-                        </button>
+                        </Button>
                     </div>
 
                     <AdminUsageDashboard />
@@ -98,24 +100,26 @@ export default function AdminPage() {
                             Password
                         </label>
                         <div className="relative">
-                            <input
+                            <Input
                                 id="password"
                                 type={showPassword ? 'text' : 'password'}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="w-full px-4 py-3 pr-12 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
                                 placeholder="Enter admin password"
                                 required
                                 disabled={isLoading}
+                                className="pr-12"
                             />
-                            <button
+                            <Button
                                 type="button"
+                                variant="ghost"
+                                size="icon"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2"
                                 disabled={isLoading}
                             >
                                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                            </button>
+                            </Button>
                         </div>
                     </div>
 
@@ -125,13 +129,13 @@ export default function AdminPage() {
                         </div>
                     )}
 
-                    <button
+                    <Button
                         type="submit"
                         disabled={isLoading || !password.trim()}
-                        className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
+                        className="w-full"
                     >
                         {isLoading ? 'Authenticating...' : 'Access Dashboard'}
-                    </button>
+                    </Button>
                 </form>
 
                 <div className="mt-6 text-center">
