@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@/components/ui/button';
 import { UsageTracker } from '@/lib/usage-tracker';
 import { AlertTriangle, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -65,13 +66,15 @@ export default function UsageWarning() {
                         </p>
                     </div>
                 </div>
-                <button
+                <Button
                     onClick={() => setIsDismissed(true)}
-                    className="text-yellow-600 dark:text-yellow-400 hover:text-yellow-800 dark:hover:text-yellow-200 p-1"
+                    variant="ghost"
+                    size="icon"
+                    className="text-yellow-600 dark:text-yellow-400 hover:text-yellow-800 dark:hover:text-yellow-200"
                     aria-label="Dismiss warning"
                 >
                     <X size={16} />
-                </button>
+                </Button>
             </div>
         </div>
     );

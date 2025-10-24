@@ -1,6 +1,8 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ImageAnalyzer, ImagePresets, ImageProcessor } from '@/lib/image-utils'
@@ -297,11 +299,10 @@ export default function VisualHub() {
                                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                                         Select Image
                                     </label>
-                                    <input
+                                    <Input
                                         type="file"
                                         onChange={handleCompressFileSelect}
                                         accept="image/*"
-                                        className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 dark:file:bg-purple-900 dark:file:text-purple-300"
                                     />
                                     {compressFile && (
                                         <div className="space-y-2">
@@ -341,26 +342,30 @@ export default function VisualHub() {
                                                         Quick Presets
                                                     </label>
                                                     <div className="grid grid-cols-2 gap-2">
-                                                        <button
+                                                        <Button
                                                             onClick={() => {
                                                                 setCompressQuality(ImagePresets.web.quality)
                                                                 setMaxWidth(ImagePresets.web.maxWidth?.toString() || '')
                                                                 setMaxHeight(ImagePresets.web.maxHeight?.toString() || '')
                                                             }}
-                                                            className="p-2 text-xs border border-purple-300 dark:border-purple-600 rounded bg-white dark:bg-slate-800 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20"
+                                                            variant="outline"
+                                                            size="sm"
+                                                            className="text-xs"
                                                         >
                                                             Web Optimized
-                                                        </button>
-                                                        <button
+                                                        </Button>
+                                                        <Button
                                                             onClick={() => {
                                                                 setCompressQuality(ImagePresets.thumbnail.quality)
                                                                 setMaxWidth(ImagePresets.thumbnail.maxWidth?.toString() || '')
                                                                 setMaxHeight(ImagePresets.thumbnail.maxHeight?.toString() || '')
                                                             }}
-                                                            className="p-2 text-xs border border-purple-300 dark:border-purple-600 rounded bg-white dark:bg-slate-800 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20"
+                                                            variant="outline"
+                                                            size="sm"
+                                                            className="text-xs"
                                                         >
                                                             Thumbnail
-                                                        </button>
+                                                        </Button>
                                                     </div>
                                                 </div>
 
@@ -368,14 +373,13 @@ export default function VisualHub() {
                                                     <label className="text-sm text-purple-700 dark:text-purple-400">
                                                         Quality: {Math.round(compressQuality * 100)}%
                                                     </label>
-                                                    <input
+                                                    <Input
                                                         type="range"
                                                         min="0.1"
                                                         max="1"
                                                         step="0.1"
                                                         value={compressQuality}
                                                         onChange={(e) => setCompressQuality(parseFloat(e.target.value))}
-                                                        className="w-full"
                                                     />
                                                 </div>
                                             </div>
@@ -385,24 +389,22 @@ export default function VisualHub() {
                                                     <label className="text-sm text-purple-700 dark:text-purple-400">
                                                         Max Width (px)
                                                     </label>
-                                                    <input
+                                                    <Input
                                                         type="number"
                                                         placeholder="Optional"
                                                         value={maxWidth}
                                                         onChange={(e) => setMaxWidth(e.target.value)}
-                                                        className="w-full p-2 text-sm border border-purple-300 dark:border-purple-600 rounded bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
                                                     <label className="text-sm text-purple-700 dark:text-purple-400">
                                                         Max Height (px)
                                                     </label>
-                                                    <input
+                                                    <Input
                                                         type="number"
                                                         placeholder="Optional"
                                                         value={maxHeight}
                                                         onChange={(e) => setMaxHeight(e.target.value)}
-                                                        className="w-full p-2 text-sm border border-purple-300 dark:border-purple-600 rounded bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                                                     />
                                                 </div>
                                             </div>
@@ -444,11 +446,10 @@ export default function VisualHub() {
                                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                                         Select Image
                                     </label>
-                                    <input
+                                    <Input
                                         type="file"
                                         onChange={handleResizeFileSelect}
                                         accept="image/*"
-                                        className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-900 dark:file:text-blue-300"
                                     />
                                     {resizeFile && (
                                         <div className="flex items-center gap-2 p-2 bg-slate-50 dark:bg-slate-800 rounded-lg">
@@ -467,13 +468,16 @@ export default function VisualHub() {
                                                 Resize Settings
                                             </h4>
 
-                                            <div className="space-y-2">
-                                                <label className="flex items-center gap-2 text-sm text-blue-700 dark:text-blue-400">
-                                                    <input
-                                                        type="checkbox"
-                                                        checked={maintainAspectRatio}
-                                                        onChange={(e) => setMaintainAspectRatio(e.target.checked)}
-                                                    />
+                                            <div className="flex items-center space-x-2">
+                                                <Checkbox
+                                                    id="maintainAspectRatio"
+                                                    checked={maintainAspectRatio}
+                                                    onCheckedChange={(checked) => setMaintainAspectRatio(Boolean(checked))}
+                                                />
+                                                <label
+                                                    htmlFor="maintainAspectRatio"
+                                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                                >
                                                     Maintain aspect ratio
                                                 </label>
                                             </div>
@@ -483,22 +487,20 @@ export default function VisualHub() {
                                                     <label className="text-sm text-blue-700 dark:text-blue-400">
                                                         Width (px)
                                                     </label>
-                                                    <input
+                                                    <Input
                                                         type="number"
                                                         value={resizeWidth}
                                                         onChange={(e) => setResizeWidth(e.target.value)}
-                                                        className="w-full p-2 text-sm border border-blue-300 dark:border-blue-600 rounded bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
                                                     <label className="text-sm text-blue-700 dark:text-blue-400">
                                                         Height (px)
                                                     </label>
-                                                    <input
+                                                    <Input
                                                         type="number"
                                                         value={resizeHeight}
                                                         onChange={(e) => setResizeHeight(e.target.value)}
-                                                        className="w-full p-2 text-sm border border-blue-300 dark:border-blue-600 rounded bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                                                     />
                                                 </div>
                                             </div>
@@ -540,11 +542,10 @@ export default function VisualHub() {
                                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                                         Select Image
                                     </label>
-                                    <input
+                                    <Input
                                         type="file"
                                         onChange={handleCropFileSelect}
                                         accept="image/*"
-                                        className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 dark:file:bg-orange-900 dark:file:text-orange-300"
                                     />
                                     {cropFile && (
                                         <div className="flex items-center gap-2 p-2 bg-slate-50 dark:bg-slate-800 rounded-lg">
@@ -573,52 +574,48 @@ export default function VisualHub() {
                                                     <label className="text-sm text-orange-700 dark:text-orange-400">
                                                         X Position (px)
                                                     </label>
-                                                    <input
+                                                    <Input
                                                         type="number"
                                                         value={cropX}
                                                         onChange={(e) => setCropX(e.target.value)}
                                                         min="0"
                                                         max={imageDimensions?.width || 0}
-                                                        className="w-full p-2 text-sm border border-orange-300 dark:border-orange-600 rounded bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
                                                     <label className="text-sm text-orange-700 dark:text-orange-400">
                                                         Y Position (px)
                                                     </label>
-                                                    <input
+                                                    <Input
                                                         type="number"
                                                         value={cropY}
                                                         onChange={(e) => setCropY(e.target.value)}
                                                         min="0"
                                                         max={imageDimensions?.height || 0}
-                                                        className="w-full p-2 text-sm border border-orange-300 dark:border-orange-600 rounded bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
                                                     <label className="text-sm text-orange-700 dark:text-orange-400">
                                                         Crop Width (px)
                                                     </label>
-                                                    <input
+                                                    <Input
                                                         type="number"
                                                         value={cropWidth}
                                                         onChange={(e) => setCropWidth(e.target.value)}
                                                         min="1"
                                                         max={imageDimensions?.width || 0}
-                                                        className="w-full p-2 text-sm border border-orange-300 dark:border-orange-600 rounded bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
                                                     <label className="text-sm text-orange-700 dark:text-orange-400">
                                                         Crop Height (px)
                                                     </label>
-                                                    <input
+                                                    <Input
                                                         type="number"
                                                         value={cropHeight}
                                                         onChange={(e) => setCropHeight(e.target.value)}
                                                         min="1"
                                                         max={imageDimensions?.height || 0}
-                                                        className="w-full p-2 text-sm border border-orange-300 dark:border-orange-600 rounded bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                                                     />
                                                 </div>
                                             </div>
@@ -673,11 +670,10 @@ export default function VisualHub() {
                                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                                         Select Image
                                     </label>
-                                    <input
+                                    <Input
                                         type="file"
                                         onChange={handleConvertFileSelect}
                                         accept="image/*"
-                                        className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-green-50 file:text-green-700 hover:file:bg-green-100 dark:file:bg-green-900 dark:file:text-green-300"
                                     />
                                     {convertFile && (
                                         <div className="flex items-center gap-2 p-2 bg-slate-50 dark:bg-slate-800 rounded-lg">
@@ -700,22 +696,20 @@ export default function VisualHub() {
                                                 {supportedFormats
                                                     .filter(format => format.value !== getFileExtension(convertFile.name))
                                                     .map((format) => (
-                                                        <button
+                                                        <Button
                                                             key={format.value}
                                                             onClick={() => setTargetFormat(format.value as 'jpeg' | 'png' | 'webp')}
-                                                            className={`p-4 rounded-lg border text-sm font-medium transition-colors ${targetFormat === format.value
-                                                                ? 'border-green-500 bg-green-50 text-green-700 dark:bg-green-900 dark:text-green-300'
-                                                                : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700'
-                                                                }`}
+                                                            variant={targetFormat === format.value ? 'default' : 'outline'}
+                                                            className="h-auto"
                                                         >
-                                                            <div className="flex flex-col items-center gap-2">
+                                                            <div className="flex flex-col items-center gap-2 p-2">
                                                                 <span className="text-2xl">{format.icon}</span>
                                                                 <span className="font-semibold">{format.label}</span>
                                                                 <span className="text-xs text-slate-500 dark:text-slate-400">
                                                                     {format.description}
                                                                 </span>
                                                             </div>
-                                                        </button>
+                                                        </Button>
                                                     ))}
                                             </div>
                                         </div>
@@ -776,11 +770,10 @@ export default function VisualHub() {
                                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                                         Select Image
                                     </label>
-                                    <input
+                                    <Input
                                         type="file"
                                         onChange={handleBgRemoveFileSelect}
                                         accept="image/*"
-                                        className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100 dark:file:bg-pink-900 dark:file:text-pink-300"
                                     />
                                     {bgRemoveFile && (
                                         <div className="flex items-center gap-2 p-2 bg-slate-50 dark:bg-slate-800 rounded-lg">

@@ -3,6 +3,7 @@
 import Head from "next/head";
 import * as Sentry from "@sentry/nextjs";
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 class SentryExampleFrontendError extends Error {
   constructor(message: string | undefined) {
@@ -45,8 +46,7 @@ export default function Page() {
            href="https://docs.sentry.io/platforms/javascript/guides/nextjs/">read our docs</a>.
         </p>
 
-        <button
-          type="button"
+        <Button
           onClick={async () => {
             await Sentry.startSpan({
               name: 'Example Frontend/Backend Span',
@@ -61,10 +61,8 @@ export default function Page() {
           }}
           disabled={!isConnected}
         >
-          <span>
-            Throw Sample Error
-          </span>
-        </button>
+          Throw Sample Error
+        </Button>
 
         {hasSentError ? (
           <p className="success">
@@ -118,45 +116,6 @@ export default function Page() {
           }
         }
 
-        button {
-          border-radius: 8px;
-          color: white;
-          cursor: pointer;
-          background-color: #553DB8;
-          border: none;
-          padding: 0;
-          margin-top: 4px;
-
-          & > span {
-            display: inline-block;
-            padding: 12px 16px;
-            border-radius: inherit;
-            font-size: 20px;
-            font-weight: bold;
-            line-height: 1;
-            background-color: #7553FF;
-            border: 1px solid #553DB8;
-            transform: translateY(-4px);
-          }
-
-          &:hover > span {
-            transform: translateY(-8px);
-          }
-
-          &:active > span {
-            transform: translateY(0);
-          }
-
-          &:disabled {
-	            cursor: not-allowed;
-	            opacity: 0.6;
-	
-	            & > span {
-	              transform: translateY(0);
-	              border: none
-	            }
-	          }
-        }
 
         .description {
           text-align: center;

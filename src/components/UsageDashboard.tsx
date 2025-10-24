@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@/components/ui/button';
 import { UsageTracker } from '@/lib/usage-tracker';
 import { AlertTriangle, BarChart3, DollarSign, Download, Settings, TrendingUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -84,18 +85,20 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
                         </h2>
                     </div>
                     <div className="flex items-center space-x-2">
-                        <button
+                        <Button
                             onClick={() => setShowSettings(!showSettings)}
-                            className="p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                            variant="ghost"
+                            size="icon"
                         >
                             <Settings size={20} />
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                             onClick={onClose}
-                            className="p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                            variant="ghost"
+                            size="icon"
                         >
                             ✕
-                        </button>
+                        </Button>
                     </div>
                 </div>
 
@@ -277,28 +280,19 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
 
                     {/* Actions */}
                     <div className="flex flex-wrap gap-3 pt-4 border-t border-slate-200 dark:border-slate-700">
-                        <button
-                            onClick={refreshStats}
-                            className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                        >
-                            <TrendingUp size={16} />
-                            <span>Refresh</span>
-                        </button>
+                        <Button onClick={refreshStats}>
+                            <TrendingUp size={16} className="mr-2" />
+                            Refresh
+                        </Button>
 
-                        <button
-                            onClick={exportData}
-                            className="flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-                        >
-                            <Download size={16} />
-                            <span>Export Data</span>
-                        </button>
+                        <Button onClick={exportData} variant="outline">
+                            <Download size={16} className="mr-2" />
+                            Export Data
+                        </Button>
 
-                        <button
-                            onClick={clearData}
-                            className="flex items-center space-x-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-                        >
-                            <span>Clear Data</span>
-                        </button>
+                        <Button onClick={clearData} variant="destructive">
+                            Clear Data
+                        </Button>
                     </div>
 
                     {/* Settings Panel */}

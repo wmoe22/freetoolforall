@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from "@/components/ui/button";
 import { AlertTriangle, CheckCircle, XCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -162,12 +163,13 @@ export default function BrowserCompatibility({
                             <h4 className="font-medium text-yellow-900 dark:text-yellow-100 text-sm">
                                 Some features may be limited
                             </h4>
-                            <button
+                            <Button
                                 onClick={() => setShowDetails(!showDetails)}
-                                className="text-yellow-700 dark:text-yellow-300 text-xs hover:underline"
+                                variant="link"
+                                className="text-yellow-700 dark:text-yellow-300 text-xs h-auto p-0"
                             >
                                 {showDetails ? 'Hide details' : 'Show details'}
-                            </button>
+                            </Button>
                         </div>
 
                         {showDetails && (

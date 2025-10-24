@@ -1,6 +1,8 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { CompressionOptions, DocumentConverter, MergeOptions, PDFProcessor, SplitOptions } from '@/lib/pdf-utils'
@@ -185,11 +187,10 @@ export default function DocumentHub() {
                                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                                         Select File
                                     </label>
-                                    <input
+                                    <Input
                                         type="file"
                                         onChange={handleFileSelect}
                                         accept=".pdf,.doc,.docx,.xls,.xlsx,.txt"
-                                        className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-900 dark:file:text-blue-300"
                                     />
                                     {selectedFile && (
                                         <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
@@ -217,19 +218,17 @@ export default function DocumentHub() {
                                             {supportedFormats
                                                 .filter(format => format.value !== getFileExtension(selectedFile.name))
                                                 .map((format) => (
-                                                    <button
+                                                    <Button
                                                         key={format.value}
                                                         onClick={() => setTargetFormat(format.value)}
-                                                        className={`p-3 rounded-lg border text-sm font-medium transition-colors ${targetFormat === format.value
-                                                            ? 'border-blue-500 bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
-                                                            : 'border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700'
-                                                            }`}
+                                                        variant={targetFormat === format.value ? 'default' : 'outline'}
+                                                        className="h-auto"
                                                     >
-                                                        <div className="flex flex-col items-center gap-1">
+                                                        <div className="flex flex-col items-center gap-1 p-2">
                                                             <span className="text-lg">{format.icon}</span>
                                                             <span>{format.label}</span>
                                                         </div>
-                                                    </button>
+                                                    </Button>
                                                 ))}
                                         </div>
                                     </div>
@@ -299,11 +298,10 @@ export default function DocumentHub() {
                                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                                         Select PDF File
                                     </label>
-                                    <input
+                                    <Input
                                         type="file"
                                         onChange={(e) => setCompressPdf(e.target.files?.[0] || null)}
                                         accept=".pdf"
-                                        className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-red-50 file:text-red-700 hover:file:bg-red-100 dark:file:bg-red-900 dark:file:text-red-300"
                                     />
                                     {compressPdf && (
                                         <div className="flex items-center gap-2 p-2 bg-slate-50 dark:bg-slate-800 rounded-lg">
@@ -322,33 +320,36 @@ export default function DocumentHub() {
                                                 Compression Options
                                             </h4>
                                             <div className="space-y-2">
-                                                <label className="flex items-center gap-2 text-sm text-red-700 dark:text-red-400">
-                                                    <input
+                                                <div className="flex items-center space-x-2">
+                                                    <Input
                                                         type="radio"
+                                                        id="standard"
                                                         name="compression"
                                                         checked={compressionQuality === 'standard'}
                                                         onChange={() => setCompressionQuality('standard')}
                                                     />
-                                                    Standard (Recommended)
-                                                </label>
-                                                <label className="flex items-center gap-2 text-sm text-red-700 dark:text-red-400">
-                                                    <input
+                                                    <label htmlFor="standard">Standard (Recommended)</label>
+                                                </div>
+                                                <div className="flex items-center space-x-2">
+                                                    <Input
                                                         type="radio"
+                                                        id="high"
                                                         name="compression"
                                                         checked={compressionQuality === 'high'}
                                                         onChange={() => setCompressionQuality('high')}
                                                     />
-                                                    High Compression
-                                                </label>
-                                                <label className="flex items-center gap-2 text-sm text-red-700 dark:text-red-400">
-                                                    <input
+                                                    <label htmlFor="high">High Compression</label>
+                                                </div>
+                                                <div className="flex items-center space-x-2">
+                                                    <Input
                                                         type="radio"
+                                                        id="maximum"
                                                         name="compression"
                                                         checked={compressionQuality === 'maximum'}
                                                         onChange={() => setCompressionQuality('maximum')}
                                                     />
-                                                    Maximum Compression
-                                                </label>
+                                                    <label htmlFor="maximum">Maximum Compression</label>
+                                                </div>
                                             </div>
                                         </div>
                                         <Button
@@ -387,11 +388,10 @@ export default function DocumentHub() {
                                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                                         Select PDF File
                                     </label>
-                                    <input
+                                    <Input
                                         type="file"
                                         onChange={(e) => setSplitPdf(e.target.files?.[0] || null)}
                                         accept=".pdf"
-                                        className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 dark:file:bg-orange-900 dark:file:text-orange-300"
                                     />
                                     {splitPdf && (
                                         <div className="flex items-center gap-2 p-2 bg-slate-50 dark:bg-slate-800 rounded-lg">
@@ -410,52 +410,53 @@ export default function DocumentHub() {
                                                 Split Options
                                             </h4>
                                             <div className="space-y-2">
-                                                <label className="flex items-center gap-2 text-sm text-orange-700 dark:text-orange-400">
-                                                    <input
+                                                <div className="flex items-center space-x-2">
+                                                    <Input
                                                         type="radio"
+                                                        id="range"
                                                         name="split"
                                                         checked={splitType === 'range'}
                                                         onChange={() => setSplitType('range')}
                                                     />
-                                                    Split by page range
-                                                </label>
-                                                <label className="flex items-center gap-2 text-sm text-orange-700 dark:text-orange-400">
-                                                    <input
+                                                    <label htmlFor="range">Split by page range</label>
+                                                </div>
+                                                <div className="flex items-center space-x-2">
+                                                    <Input
                                                         type="radio"
+                                                        id="individual"
                                                         name="split"
                                                         checked={splitType === 'individual'}
                                                         onChange={() => setSplitType('individual')}
                                                     />
-                                                    Split into individual pages
-                                                </label>
-                                                <label className="flex items-center gap-2 text-sm text-orange-700 dark:text-orange-400">
-                                                    <input
+                                                    <label htmlFor="individual">Split into individual pages</label>
+                                                </div>
+                                                <div className="flex items-center space-x-2">
+                                                    <Input
                                                         type="radio"
+                                                        id="every"
                                                         name="split"
                                                         checked={splitType === 'every'}
                                                         onChange={() => setSplitType('every')}
                                                     />
-                                                    Split every N pages
-                                                </label>
+                                                    <label htmlFor="every">Split every N pages</label>
+                                                </div>
                                             </div>
                                             <div className="mt-3 space-y-2">
                                                 {splitType === 'range' && (
-                                                    <input
+                                                    <Input
                                                         type="text"
                                                         placeholder="e.g., 1-5, 6-10, 11-15"
                                                         value={splitRanges}
                                                         onChange={(e) => setSplitRanges(e.target.value)}
-                                                        className="w-full p-2 text-sm border border-orange-300 dark:border-orange-600 rounded bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                                                     />
                                                 )}
                                                 {splitType === 'every' && (
-                                                    <input
+                                                    <Input
                                                         type="number"
                                                         placeholder="Number of pages per split"
                                                         value={splitEveryN}
                                                         onChange={(e) => setSplitEveryN(parseInt(e.target.value) || 1)}
                                                         min="1"
-                                                        className="w-full p-2 text-sm border border-orange-300 dark:border-orange-600 rounded bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                                                     />
                                                 )}
                                             </div>
@@ -496,12 +497,11 @@ export default function DocumentHub() {
                                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
                                         Select PDF Files (Multiple)
                                     </label>
-                                    <input
+                                    <Input
                                         type="file"
                                         onChange={handleMergeFileSelect}
                                         accept=".pdf"
                                         multiple
-                                        className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-green-50 file:text-green-700 hover:file:bg-green-100 dark:file:bg-green-900 dark:file:text-green-300"
                                     />
                                     {mergePdfs.length > 0 && (
                                         <div className="space-y-2">
@@ -529,22 +529,32 @@ export default function DocumentHub() {
                                                 Merge Options
                                             </h4>
                                             <div className="space-y-2">
-                                                <label className="flex items-center gap-2 text-sm text-green-700 dark:text-green-400">
-                                                    <input
-                                                        type="checkbox"
+                                                <div className="flex items-center space-x-2">
+                                                    <Checkbox
+                                                        id="maintainOrder"
                                                         checked={maintainOrder}
-                                                        onChange={(e) => setMaintainOrder(e.target.checked)}
+                                                        onCheckedChange={(checked) => setMaintainOrder(Boolean(checked))}
                                                     />
-                                                    Maintain original page order
-                                                </label>
-                                                <label className="flex items-center gap-2 text-sm text-green-700 dark:text-green-400">
-                                                    <input
-                                                        type="checkbox"
+                                                    <label
+                                                        htmlFor="maintainOrder"
+                                                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                                    >
+                                                        Maintain original page order
+                                                    </label>
+                                                </div>
+                                                <div className="flex items-center space-x-2">
+                                                    <Checkbox
+                                                        id="addBookmarks"
                                                         checked={addBookmarks}
-                                                        onChange={(e) => setAddBookmarks(e.target.checked)}
+                                                        onCheckedChange={(checked) => setAddBookmarks(Boolean(checked))}
                                                     />
-                                                    Add bookmarks for each file
-                                                </label>
+                                                    <label
+                                                        htmlFor="addBookmarks"
+                                                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                                    >
+                                                        Add bookmarks for each file
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                         <Button
