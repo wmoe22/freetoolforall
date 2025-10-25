@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
+import FormatLogo from '@/components/ui/FormatLogo'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { CompressionOptions, DocumentConverter, MergeOptions, PDFProcessor, SplitOptions } from '@/lib/pdf-utils'
@@ -31,12 +32,12 @@ export default function DocumentHub() {
     const [addBookmarks, setAddBookmarks] = useState<boolean>(false)
 
     const supportedFormats = [
-        { value: 'pdf', label: 'PDF', icon: '📄' },
-        { value: 'docx', label: 'Word (DOCX)', icon: '📝' },
-        { value: 'xlsx', label: 'Excel (XLSX)', icon: '📊' },
-        { value: 'txt', label: 'Text', icon: '📃' },
-        { value: 'html', label: 'HTML', icon: '🌐' },
-        { value: 'csv', label: 'CSV', icon: '📋' }
+        { value: 'pdf', label: 'PDF' },
+        { value: 'docx', label: 'Word (DOCX)' },
+        { value: 'xlsx', label: 'Excel (XLSX)' },
+        { value: 'txt', label: 'Text' },
+        { value: 'html', label: 'HTML' },
+        { value: 'csv', label: 'CSV' }
     ]
 
     const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -140,7 +141,7 @@ export default function DocumentHub() {
 
     return (
         <div className="space-y-6">
-            <Card className="w-full bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl">
+            <Card className="w-full bg-card border-border rounded-xl sm:rounded-2xl">
 
                 <CardContent>
                     <Tabs defaultValue="converter" className="w-full">
@@ -216,8 +217,8 @@ export default function DocumentHub() {
                                                         className="h-auto"
                                                     >
                                                         <div className="flex flex-col items-center gap-1 p-2">
-                                                            <span className="text-lg">{format.icon}</span>
-                                                            <span>{format.label}</span>
+                                                            <FormatLogo format={format.value} width={24} height={24} />
+                                                            <span className="text-xs">{format.label}</span>
                                                         </div>
                                                     </Button>
                                                 ))}
@@ -236,7 +237,7 @@ export default function DocumentHub() {
                                         <Button
                                             onClick={handleConvert}
                                             disabled={isConverting}
-                                            className="bg-blue-600 hover:bg-blue-700 text-white"
+                                            className=""
                                         >
                                             {isConverting ? (
                                                 <>
@@ -260,8 +261,8 @@ export default function DocumentHub() {
                                     </h4>
                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs text-blue-700 dark:text-blue-400 mb-3">
                                         {supportedFormats.map((format) => (
-                                            <div key={format.value} className="flex items-center gap-1">
-                                                <span>{format.icon}</span>
+                                            <div key={format.value} className="flex items-center gap-2">
+                                                <FormatLogo format={format.value} width={16} height={16} />
                                                 <span>{format.label}</span>
                                             </div>
                                         ))}
@@ -346,7 +347,7 @@ export default function DocumentHub() {
                                         <Button
                                             onClick={handleCompressPdf}
                                             disabled={isProcessing}
-                                            className="w-full bg-red-600 hover:bg-red-700 text-white"
+                                            className="w-full"
                                         >
                                             {isProcessing ? (
                                                 <>
@@ -455,7 +456,7 @@ export default function DocumentHub() {
                                         <Button
                                             onClick={handleSplitPdf}
                                             disabled={isProcessing || (splitType === 'range' && !splitRanges.trim())}
-                                            className="w-full bg-orange-600 hover:bg-orange-700 text-white disabled:opacity-50"
+                                            className="w-full disabled:opacity-50"
                                         >
                                             {isProcessing ? (
                                                 <>
@@ -551,7 +552,7 @@ export default function DocumentHub() {
                                         <Button
                                             onClick={handleMergePdfs}
                                             disabled={isProcessing}
-                                            className="w-full bg-green-600 hover:bg-green-700 text-white"
+                                            className="w-full"
                                         >
                                             {isProcessing ? (
                                                 <>

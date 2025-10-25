@@ -59,38 +59,144 @@ Object.defineProperty(window, 'matchMedia', {
 })
 
 // Mock Web APIs for Node.js environment
-global.Request = class MockRequest {
-    constructor(input, init) {
-        this.url = input
-        this.method = init?.method || 'GET'
-        this.headers = new Map(Object.entries(init?.headers || {}))
-        this.body = init?.body
+const { TextEncoder, TextDecoder } = require('util')
+global.TextEncoder = TextEncoder
+global.TextDecoder = TextDecoder
+
+// Mock Headers
+global.Headers = class MockHeaders extends Map {
+    constructor(init) {
+        super()
+        if (init) {
+            if (Array.isArray(init)) {
+                init.forEach(([key, value]) => this.set(key, value))
+            } else if (typeof init === 'object') {
+                Object.entries(init).forEach(([key, value]) => this.set(key, value))
+            }
+        }
+    }
+
+    get(name) {
+        return super.get(name.toLowerCase())
+    }
+
+    set(name, value) {
+        return super.set(name.toLowerCase(), value)
+    }
+
+    has(name) {
+        return super.has(name.toLowerCase())
+    }
+
+    delete(name) {
+        return super.delete(name.toLowerCase())
     }
 }
 
-global.Response = class MockResponse {
-    constructor(body, init) {
-        this.body = body
-        this.status = init?.status || 200
-        this.statusText = init?.statusText || 'OK'
-        this.headers = new Map(Object.entries(init?.headers || {}))
-        this.ok = this.status >= 200 && this.status < 300
+// Mock Request
+global.Request = class MockRequest {
+    constructor(input, init = {}) {
+        this.url = input
+        this.method = init.method || 'GET'
+        this.headers = new global.Headers(init.headers)
+        this.body = init.body
+        this._bodyUsed = false
+    }
+
+    get bodyUsed() {
+        return this._bodyUsed
     }
 
     async json() {
+        this._bodyUsed = true
         return JSON.parse(this.body)
     }
 
     async text() {
+        this._bodyUsed = true
         return this.body
     }
 
+    async formData() {
+        this._bodyUsed = true
+        return new FormData()
+    }
+
     async arrayBuffer() {
+        this._bodyUsed = true
         return new ArrayBuffer(0)
+    }
+
+    clone() {
+        return new MockRequest(this.url, {
+            method: this.method,
+            headers: this.headers,
+            body: this.body
+        })
     }
 }
 
-global.Headers = Map
+// Mock Response
+global.Response = class MockResponse {
+    constructor(body, init = {}) {
+        this.body = body
+        this.status = init.status || 200
+        this.statusText = init.statusText || 'OK'
+        this.headers = new global.Headers(init.headers)
+        this.ok = this.status >= 200 && this.status < 300
+        this.url = ''
+        this.type = 'basic'
+        this.redirected = false
+        this._bodyUsed = false
+    }
+
+    get bodyUsed() {
+        return this._bodyUsed
+    }
+
+    async json() {
+        this._bodyUsed = true
+        if (typeof this.body === 'string') {
+            return JSON.parse(this.body)
+        }
+        return this.body
+    }
+
+    async text() {
+        this._bodyUsed = true
+        if (typeof this.body === 'string') {
+            return this.body
+        }
+        return JSON.stringify(this.body)
+    }
+
+    async arrayBuffer() {
+        this._bodyUsed = true
+        if (this.body instanceof ArrayBuffer) {
+            return this.body
+        }
+        const text = await this.text()
+        return new TextEncoder().encode(text).buffer
+    }
+
+    clone() {
+        return new MockResponse(this.body, {
+            status: this.status,
+            statusText: this.statusText,
+            headers: this.headers
+        })
+    }
+
+    static json(data, init = {}) {
+        return new MockResponse(JSON.stringify(data), {
+            ...init,
+            headers: {
+                'content-type': 'application/json',
+                ...init.headers
+            }
+        })
+    }
+}
 
 // Mock AbortSignal
 global.AbortSignal = {
@@ -108,11 +214,54 @@ global.FormData = class MockFormData {
     }
 
     append(key, value) {
-        this.data.set(key, value)
+        if (this.data.has(key)) {
+            const existing = this.data.get(key)
+            if (Array.isArray(existing)) {
+                existing.push(value)
+            } else {
+                this.data.set(key, [existing, value])
+            }
+        } else {
+            this.data.set(key, value)
+        }
     }
 
     get(key) {
-        return this.data.get(key)
+        const value = this.data.get(key)
+        return Array.isArray(value) ? value[0] : value
+    }
+
+    getAll(key) {
+        const value = this.data.get(key)
+        return Array.isArray(value) ? value : value ? [value] : []
+    }
+
+    has(key) {
+        return this.data.has(key)
+    }
+
+    set(key, value) {
+        this.data.set(key, value)
+    }
+
+    delete(key) {
+        this.data.delete(key)
+    }
+
+    entries() {
+        return this.data.entries()
+    }
+
+    keys() {
+        return this.data.keys()
+    }
+
+    values() {
+        return this.data.values()
+    }
+
+    forEach(callback) {
+        this.data.forEach(callback)
     }
 }
 

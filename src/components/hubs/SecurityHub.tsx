@@ -192,7 +192,7 @@ export default function SecurityHub() {
             </TabsList>
 
             <TabsContent value="file-scanner" className="space-y-6">
-                <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+                <Card className="bg-card border-border">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <FileText className="h-5 w-5" />
@@ -237,7 +237,7 @@ export default function SecurityHub() {
                         {renderScanResult(fileScanResult, 'file')}
 
                         {/* File Safety Tips */}
-                        <div className="mt-6 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-lg">
+                        <div className="mt-6 p-4 bg-muted rounded-lg">
                             <h4 className="font-semibold mb-2 flex items-center gap-2">
                                 <Shield className="h-4 w-4" />
                                 File Safety Tips
@@ -254,7 +254,7 @@ export default function SecurityHub() {
             </TabsContent>
 
             <TabsContent value="url-scanner" className="space-y-6">
-                <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+                <Card className="bg-card border-border">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                             <Link className="h-5 w-5" />
@@ -295,7 +295,7 @@ export default function SecurityHub() {
                         {renderScanResult(urlScanResult, 'url')}
 
                         {/* URL Safety Tips */}
-                        <div className="mt-6 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-lg">
+                        <div className="mt-6 p-4 bg-muted rounded-lg">
                             <h4 className="font-semibold mb-2 flex items-center gap-2">
                                 <Shield className="h-4 w-4" />
                                 URL Safety Tips

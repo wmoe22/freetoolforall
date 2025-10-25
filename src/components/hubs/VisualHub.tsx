@@ -248,7 +248,7 @@ export default function VisualHub() {
 
     return (
         <div className="space-y-6">
-            <Card className="w-full bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl">
+            <Card className="w-full bg-card border-border rounded-xl sm:rounded-2xl">
                 <CardContent>
                     <Tabs defaultValue="compress" className="w-full">
                         <TabsList className="grid w-full grid-cols-5 mb-6">
@@ -278,8 +278,8 @@ export default function VisualHub() {
                         <TabsContent value="compress" className="space-y-4">
                             <div className="space-y-4">
                                 <div>
-                                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Image Compressor</h3>
-                                    <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
+                                    <h3 className="text-lg font-semibold text-foreground mb-2">Image Compressor</h3>
+                                    <p className="text-sm text-muted-foreground mb-4">
                                         Reduce image file size while maintaining quality
                                     </p>
                                 </div>
@@ -402,7 +402,7 @@ export default function VisualHub() {
                                         <Button
                                             onClick={handleCompress}
                                             disabled={isCompressing}
-                                            className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+                                            className="w-full"
                                         >
                                             {isCompressing ? (
                                                 <>
@@ -498,7 +498,7 @@ export default function VisualHub() {
                                         <Button
                                             onClick={handleResize}
                                             disabled={isResizing || (!resizeWidth && !resizeHeight)}
-                                            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                                            className="w-full"
                                         >
                                             {isResizing ? (
                                                 <>
@@ -626,7 +626,7 @@ export default function VisualHub() {
                                         <Button
                                             onClick={handleCrop}
                                             disabled={isCropping || !cropWidth || !cropHeight}
-                                            className="w-full bg-orange-600 hover:bg-orange-700 text-white"
+                                            className="w-full"
                                         >
                                             {isCropping ? (
                                                 <>
@@ -706,7 +706,7 @@ export default function VisualHub() {
                                         <Button
                                             onClick={handleConvert}
                                             disabled={isConverting}
-                                            className="w-full bg-green-600 hover:bg-green-700 text-white"
+                                            className="w-full"
                                         >
                                             {isConverting ? (
                                                 <>
@@ -723,7 +723,7 @@ export default function VisualHub() {
                                     </div>
                                 )}
 
-                                <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                                <div className="p-3 bg-green-50 dark:bg-green-900/20 border dark:border-green-500 rounded-lg">
                                     <h4 className="text-sm font-medium text-green-900 dark:text-green-300 mb-2">
                                         Format Guide
                                     </h4>
@@ -794,7 +794,7 @@ export default function VisualHub() {
                                         <Button
                                             onClick={handleRemoveBackground}
                                             disabled={isRemovingBg}
-                                            className="w-full bg-pink-600 hover:bg-pink-700 text-white"
+                                            className="w-full"
                                         >
                                             {isRemovingBg ? (
                                                 <>

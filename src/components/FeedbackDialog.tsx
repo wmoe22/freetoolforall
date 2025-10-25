@@ -4,22 +4,23 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import { Mail, Send } from 'lucide-react'
+import { MessageSquare, Send } from 'lucide-react'
 import { useState } from 'react'
 
-interface ToolRequestDialogProps {
+interface FeedbackDialogProps {
     open: boolean
     onOpenChange: (open: boolean) => void
 }
 
-export default function ToolRequestDialog({ open, onOpenChange }: ToolRequestDialogProps) {
+export default function FeedbackDialog({ open, onOpenChange }: FeedbackDialogProps) {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        toolName: '',
-        description: '',
-        useCase: ''
+        feedbackType: '',
+        subject: '',
+        message: ''
     })
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -30,42 +31,46 @@ export default function ToolRequestDialog({ open, onOpenChange }: ToolRequestDia
         }))
     }
 
+    const handleSelectChange = (value: string) => {
+        setFormData(prev => ({
+            ...prev,
+            feedbackType: value
+        }))
+    }
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
 
-        const subject = `Tool Request: ${formData.toolName || 'New Tool'}`
+        const emailSubject = `Feedback: ${formData.subject || formData.feedbackType}`
         const body = `
-Hi,
+Hi FreeToolForAll Team,
 
-I would like to request a new tool for FreeToolForAll:
+I have some feedback to share:
 
 Name: ${formData.name}
 Email: ${formData.email}
+Feedback Type: ${formData.feedbackType}
+Subject: ${formData.subject}
 
-Tool Name: ${formData.toolName}
+Message:
+${formData.message}
 
-Description:
-${formData.description}
-
-Use Case:
-${formData.useCase}
-
-Thank you for considering this request!
+Thank you for your time and for providing these great tools!
 
 Best regards,
 ${formData.name}
     `.trim()
 
-        const mailtoLink = `mailto:wmoecontact@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+        const mailtoLink = `mailto:wmoecontact@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(body)}`
         window.open(mailtoLink, '_blank')
 
         // Reset form and close dialog
         setFormData({
             name: '',
             email: '',
-            toolName: '',
-            description: '',
-            useCase: ''
+            feedbackType: '',
+            subject: '',
+            message: ''
         })
         onOpenChange(false)
     }
@@ -75,11 +80,11 @@ ${formData.name}
             <DialogContent className="max-w-md">
                 <DialogHeader>
                     <DialogTitle className="flex items-center gap-2">
-                        <Mail className="h-5 w-5 text-primary" />
-                        Request a New Tool
+                        <MessageSquare className="h-5 w-5 text-primary" />
+                        Share Your Feedback
                     </DialogTitle>
                     <DialogDescription>
-                        Tell us about the tool you'd like to see added to FreeToolForAll. We'll review your request and get back to you!
+                        We'd love to hear from you! Share your thoughts, suggestions, or report any issues you've encountered.
                     </DialogDescription>
                 </DialogHeader>
 
@@ -115,40 +120,45 @@ ${formData.name}
                     </div>
 
                     <div>
-                        <Label htmlFor="toolName">Tool Name *</Label>
+                        <Label htmlFor="feedbackType">Feedback Type *</Label>
+                        <Select value={formData.feedbackType} onValueChange={handleSelectChange}>
+                            <SelectTrigger className="mt-1">
+                                <SelectValue placeholder="Select feedback type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="bug-report">Bug Report</SelectItem>
+                                <SelectItem value="feature-request">Feature Request</SelectItem>
+                                <SelectItem value="improvement">Improvement Suggestion</SelectItem>
+                                <SelectItem value="compliment">Compliment</SelectItem>
+                                <SelectItem value="general">General Feedback</SelectItem>
+                                <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <div>
+                        <Label htmlFor="subject">Subject *</Label>
                         <Input
-                            id="toolName"
-                            name="toolName"
-                            value={formData.toolName}
+                            id="subject"
+                            name="subject"
+                            value={formData.subject}
                             onChange={handleInputChange}
-                            placeholder="e.g., QR Code Generator, Password Manager"
+                            placeholder="Brief description of your feedback"
                             required
                             className="mt-1"
                         />
                     </div>
 
                     <div>
-                        <Label htmlFor="description">Tool Description *</Label>
+                        <Label htmlFor="message">Your Message *</Label>
                         <Textarea
-                            id="description"
-                            name="description"
-                            value={formData.description}
+                            id="message"
+                            name="message"
+                            value={formData.message}
                             onChange={handleInputChange}
-                            placeholder="Describe what this tool should do and its main features..."
+                            placeholder="Please share your detailed feedback, suggestions, or describe any issues you've encountered..."
                             required
-                            className="mt-1 min-h-[80px]"
-                        />
-                    </div>
-
-                    <div>
-                        <Label htmlFor="useCase">Use Case</Label>
-                        <Textarea
-                            id="useCase"
-                            name="useCase"
-                            value={formData.useCase}
-                            onChange={handleInputChange}
-                            placeholder="How would you use this tool? What problem does it solve?"
-                            className="mt-1 min-h-[60px]"
+                            className="mt-1 min-h-[100px]"
                         />
                     </div>
 
@@ -164,10 +174,10 @@ ${formData.name}
                         <Button
                             type="submit"
                             className="flex-1"
-                            disabled={!formData.name || !formData.email || !formData.toolName || !formData.description}
+                            disabled={!formData.name || !formData.email || !formData.feedbackType || !formData.subject || !formData.message}
                         >
                             <Send className="h-4 w-4 mr-2" />
-                            Send Request
+                            Send Feedback
                         </Button>
                     </div>
                 </form>

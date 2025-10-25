@@ -31,7 +31,7 @@ export default function Home() {
   }, [isDarkMode])
 
   return (
-    <div className={`min-h-screen font-sans transition-colors duration-200 ${isDarkMode ? 'dark bg-slate-950' : 'bg-slate-50'
+    <div className={`min-h-screen font-sans transition-colors duration-200 bg-background ${isDarkMode ? 'dark' : ''
       }`}>
       <Header />
 
@@ -49,7 +49,7 @@ export default function Home() {
         <section aria-labelledby="hubs-heading" className="mb-8 sm:mb-12">
           <h2 id="hubs-heading" className="sr-only">Essential Tool Hubs</h2>
           <Tabs defaultValue="voice-hub" className="">
-            <TabsList className="grid w-full grid-cols-5 bg-slate-100 dark:bg-slate-800 rounded-lg sm:rounded-xl h-14 sm:h-auto" role="tablist" aria-label="Essential tool hubs">
+            <TabsList className="grid w-full grid-cols-5 bg-muted rounded-lg sm:rounded-xl h-14 sm:h-auto" role="tablist" aria-label="Essential tool hubs">
               <TabsTrigger
                 value="voice-hub"
                 role="tab"

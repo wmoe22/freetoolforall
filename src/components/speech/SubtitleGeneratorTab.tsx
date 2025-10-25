@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Download, FileText, FileVideo, Upload, X } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { toast } from 'sonner'
+import { Input } from '../ui/input'
 
 interface SubtitleGeneratorTabProps {
     // Add any props if needed in the future
@@ -282,7 +283,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                         Select Video or Audio File
                     </label>
                     <div className="flex flex-col sm:flex-row gap-3">
-                        <input
+                        <Input
                             ref={fileInputRef}
                             type="file"
                             accept="video/*,audio/*"
@@ -324,42 +325,44 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                 </div>
 
                 {/* Subtitle Format Selection */}
-                <div className="space-y-3">
+                <div className='flex flex-col gap-3'>
+
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
                         Subtitle Format
                     </label>
-                    <Select value={subtitleFormat} onValueChange={setSubtitleFormat}>
-                        <SelectTrigger className="h-12">
-                            <SelectValue placeholder="Select subtitle format" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {SUBTITLE_FORMATS.map((format) => (
-                                <SelectItem key={format.value} value={format.value}>
-                                    {format.label}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
-                </div>
+                    <div className="flex gap-3">
+                        <Select value={subtitleFormat} onValueChange={setSubtitleFormat}>
+                            <SelectTrigger className="h-12">
+                                <SelectValue placeholder="Select subtitle format" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {SUBTITLE_FORMATS.map((format) => (
+                                    <SelectItem key={format.value} value={format.value}>
+                                        {format.label}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
 
-                {/* Generate Button */}
-                <Button
-                    onClick={handleGenerateSubtitles}
-                    disabled={!selectedFile || isGenerating}
-                    className="w-full h-12 bg-purple-600 hover:bg-purple-700 text-white"
-                >
-                    {isGenerating ? (
-                        <>
-                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-                            Generating Subtitles...
-                        </>
-                    ) : (
-                        <>
-                            <FileText size={18} className="mr-2" />
-                            Generate Subtitles
-                        </>
-                    )}
-                </Button>
+                        {/* Generate Button */}
+                        <Button
+                            onClick={handleGenerateSubtitles}
+                            disabled={!selectedFile || isGenerating}
+                        >
+                            {isGenerating ? (
+                                <>
+                                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                                    Generating Subtitles...
+                                </>
+                            ) : (
+                                <>
+                                    <FileText size={18} className="mr-2" />
+                                    Generate Subtitles
+                                </>
+                            )}
+                        </Button>
+                    </div>
+                </div>
 
                 {/* Subtitle Preview */}
                 {subtitleText && (

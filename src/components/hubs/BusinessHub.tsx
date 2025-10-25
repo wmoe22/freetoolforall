@@ -216,7 +216,7 @@ export default function BusinessHub() {
 
     return (
         <div className="space-y-6">
-            <Card className="w-full bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl">
+            <Card className="w-full bg-card border-border rounded-xl sm:rounded-2xl">
                 <CardContent>
                     <Tabs defaultValue="proposal" className="w-full">
                         <TabsList className="grid w-full grid-cols-3 mb-6">
@@ -327,7 +327,7 @@ export default function BusinessHub() {
                                 <Button
                                     onClick={handleGenerateProposal}
                                     disabled={isGeneratingProposal}
-                                    className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+                                    className="w-full"
                                 >
                                     {isGeneratingProposal ? (
                                         <>
@@ -555,7 +555,7 @@ export default function BusinessHub() {
                                     <Button
                                         onClick={handleGenerateInvoice}
                                         disabled={isGeneratingInvoice}
-                                        className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+                                        className="w-full"
                                     >
                                         {isGeneratingInvoice ? (
                                             <>
@@ -674,7 +674,7 @@ export default function BusinessHub() {
                                 <Button
                                     onClick={handleGenerateMeetingNotes}
                                     disabled={isProcessingNotes}
-                                    className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+                                    className="w-full"
                                 >
                                     {isProcessingNotes ? (
                                         <>

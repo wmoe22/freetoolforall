@@ -11,7 +11,7 @@ import { SpeechService } from '@/lib/speech-service'
 import { useStore } from '@/store/useStore'
 import { VoiceModel } from '@/types/voice-models'
 import { AudioWaveform, FileText, Scissors, Upload, Volume2 } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 const ICON_SIZE = 15
@@ -34,12 +34,19 @@ export default function VoiceHub({ }: VoiceHubProps) {
     const [showVoiceSelector, setShowVoiceSelector] = useState(false)
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
     const [isTranscribing, setIsTranscribing] = useState(false)
+    const [speechCompleted, setSpeechCompleted] = useState(false)
+
+    // Reset speech completion when text input changes
+    useEffect(() => {
+        setSpeechCompleted(false)
+    }, [textInput])
 
     const handleTextToSpeech = async () => {
         if (!textInput.trim()) return
 
         try {
             setPlaying(true)
+            setSpeechCompleted(false)
             toast.success('Playing speech...', {
                 description: selectedVoiceModel
                     ? `Using ${selectedVoiceModel.metadata?.display_name || selectedVoiceModel.name}`
@@ -51,6 +58,8 @@ export default function VoiceHub({ }: VoiceHubProps) {
             } else {
                 await speechService.textToSpeech(textInput)
             }
+
+            setSpeechCompleted(true)
         } catch (error) {
             console.error('Failed to play speech:', error)
             toast.error('Speech playback failed', {
@@ -64,6 +73,7 @@ export default function VoiceHub({ }: VoiceHubProps) {
     const handleStopSpeech = () => {
         speechSynthesis.cancel()
         setPlaying(false)
+        setSpeechCompleted(false)
         toast.info('Speech stopped', {
             description: 'Audio playback has been stopped.'
         })
@@ -167,7 +177,7 @@ export default function VoiceHub({ }: VoiceHubProps) {
 
     return (
         <div className="space-y-6">
-            <Card className="w-full bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl">
+            <Card className="w-full bg-card border-border rounded-xl sm:rounded-2xl">
                 <CardContent>
                     <Tabs defaultValue="speech-to-text" className="w-full">
                         <TabsList className="grid w-full grid-cols-5 mb-6" role="tablist" aria-label="Voice tools">
@@ -260,6 +270,7 @@ export default function VoiceHub({ }: VoiceHubProps) {
                                 showVoiceSelector={showVoiceSelector}
                                 setShowVoiceSelector={setShowVoiceSelector}
                                 isPlaying={isPlaying}
+                                speechCompleted={speechCompleted}
                                 handleTextToSpeech={handleTextToSpeech}
                                 handleStopSpeech={handleStopSpeech}
                                 handleDownloadAudio={handleDownloadAudio}

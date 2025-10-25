@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Download, FileAudio, Upload, X } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { toast } from 'sonner'
+import { Input } from '../ui/input'
 
 interface AudioConverterTabProps {
     // Add any props if needed in the future
@@ -219,7 +220,7 @@ export default function AudioConverterTab({ }: AudioConverterTabProps) {
                         Select Audio File
                     </label>
                     <div className="flex flex-col sm:flex-row gap-3">
-                        <input
+                        <Input
                             ref={fileInputRef}
                             type="file"
                             accept="audio/*"
@@ -261,42 +262,43 @@ export default function AudioConverterTab({ }: AudioConverterTabProps) {
                 </div>
 
                 {/* Output Format Selection */}
-                <div className="space-y-3">
+                <div className="flex flex-col gap-3">
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
                         Output Format
                     </label>
-                    <Select value={outputFormat} onValueChange={setOutputFormat}>
-                        <SelectTrigger className="h-12">
-                            <SelectValue placeholder="Select output format" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {SUPPORTED_FORMATS.map((format) => (
-                                <SelectItem key={format.value} value={format.value}>
-                                    {format.label}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
-                </div>
+                    <div className='flex gap-3'>
+                        <Select value={outputFormat} onValueChange={setOutputFormat}>
+                            <SelectTrigger className="h-12">
+                                <SelectValue placeholder="Select output format" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {SUPPORTED_FORMATS.map((format) => (
+                                    <SelectItem key={format.value} value={format.value}>
+                                        {format.label}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
 
-                {/* Convert Button */}
-                <Button
-                    onClick={handleConvert}
-                    disabled={!selectedFile || !outputFormat || isConverting}
-                    className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white"
-                >
-                    {isConverting ? (
-                        <>
-                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-                            Converting...
-                        </>
-                    ) : (
-                        <>
-                            <FileAudio size={18} className="mr-2" />
-                            Convert Audio
-                        </>
-                    )}
-                </Button>
+                        {/* Convert Button */}
+                        <Button
+                            onClick={handleConvert}
+                            disabled={!selectedFile || !outputFormat || isConverting}
+                        >
+                            {isConverting ? (
+                                <>
+                                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                                    Converting...
+                                </>
+                            ) : (
+                                <>
+                                    <FileAudio size={18} className="mr-2" />
+                                    Convert Audio
+                                </>
+                            )}
+                        </Button>
+                    </div>
+                </div>
 
                 {/* Download Converted File */}
                 {convertedAudio && (

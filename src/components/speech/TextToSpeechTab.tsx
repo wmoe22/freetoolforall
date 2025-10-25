@@ -17,6 +17,7 @@ interface TextToSpeechTabProps {
     showVoiceSelector: boolean
     setShowVoiceSelector: (show: boolean) => void
     isPlaying: boolean
+    speechCompleted: boolean
     handleTextToSpeech: () => void
     handleStopSpeech: () => void
     handleDownloadAudio: () => void
@@ -30,6 +31,7 @@ export default function TextToSpeechTab({
     showVoiceSelector,
     setShowVoiceSelector,
     isPlaying,
+    speechCompleted,
     handleTextToSpeech,
     handleStopSpeech,
     handleDownloadAudio
@@ -47,9 +49,7 @@ export default function TextToSpeechTab({
                         </div>
                     </div>
                     <Button
-                        variant="outline"
                         onClick={() => setShowVoiceSelector(!showVoiceSelector)}
-                        className="flex items-center h-10 sm:h-12 px-3 sm:px-4 text-xs sm:text-sm w-full sm:w-auto"
                     >
                         <Settings size={ICON_SIZE} className="mr-1 sm:mr-2" />
                         <span className="hidden sm:inline">{showVoiceSelector ? 'Hide Voice Selector' : 'Choose Voice Model'}</span>
@@ -75,7 +75,7 @@ export default function TextToSpeechTab({
                 {selectedVoiceModel && !showVoiceSelector && (
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 p-3 sm:p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg">
                         <div className="flex items-center space-x-3 sm:space-x-4 min-w-0">
-                            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-500 rounded-full flex items-center justify-center shrink-0">
                                 <Volume2 size={16} className="text-white sm:hidden" />
                                 <Volume2 size={20} className="text-white hidden sm:block" />
                             </div>
@@ -115,11 +115,6 @@ export default function TextToSpeechTab({
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <Button
                         onClick={isPlaying ? handleStopSpeech : handleTextToSpeech}
-                        size="lg"
-                        className={`flex-1 h-12 sm:h-14 lg:h-16 text-sm sm:text-base lg:text-xl font-medium transition-all duration-200 ${isPlaying
-                            ? 'bg-blue-700 hover:bg-blue-800 text-white'
-                            : 'bg-blue-600 hover:bg-blue-700 text-white'
-                            }`}
                         disabled={!textInput.trim()}
                     >
                         {isPlaying ? (
@@ -145,28 +140,26 @@ export default function TextToSpeechTab({
                     </Button>
 
                     <Button
-                        variant="outline"
                         onClick={() => setTextInput('')}
                         disabled={isPlaying}
-                        className="h-12 sm:h-14 lg:h-16 px-4 sm:px-6"
                     >
                         <RotateCcw size={20} className="sm:mr-2" />
                         <span className="hidden sm:inline">Clear</span>
                     </Button>
+
+                    {textInput.trim() && speechCompleted && (
+                        <Button
+                            onClick={handleDownloadAudio}
+                            disabled={isPlaying}
+                        >
+                            <Download size={ICON_SIZE} className="mr-2" />
+                            Download Audio
+                        </Button>
+                    )}
                 </div>
 
                 {/* Audio Actions */}
-                {textInput.trim() && (
-                    <Button
-                        variant="outline"
-                        onClick={handleDownloadAudio}
-                        className="w-full h-10 sm:h-12 text-sm sm:text-base"
-                        disabled={isPlaying}
-                    >
-                        <Download size={ICON_SIZE} className="mr-2" />
-                        Download Audio
-                    </Button>
-                )}
+
 
                 {/* Voice Model Quick Info */}
                 {selectedVoiceModel && (

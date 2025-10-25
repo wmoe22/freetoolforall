@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Copy, FileAudio, Loader2, RotateCcw, Upload, Volume2 } from 'lucide-react'
+import { Copy, FileAudio, Loader2, RotateCcw, Upload } from 'lucide-react'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 
@@ -93,34 +93,33 @@ export default function SpeechToTextTab({
 
                 {/* Action Buttons */}
                 {selectedFile && (
-                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                    <div className="flex flex-col sm:flex-row justify-center  gap-3 sm:gap-4">
                         <Button
                             onClick={handleFileTranscription}
-                            size="lg"
-                            className={`flex-1 h-12 sm:h-14 lg:h-16 text-sm sm:text-base lg:text-xl font-medium transition-all duration-200 ${isTranscribing
-                                ? 'bg-blue-700 hover:bg-blue-800 cursor-not-allowed'
-                                : 'bg-blue-600 hover:bg-blue-700'
-                                } text-white`}
-                            disabled={isTranscribing}
+                            disabled={isTranscribing || !!transcript}
                         >
                             {isTranscribing ? (
                                 <>
-                                    <Loader2 size={20} className="mr-2 sm:mr-3 lg:mr-4 animate-spin" />
+                                    <Loader2 size={15} className="mr-2 sm:mr-3 lg:mr-4 animate-spin" />
                                     <span className="hidden sm:inline">Processing Audio...</span>
                                     <span className="sm:hidden">Processing...</span>
                                 </>
+                            ) : transcript ? (
+                                <>
+                                    <FileAudio size={15} className="mr-2 sm:mr-3 lg:mr-4" />
+                                    <span className="hidden sm:inline">Already Transcribed</span>
+                                    <span className="sm:hidden">Transcribed</span>
+                                </>
                             ) : (
                                 <>
-                                    <FileAudio size={20} className="mr-2 sm:mr-3 lg:mr-4" />
+                                    <FileAudio size={15} className="mr-2 sm:mr-3 lg:mr-4" />
                                     <span className="hidden sm:inline">Transcribe Audio</span>
                                     <span className="sm:hidden">Transcribe</span>
                                 </>
                             )}
                         </Button>
                         <Button
-                            variant="outline"
                             onClick={clearFile}
-                            className="h-12 sm:h-14 lg:h-16 px-4 sm:px-6"
                             disabled={isTranscribing}
                         >
                             <RotateCcw size={20} className="sm:mr-2" />
@@ -138,10 +137,9 @@ export default function SpeechToTextTab({
                             <p className="text-sm sm:text-base font-medium text-slate-700 dark:text-slate-300">Transcript</p>
                             {transcript && (
                                 <Button
-                                    variant="ghost"
                                     size="sm"
+                                    variant={"outline"}
                                     onClick={() => copyToClipboard(transcript)}
-                                    className="h-8 sm:h-10 px-2 sm:px-3 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 text-xs sm:text-sm"
                                 >
                                     <Copy size={ICON_SIZE} className="mr-1 sm:mr-2" />
                                     Copy
@@ -161,24 +159,13 @@ export default function SpeechToTextTab({
 
                 {/* Action Buttons for Transcript */}
                 {transcript && (
-                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                    <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
                         <Button
-                            variant="outline"
                             onClick={() => setTranscript('')}
-                            className="flex-1 h-10 sm:h-12 text-xs sm:text-base"
                         >
                             <RotateCcw size={ICON_SIZE} className="mr-2" />
                             <span className="hidden sm:inline">Clear Transcript</span>
                             <span className="sm:hidden">Clear</span>
-                        </Button>
-                        <Button
-                            variant="outline"
-                            onClick={() => setTextInput(transcript)}
-                            className="flex-1 h-10 sm:h-12 text-xs sm:text-base"
-                        >
-                            <Volume2 size={ICON_SIZE} className="mr-2" />
-                            <span className="hidden sm:inline">Use for Text-to-Speech</span>
-                            <span className="sm:hidden">Use for TTS</span>
                         </Button>
                     </div>
                 )}
