@@ -160,7 +160,7 @@ class LazyLoader {
     private async waitForIdle(): Promise<void> {
         return new Promise(resolve => {
             if ('requestIdleCallback' in window) {
-                requestIdleCallback(resolve, { timeout: 5000 });
+                requestIdleCallback(() => resolve(), { timeout: 5000 });
             } else {
                 // Fallback for browsers without requestIdleCallback
                 setTimeout(resolve, 1000);

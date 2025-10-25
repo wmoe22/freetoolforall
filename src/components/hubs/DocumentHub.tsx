@@ -1,9 +1,9 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { CompressionOptions, DocumentConverter, MergeOptions, PDFProcessor, SplitOptions } from '@/lib/pdf-utils'
 import { ArrowRight, Copy, Download, FileText, RefreshCw, Scissors, Settings } from 'lucide-react'
@@ -141,15 +141,6 @@ export default function DocumentHub() {
     return (
         <div className="space-y-6">
             <Card className="w-full bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl">
-                <CardHeader className="pb-4 sm:pb-6">
-                    <CardTitle className="text-lg sm:text-xl text-slate-900 dark:text-white flex items-center gap-2">
-                        <FileText size={24} className="text-blue-600" />
-                        Document Hub
-                    </CardTitle>
-                    <CardDescription className="text-sm text-slate-600 dark:text-slate-400">
-                        Document processing and analysis tools
-                    </CardDescription>
-                </CardHeader>
 
                 <CardContent>
                     <Tabs defaultValue="converter" className="w-full">

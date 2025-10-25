@@ -36,27 +36,13 @@ export default function TextToSpeechTab({
 }: TextToSpeechTabProps) {
     return (
         <Card className="border-0 bg-white dark:bg-slate-900 shadow-xl shadow-slate-200/20 dark:shadow-slate-950/20">
-            <CardHeader className="pb-4 sm:pb-6 px-4 sm:px-6">
+            <CardHeader className="pb-4  sm:pb-6 px-4 sm:px-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
                     <div className="flex items-center space-x-3 sm:space-x-4">
-                        <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center ${isPlaying ? 'bg-blue-600' : 'bg-blue-500'
-                            }`}>
-                            {isPlaying ? (
-                                <VolumeX size={24} className="text-white sm:hidden" />
-                            ) : (
-                                <Volume2 size={24} className="text-white sm:hidden" />
-                            )}
-                            {isPlaying ? (
-                                <VolumeX size={32} className="text-white hidden sm:block" />
-                            ) : (
-                                <Volume2 size={32} className="text-white hidden sm:block" />
-                            )}
-                        </div>
                         <div className="min-w-0">
-                            <CardTitle className="text-xl sm:text-2xl lg:text-3xl text-slate-900 dark:text-white">Text to Speech</CardTitle>
-                            <CardDescription className="text-slate-600 dark:text-slate-400 mt-1 sm:mt-2 text-sm sm:text-base lg:text-lg">
-                                <span className="hidden sm:inline">Natural voice synthesis with customizable AI voice models</span>
-                                <span className="sm:hidden">Convert text to natural speech</span>
+                            <CardTitle className="text-md sm:text-lg lg:text-xl text-slate-900 dark:text-white">Text to Speech</CardTitle>
+                            <CardDescription className="text-slate-600 dark:text-slate-400  ">
+                                <span className="hidden sm:inline text-xs sm:text-base ">Natural voice synthesis with customizable AI voice models</span>
                             </CardDescription>
                         </div>
                     </div>

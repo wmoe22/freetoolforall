@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useStore } from '@/store/useStore'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AlertTriangle, CheckCircle, FileText, Link, Loader2, Shield, XCircle } from 'lucide-react'
 import { useState } from 'react'
 
@@ -18,7 +18,6 @@ interface ScanResult {
 }
 
 export default function SecurityHub() {
-    const { isDarkMode } = useStore()
     const [fileScanning, setFileScanning] = useState(false)
     const [urlScanning, setUrlScanning] = useState(false)
     const [fileScanResult, setFileScanResult] = useState<ScanResult | null>(null)
@@ -180,22 +179,19 @@ export default function SecurityHub() {
     }
 
     return (
-        <div className="space-y-6">
-            {/* Header */}
-            <div className="text-center">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                    <Shield className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
-                        Security Hub
-                    </h2>
-                </div>
-                <p className="text-slate-600 dark:text-slate-400">
-                    Scan files and URLs for malware and security threats using VirusTotal
-                </p>
-            </div>
+        <Tabs defaultValue="file-scanner" className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="file-scanner" className="flex items-center gap-2">
+                    <FileText className="h-4 w-4" />
+                    File Scanner
+                </TabsTrigger>
+                <TabsTrigger value="url-scanner" className="flex items-center gap-2">
+                    <Link className="h-4 w-4" />
+                    URL Scanner
+                </TabsTrigger>
+            </TabsList>
 
-            <div className="grid gap-6 md:grid-cols-2">
-                {/* File Scanner */}
+            <TabsContent value="file-scanner" className="space-y-6">
                 <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
@@ -239,10 +235,25 @@ export default function SecurityHub() {
                         </Button>
 
                         {renderScanResult(fileScanResult, 'file')}
+
+                        {/* File Safety Tips */}
+                        <div className="mt-6 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-lg">
+                            <h4 className="font-semibold mb-2 flex items-center gap-2">
+                                <Shield className="h-4 w-4" />
+                                File Safety Tips
+                            </h4>
+                            <ul className="text-sm space-y-1 text-slate-600 dark:text-slate-400">
+                                <li>• Always scan files from unknown sources</li>
+                                <li>• Be cautious with executable files (.exe, .bat, .scr)</li>
+                                <li>• Keep your antivirus software updated</li>
+                                <li>• Avoid opening suspicious email attachments</li>
+                            </ul>
+                        </div>
                     </CardContent>
                 </Card>
+            </TabsContent>
 
-                {/* URL Scanner */}
+            <TabsContent value="url-scanner" className="space-y-6">
                 <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">
@@ -282,31 +293,13 @@ export default function SecurityHub() {
                         </Button>
 
                         {renderScanResult(urlScanResult, 'url')}
-                    </CardContent>
-                </Card>
-            </div>
 
-            {/* Security Tips */}
-            <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                        <Shield className="h-5 w-5" />
-                        Security Tips
-                    </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <div className="grid gap-4 md:grid-cols-2">
-                        <div>
-                            <h4 className="font-semibold mb-2">File Safety</h4>
-                            <ul className="text-sm space-y-1 text-slate-600 dark:text-slate-400">
-                                <li>• Always scan files from unknown sources</li>
-                                <li>• Be cautious with executable files (.exe, .bat, .scr)</li>
-                                <li>• Keep your antivirus software updated</li>
-                                <li>• Avoid opening suspicious email attachments</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="font-semibold mb-2">URL Safety</h4>
+                        {/* URL Safety Tips */}
+                        <div className="mt-6 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-lg">
+                            <h4 className="font-semibold mb-2 flex items-center gap-2">
+                                <Shield className="h-4 w-4" />
+                                URL Safety Tips
+                            </h4>
                             <ul className="text-sm space-y-1 text-slate-600 dark:text-slate-400">
                                 <li>• Check URLs before clicking suspicious links</li>
                                 <li>• Look for HTTPS encryption on sensitive sites</li>
@@ -314,9 +307,9 @@ export default function SecurityHub() {
                                 <li>• Verify website authenticity before entering credentials</li>
                             </ul>
                         </div>
-                    </div>
-                </CardContent>
-            </Card>
-        </div>
+                    </CardContent>
+                </Card>
+            </TabsContent>
+        </Tabs>
     )
 }

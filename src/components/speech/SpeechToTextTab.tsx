@@ -35,26 +35,9 @@ export default function SpeechToTextTab({
         <Card className="border-0 bg-white dark:bg-slate-900 shadow-xl shadow-slate-200/20 dark:shadow-slate-950/20">
             <CardHeader className="pb-4 sm:pb-6 px-4 sm:px-6">
                 <div className="flex items-center space-x-3 sm:space-x-4 mb-4">
-                    <div className={`w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center ${isTranscribing ? 'bg-blue-600' : selectedFile ? 'bg-blue-500' : 'bg-blue-500'
-                        }`}>
-                        {isTranscribing ? (
-                            <Loader2 size={ICON_SIZE} className="text-white animate-spin sm:hidden" />
-                        ) : selectedFile ? (
-                            <FileAudio size={ICON_SIZE} className="text-white sm:hidden" />
-                        ) : (
-                            <Upload size={ICON_SIZE} className="text-white sm:hidden" />
-                        )}
-                        {isTranscribing ? (
-                            <Loader2 size={ICON_SIZE} className="text-white animate-spin hidden sm:block" />
-                        ) : selectedFile ? (
-                            <FileAudio size={ICON_SIZE} className="text-white hidden sm:block" />
-                        ) : (
-                            <Upload size={ICON_SIZE} className="text-white hidden sm:block" />
-                        )}
-                    </div>
                     <div className="min-w-0">
-                        <CardTitle className="text-lg sm:text-xl lg:text-2xl text-slate-900 dark:text-white">Speech to Text</CardTitle>
-                        <CardDescription className="text-slate-600 dark:text-slate-400 mt-1 sm:mt-2 text-sm sm:text-base lg:text-md">
+                        <CardTitle className="text-md sm:text-lg lg:text-xl text-slate-900 dark:text-white">Speech to Text</CardTitle>
+                        <CardDescription className="text-slate-600 dark:text-slate-400 text-sm sm:text-base lg:text-md">
                             <span className="hidden sm:inline">Upload audio files for accurate transcription</span>
                             <span className="sm:hidden">Upload audio for transcription</span>
                         </CardDescription>

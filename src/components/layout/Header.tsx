@@ -1,15 +1,17 @@
 'use client'
 
+import ToolRequestDialog from '@/components/ToolRequestDialog'
+import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { useStore } from '@/store/useStore'
-import { AudioWaveform, Moon, Sun } from 'lucide-react'
+import { AudioWaveform, Moon, Plus, Sun } from 'lucide-react'
 import { useState } from 'react'
 
 const ICON_SIZE = 15
 
 export default function Header() {
     const { isDarkMode, toggleDarkMode } = useStore()
-    const [showUsageDashboard, setShowUsageDashboard] = useState(false)
+    const [showToolRequestDialog, setShowToolRequestDialog] = useState(false)
 
     return (
         <>
@@ -23,13 +25,33 @@ export default function Header() {
                             </div>
                             <div className="min-w-0">
                                 <h1 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white truncate">
-                                    SpeechFlow
+                                    FreeToolForAll
                                 </h1>
-                                <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">Voice AI Platform</p>
+                                <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">Essential Tool Hub</p>
                             </div>
                         </div>
 
                         <div className="flex items-center space-x-2 sm:space-x-4">
+                            <Button
+                                onClick={() => setShowToolRequestDialog(true)}
+                                variant="outline"
+                                size="sm"
+                                className="hidden sm:flex items-center gap-2 text-xs sm:text-sm bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700"
+                            >
+                                <Plus size={14} />
+                                Request Tool
+                            </Button>
+
+                            <Button
+                                onClick={() => setShowToolRequestDialog(true)}
+                                variant="outline"
+                                size="sm"
+                                className="sm:hidden p-2 bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700"
+                                aria-label="Request Tool"
+                            >
+                                <Plus size={16} />
+                            </Button>
+
                             <div className="flex items-center space-x-1 sm:space-x-2 bg-slate-100 dark:bg-slate-800 rounded-full p-1">
                                 <Sun size={ICON_SIZE} className="text-slate-600 dark:text-slate-400" />
                                 <Switch
@@ -44,6 +66,10 @@ export default function Header() {
                 </div>
             </header>
 
+            <ToolRequestDialog
+                open={showToolRequestDialog}
+                onOpenChange={setShowToolRequestDialog}
+            />
         </>
     )
 }

@@ -1,36 +1,30 @@
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+
 export default function FAQSection() {
     const faqs = [
         {
-            question: "Is SpeechFlow completely free to use?",
-            answer: "Yes, SpeechFlow is completely free to use. There are no hidden fees, subscriptions, or login requirements. You can start converting speech to text and text to speech immediately."
+            question: "How do I convert speech to text?",
+            answer: "Simply upload your audio file or record directly in your browser. Our AI will automatically transcribe your speech into text within seconds. No account required."
         },
         {
-            question: "What audio formats are supported for speech-to-text conversion?",
-            answer: "SpeechFlow supports all major audio formats including MP3, WAV, M4A, FLAC, and video formats like MP4 and WebM. Simply upload your file and we'll handle the conversion."
+            question: "What file formats can I upload?",
+            answer: "We support all common audio formats including MP3, WAV, M4A, FLAC, and video files like MP4. Maximum file size is 100MB."
         },
         {
-            question: "How accurate is the speech recognition?",
-            answer: "Our speech recognition is powered by advanced AI technology and provides high accuracy for clear audio. Accuracy may vary based on audio quality, background noise, and speaker clarity."
+            question: "Is my data private and secure?",
+            answer: "Yes, your privacy is our top priority. Files are processed temporarily and automatically deleted after conversion. We never store or share your audio data."
         },
         {
-            question: "Can I use different voices for text-to-speech?",
-            answer: "Yes, SpeechFlow offers multiple voice models with different accents and speaking styles. You can select from various high-quality voices to suit your needs."
+            question: "How accurate is the transcription?",
+            answer: "Our AI provides high accuracy for clear audio with minimal background noise. For best results, use good quality recordings with clear speech."
         },
         {
-            question: "Is my audio data stored or shared?",
-            answer: "No, your privacy is our priority. Audio files are processed temporarily and are not stored on our servers. Your data remains private and secure."
+            question: "Can I edit the transcribed text?",
+            answer: "Yes, you can edit the transcribed text directly in the interface before copying or downloading it."
         },
         {
-            question: "Do I need to create an account?",
-            answer: "No account creation is required. SpeechFlow works instantly in your browser without any registration or login process."
-        },
-        {
-            question: "What languages are supported?",
-            answer: "SpeechFlow supports multiple languages for both speech recognition and text-to-speech conversion. The exact languages available depend on the voice models and recognition engines used."
-        },
-        {
-            question: "Can I download the generated audio files?",
-            answer: "Yes, you can download the generated audio files from text-to-speech conversion directly to your device in high-quality audio format."
+            question: "Is there a limit on file length?",
+            answer: "You can upload files up to 2 hours long. For longer files, consider splitting them into smaller segments for better processing."
         }
     ];
 
@@ -59,22 +53,22 @@ export default function FAQSection() {
                         Frequently Asked Questions
                     </h2>
                     <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300">
-                        Everything you need to know about SpeechFlow
+                        Get answers to common questions about our speech-to-text service
                     </p>
                 </div>
 
-                <div className="space-y-6 sm:space-y-8">
+                <Accordion type="single" collapsible className="w-full">
                     {faqs.map((faq, index) => (
-                        <div key={index} className="border-b border-slate-200 dark:border-slate-700 pb-6 sm:pb-8">
-                            <h3 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white mb-2 sm:mb-3">
+                        <AccordionItem key={index} value={`item-${index}`}>
+                            <AccordionTrigger className="text-left text-lg sm:text-xl font-semibold text-slate-900 dark:text-white">
                                 {faq.question}
-                            </h3>
-                            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                            </AccordionTrigger>
+                            <AccordionContent className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
                                 {faq.answer}
-                            </p>
-                        </div>
+                            </AccordionContent>
+                        </AccordionItem>
                     ))}
-                </div>
+                </Accordion>
             </div>
         </section>
     );

@@ -5,6 +5,7 @@ import AudioTrimmerTab from '@/components/speech/AudioTrimmerTab'
 import SpeechToTextTab from '@/components/speech/SpeechToTextTab'
 import SubtitleGeneratorTab from '@/components/speech/SubtitleGeneratorTab'
 import TextToSpeechTab from '@/components/speech/TextToSpeechTab'
+import { Card, CardContent } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { SpeechService } from '@/lib/speech-service'
 import { useStore } from '@/store/useStore'
@@ -166,136 +167,139 @@ export default function VoiceHub({ }: VoiceHubProps) {
 
     return (
         <div className="space-y-6">
-            <Tabs defaultValue="speech-to-text" className="">
-                <TabsList className="grid w-full grid-cols-5 bg-slate-100 dark:bg-slate-800 rounded-lg sm:rounded-xl h-12 sm:h-auto" role="tablist" aria-label="Voice tools">
-                    <TabsTrigger
-                        value="speech-to-text"
-                        role="tab"
-                        aria-controls="speech-to-text-panel"
-                        className="text-xs sm:text-sm py-2 sm:py-3"
-                    >
-                        <Upload size={ICON_SIZE} className="mr-1 sm:mr-2" aria-hidden="true" />
-                        <span className="hidden xs:inline">Speech to Text</span>
-                        <span className="xs:hidden">STT</span>
-                    </TabsTrigger>
-                    <TabsTrigger
-                        value="text-to-speech"
-                        role="tab"
-                        aria-controls="text-to-speech-panel"
-                        className="text-xs sm:text-sm py-2 sm:py-3"
-                    >
-                        <Volume2 size={ICON_SIZE} className="mr-1 sm:mr-2" aria-hidden="true" />
-                        <span className="hidden xs:inline">Text to Speech</span>
-                        <span className="xs:hidden">TTS</span>
-                    </TabsTrigger>
-                    <TabsTrigger
-                        value="audio-converter"
-                        role="tab"
-                        aria-controls="audio-converter-panel"
-                        className="text-xs sm:text-sm py-2 sm:py-3"
-                    >
-                        <AudioWaveform size={ICON_SIZE} className="mr-1 sm:mr-2" aria-hidden="true" />
-                        <span className="hidden xs:inline">Audio Converter</span>
-                        <span className="xs:hidden">Convert</span>
-                    </TabsTrigger>
-                    <TabsTrigger
-                        value="subtitle-generator"
-                        role="tab"
-                        aria-controls="subtitle-generator-panel"
-                        className="text-xs sm:text-sm py-2 sm:py-3"
-                    >
-                        <FileText size={ICON_SIZE} className="mr-1 sm:mr-2" aria-hidden="true" />
-                        <span className="hidden xs:inline">Subtitle Generator</span>
-                        <span className="xs:hidden">Subs</span>
-                    </TabsTrigger>
-                    <TabsTrigger
-                        value="audio-trimmer"
-                        role="tab"
-                        aria-controls="audio-trimmer-panel"
-                        className="text-xs sm:text-sm py-2 sm:py-3"
-                    >
-                        <Scissors size={ICON_SIZE} className="mr-1 sm:mr-2" aria-hidden="true" />
-                        <span className="hidden xs:inline">Audio Trimmer</span>
-                        <span className="xs:hidden">Trim</span>
-                    </TabsTrigger>
-                </TabsList>
+            <Card className="w-full bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl">
+                <CardContent>
+                    <Tabs defaultValue="speech-to-text" className="w-full">
+                        <TabsList className="grid w-full grid-cols-5 mb-6" role="tablist" aria-label="Voice tools">
+                            <TabsTrigger
+                                value="speech-to-text"
+                                role="tab"
+                                aria-controls="speech-to-text-panel"
+                                className="text-xs sm:text-sm py-1 sm:py-1.5"
+                            >
+                                <Upload size={ICON_SIZE} className="mr-1 sm:mr-2" aria-hidden="true" />
+                                <span className="hidden xs:inline">Speech to Text</span>
+                                <span className="xs:hidden">STT</span>
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="text-to-speech"
+                                role="tab"
+                                aria-controls="text-to-speech-panel"
+                                className="text-xs sm:text-sm py-1 sm:py-1.5"
+                            >
+                                <Volume2 size={ICON_SIZE} className="mr-1 sm:mr-2" aria-hidden="true" />
+                                <span className="hidden xs:inline">Text to Speech</span>
+                                <span className="xs:hidden">TTS</span>
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="audio-converter"
+                                role="tab"
+                                aria-controls="audio-converter-panel"
+                                className="text-xs sm:text-sm py-1 sm:py-1.5"
+                            >
+                                <AudioWaveform size={ICON_SIZE} className="mr-1 sm:mr-2" aria-hidden="true" />
+                                <span className="hidden xs:inline">Audio Converter</span>
+                                <span className="xs:hidden">Convert</span>
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="subtitle-generator"
+                                role="tab"
+                                aria-controls="subtitle-generator-panel"
+                                className="text-xs sm:text-sm py-1 sm:py-1.5"
+                            >
+                                <FileText size={ICON_SIZE} className="mr-1 sm:mr-2" aria-hidden="true" />
+                                <span className="hidden xs:inline">Subtitle Generator</span>
+                                <span className="xs:hidden">Subs</span>
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="audio-trimmer"
+                                role="tab"
+                                aria-controls="audio-trimmer-panel"
+                                className="text-xs sm:text-sm py-1 sm:py-1.5"
+                            >
+                                <Scissors size={ICON_SIZE} className="mr-1 sm:mr-2" aria-hidden="true" />
+                                <span className="hidden xs:inline">Audio Trimmer</span>
+                                <span className="xs:hidden">Trim</span>
+                            </TabsTrigger>
+                        </TabsList>
 
-                {/* Speech to Text Tab */}
-                <TabsContent
-                    value="speech-to-text"
-                    className="mt-0"
-                    role="tabpanel"
-                    id="speech-to-text-panel"
-                    aria-labelledby="speech-to-text-tab"
-                >
-                    <SpeechToTextTab
-                        selectedFile={selectedFile}
-                        isTranscribing={isTranscribing}
-                        transcript={transcript}
-                        handleFileSelect={handleFileSelect}
-                        handleFileTranscription={handleFileTranscription}
-                        clearFile={clearFile}
-                        copyToClipboard={copyToClipboard}
-                        setTranscript={setTranscript}
-                        setTextInput={setTextInput}
-                    />
-                </TabsContent>
+                        {/* Speech to Text Tab */}
+                        <TabsContent
+                            value="speech-to-text"
+                            className="mt-0"
+                            role="tabpanel"
+                            id="speech-to-text-panel"
+                            aria-labelledby="speech-to-text-tab"
+                        >
+                            <SpeechToTextTab
+                                selectedFile={selectedFile}
+                                isTranscribing={isTranscribing}
+                                transcript={transcript}
+                                handleFileSelect={handleFileSelect}
+                                handleFileTranscription={handleFileTranscription}
+                                clearFile={clearFile}
+                                copyToClipboard={copyToClipboard}
+                                setTranscript={setTranscript}
+                                setTextInput={setTextInput}
+                            />
+                        </TabsContent>
 
-                {/* Text to Speech Tab */}
-                <TabsContent
-                    value="text-to-speech"
-                    className="mt-0"
-                    role="tabpanel"
-                    id="text-to-speech-panel"
-                    aria-labelledby="text-to-speech-tab"
-                >
-                    <TextToSpeechTab
-                        textInput={textInput}
-                        setTextInput={setTextInput}
-                        selectedVoiceModel={selectedVoiceModel}
-                        setSelectedVoiceModel={setSelectedVoiceModel}
-                        showVoiceSelector={showVoiceSelector}
-                        setShowVoiceSelector={setShowVoiceSelector}
-                        isPlaying={isPlaying}
-                        handleTextToSpeech={handleTextToSpeech}
-                        handleStopSpeech={handleStopSpeech}
-                        handleDownloadAudio={handleDownloadAudio}
-                    />
-                </TabsContent>
+                        {/* Text to Speech Tab */}
+                        <TabsContent
+                            value="text-to-speech"
+                            className="mt-0"
+                            role="tabpanel"
+                            id="text-to-speech-panel"
+                            aria-labelledby="text-to-speech-tab"
+                        >
+                            <TextToSpeechTab
+                                textInput={textInput}
+                                setTextInput={setTextInput}
+                                selectedVoiceModel={selectedVoiceModel}
+                                setSelectedVoiceModel={setSelectedVoiceModel}
+                                showVoiceSelector={showVoiceSelector}
+                                setShowVoiceSelector={setShowVoiceSelector}
+                                isPlaying={isPlaying}
+                                handleTextToSpeech={handleTextToSpeech}
+                                handleStopSpeech={handleStopSpeech}
+                                handleDownloadAudio={handleDownloadAudio}
+                            />
+                        </TabsContent>
 
-                {/* Audio Converter Tab */}
-                <TabsContent
-                    value="audio-converter"
-                    className="mt-0"
-                    role="tabpanel"
-                    id="audio-converter-panel"
-                    aria-labelledby="audio-converter-tab"
-                >
-                    <AudioConverterTab />
-                </TabsContent>
+                        {/* Audio Converter Tab */}
+                        <TabsContent
+                            value="audio-converter"
+                            role="tabpanel"
+                            id="audio-converter-panel"
+                            aria-labelledby="audio-converter-tab"
+                        >
+                            <AudioConverterTab />
+                        </TabsContent>
 
-                {/* Subtitle Generator Tab */}
-                <TabsContent
-                    value="subtitle-generator"
-                    className="mt-0"
-                    role="tabpanel"
-                    id="subtitle-generator-panel"
-                    aria-labelledby="subtitle-generator-tab"
-                >
-                    <SubtitleGeneratorTab />
-                </TabsContent>
+                        {/* Subtitle Generator Tab */}
+                        <TabsContent
+                            value="subtitle-generator"
+                            className="mt-0"
+                            role="tabpanel"
+                            id="subtitle-generator-panel"
+                            aria-labelledby="subtitle-generator-tab"
+                        >
+                            <SubtitleGeneratorTab />
+                        </TabsContent>
 
-                {/* Audio Trimmer Tab */}
-                <TabsContent
-                    value="audio-trimmer"
-                    className="mt-0"
-                    role="tabpanel"
-                    id="audio-trimmer-panel"
-                    aria-labelledby="audio-trimmer-tab"
-                >
-                    <AudioTrimmerTab />
-                </TabsContent>
-            </Tabs>
+                        {/* Audio Trimmer Tab */}
+                        <TabsContent
+                            value="audio-trimmer"
+                            className="mt-0"
+                            role="tabpanel"
+                            id="audio-trimmer-panel"
+                            aria-labelledby="audio-trimmer-tab"
+                        >
+                            <AudioTrimmerTab />
+                        </TabsContent>
+                    </Tabs>
+                </CardContent>
+            </Card>
         </div>
     )
 }

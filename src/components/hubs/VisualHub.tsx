@@ -1,14 +1,13 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ImageAnalyzer, ImagePresets, ImageProcessor } from '@/lib/image-utils'
 import {
     Download,
-    Eye,
     Image,
     Maximize2,
     Palette,
@@ -250,16 +249,6 @@ export default function VisualHub() {
     return (
         <div className="space-y-6">
             <Card className="w-full bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl">
-                <CardHeader className="pb-4 sm:pb-6">
-                    <CardTitle className="text-lg sm:text-xl text-slate-900 dark:text-white flex items-center gap-2">
-                        <Eye size={24} className="text-purple-600" />
-                        Visual Hub
-                    </CardTitle>
-                    <CardDescription className="text-sm text-slate-600 dark:text-slate-400">
-                        Comprehensive image processing and editing tools
-                    </CardDescription>
-                </CardHeader>
-
                 <CardContent>
                     <Tabs defaultValue="compress" className="w-full">
                         <TabsList className="grid w-full grid-cols-5 mb-6">

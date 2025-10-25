@@ -6,14 +6,14 @@ export default function HeroSection() {
                 <span className="whitespace-nowrap">No login required • Start instantly</span>
             </div>
             <h1 id="hero-heading" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-4 sm:mb-6 leading-tight px-2">
-                Transform Your Voice
+                Essential Tools
                 <br className="hidden sm:block" />
                 <span className="sm:hidden"> </span>
-                <span className="text-blue-600">Instantly</span>
+                <span className="text-blue-600">For Everyone</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed px-4">
-                Professional speech-to-text and text-to-speech conversion powered by advanced AI.
-                <span className="hidden sm:inline"> Perfect for content creators, professionals, and accessibility needs.</span>
+                Complete toolkit with voice processing, document conversion, visual tools, and security features.
+                <span className="hidden sm:inline"> Everything you need in one powerful, free platform.</span>
             </p>
         </section>
     )

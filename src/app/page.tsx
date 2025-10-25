@@ -47,9 +47,9 @@ export default function Home() {
 
         {/* Main Hub Section */}
         <section aria-labelledby="hubs-heading" className="mb-8 sm:mb-12">
-          <h2 id="hubs-heading" className="sr-only">AI Processing Hubs</h2>
+          <h2 id="hubs-heading" className="sr-only">Essential Tool Hubs</h2>
           <Tabs defaultValue="voice-hub" className="">
-            <TabsList className="grid w-full grid-cols-5 bg-slate-100 dark:bg-slate-800 rounded-lg sm:rounded-xl h-14 sm:h-auto" role="tablist" aria-label="AI processing hubs">
+            <TabsList className="grid w-full grid-cols-5 bg-slate-100 dark:bg-slate-800 rounded-lg sm:rounded-xl h-14 sm:h-auto" role="tablist" aria-label="Essential tool hubs">
               <TabsTrigger
                 value="voice-hub"
                 role="tab"
@@ -100,7 +100,6 @@ export default function Home() {
             {/* Voice Hub */}
             <TabsContent
               value="voice-hub"
-              className="mt-6"
               role="tabpanel"
               id="voice-hub-panel"
               aria-labelledby="voice-hub-tab"
@@ -111,7 +110,6 @@ export default function Home() {
             {/* Document Hub */}
             <TabsContent
               value="document-hub"
-              className="mt-6"
               role="tabpanel"
               id="document-hub-panel"
               aria-labelledby="document-hub-tab"
@@ -122,7 +120,7 @@ export default function Home() {
             {/* Business Hub */}
             <TabsContent
               value="business-hub"
-              className="mt-6"
+
               role="tabpanel"
               id="business-hub-panel"
               aria-labelledby="business-hub-tab"
@@ -133,7 +131,7 @@ export default function Home() {
             {/* Visual Hub */}
             <TabsContent
               value="visual-hub"
-              className="mt-6"
+
               role="tabpanel"
               id="visual-hub-panel"
               aria-labelledby="visual-hub-tab"
@@ -144,7 +142,7 @@ export default function Home() {
             {/* Security Hub */}
             <TabsContent
               value="security-hub"
-              className="mt-6"
+
               role="tabpanel"
               id="security-hub-panel"
               aria-labelledby="security-hub-tab"
