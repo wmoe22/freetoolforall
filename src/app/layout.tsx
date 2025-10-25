@@ -18,9 +18,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     default: "SpeechFlow - Free Voice to Text & Text to Speech Converter",
-    template: "%s | SpeechFlow"
+    template: "%s | SpeechFlow",
   },
-  description: "Transform your voice with seamless speech-to-text and text-to-speech conversion. Free online tool with no login required. Support for multiple languages and voice models.",
+  description:
+    "Transform your voice with seamless speech-to-text and text-to-speech conversion. Free online tool with no login required. Support for multiple languages and voice models.",
   keywords: [
     "speech to text",
     "text to speech",
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     "voice to text",
     "audio to text",
     "free speech converter",
-    "online voice tools"
+    "online voice tools",
   ],
   authors: [{ name: "SpeechFlow Team" }],
   creator: "SpeechFlow",
@@ -43,32 +44,36 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://speechflow.app'),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL || "https://speechflow.app"
+  ),
   alternates: {
-    canonical: '/',
+    canonical: "/",
   },
   openGraph: {
     title: "SpeechFlow - Free Voice to Text & Text to Speech Converter",
-    description: "Transform your voice with seamless speech-to-text and text-to-speech conversion. Free online tool with no login required.",
-    url: '/',
-    siteName: 'SpeechFlow',
+    description:
+      "Transform your voice with seamless speech-to-text and text-to-speech conversion. Free online tool with no login required.",
+    url: "/",
+    siteName: "SpeechFlow",
     images: [
       {
-        url: '/og-image.png',
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: 'SpeechFlow - Voice Conversion Tools',
-      }
+        alt: "SpeechFlow - Voice Conversion Tools",
+      },
     ],
-    locale: 'en_US',
-    type: 'website',
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: "SpeechFlow - Free Voice to Text & Text to Speech Converter",
-    description: "Transform your voice with seamless speech-to-text and text-to-speech conversion. Free online tool with no login required.",
-    images: ['/og-image.png'],
-    creator: '@speechflow',
+    description:
+      "Transform your voice with seamless speech-to-text and text-to-speech conversion. Free online tool with no login required.",
+    images: ["/og-image.png"],
+    creator: "@speechflow",
   },
   robots: {
     index: true,
@@ -76,9 +81,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   verification: {
@@ -94,28 +99,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebApplication',
-    name: 'SpeechFlow',
-    description: 'Free online speech-to-text and text-to-speech converter with no login required',
-    url: process.env.NEXT_PUBLIC_APP_URL || 'https://speechflow.app',
-    applicationCategory: 'UtilityApplication',
-    operatingSystem: 'Web Browser',
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "SpeechFlow",
+    description:
+      "Free online speech-to-text and text-to-speech converter with no login required",
+    url: process.env.NEXT_PUBLIC_APP_URL || "https://speechflow.app",
+    applicationCategory: "UtilityApplication",
+    operatingSystem: "Web Browser",
     offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD'
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
     },
     featureList: [
-      'Speech to Text Conversion',
-      'Text to Speech Synthesis',
-      'Multiple Voice Models',
-      'Audio File Upload',
-      'Real-time Transcription',
-      'Download Audio Files'
+      "Speech to Text Conversion",
+      "Text to Speech Synthesis",
+      "Multiple Voice Models",
+      "Audio File Upload",
+      "Real-time Transcription",
+      "Download Audio Files",
     ],
-    browserRequirements: 'Requires JavaScript. Requires HTML5.',
-    permissions: 'microphone'
+    browserRequirements: "Requires JavaScript. Requires HTML5.",
+    permissions: "microphone",
   };
 
   return (
@@ -125,7 +131,10 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <link rel="canonical" href={process.env.NEXT_PUBLIC_APP_URL || 'https://speechflow.app'} />
+        <link
+          rel="canonical"
+          href={process.env.NEXT_PUBLIC_APP_URL || "https://speechflow.app"}
+        />
         <meta name="theme-color" content="#0f172a" />
         <meta name="color-scheme" content="light dark" />
       </head>
@@ -134,10 +143,13 @@ export default function RootLayout({
       >
         <Analytics />
         <ErrorBoundary>
-          <Providers>
-            {children}
-          </Providers>
+          <Providers>{children}</Providers>
         </ErrorBoundary>
+        <script
+          async={true}
+          data-cfasync="false"
+          src="//comprehensiveimplementationstrode.com/8250dc77e079516ac855643826e93e7d/invoke.js"
+        ></script>
       </body>
     </html>
   );
