@@ -76,12 +76,13 @@ export function middleware(request: NextRequest) {
     // CSP header
     const csp = [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+        "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.highperformanceformat.com http://www.highperformanceformat.com https://*.adsterra.com http://*.adsterra.com",
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
         "font-src 'self' https://fonts.gstatic.com",
         "img-src 'self' data: https: blob:",
         "media-src 'self' blob:",
-        "connect-src 'self' https://api.deepgram.com https://www.google-analytics.com https://vitals.vercel-insights.com",
+        "connect-src 'self' https://api.deepgram.com https://www.google-analytics.com https://vitals.vercel-insights.com https://*.adsterra.com http://*.adsterra.com",
+        "frame-src 'self' https://*.adsterra.com http://*.adsterra.com https://www.highperformanceformat.com http://www.highperformanceformat.com",
         "worker-src 'self' blob:",
     ].join('; ');
 

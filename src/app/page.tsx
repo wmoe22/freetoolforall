@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import UsageWarning from '@/components/UsageWarning'
 import { useStore } from '@/store/useStore'
 import { Briefcase, Eye, FileText, Shield, Volume2 } from 'lucide-react'
+import Script from 'next/script'
 import { useEffect } from 'react'
 
 const ICON_SIZE = 18
@@ -33,6 +34,26 @@ export default function Home() {
   return (
     <div className={`min-h-screen font-sans transition-colors duration-200 bg-background ${isDarkMode ? 'dark' : ''
       }`}>
+      {/* Ad Script Configuration */}
+      <Script id="ad-config" strategy="beforeInteractive">
+        {`
+          console.log('Ad config loaded - atOptions set');
+          atOptions = {
+            'key': '9049b5988a1996a1f861fb1a973374ca',
+            'format': 'iframe',
+            'height': 250,
+            'width': 300,
+            'params': {}
+          };
+        `}
+      </Script>
+      <Script
+        src="https://www.highperformanceformat.com/9049b5988a1996a1f861fb1a973374ca/invoke.js"
+        strategy="afterInteractive"
+        onLoad={() => console.log('Ad script loaded successfully')}
+        onError={(e) => console.error('Ad script failed to load:', e)}
+      />
+
       <Header />
 
       {/* Main Content */}
@@ -153,6 +174,28 @@ export default function Home() {
         </section>
 
         <FeaturesSection />
+
+        {/* Ad Container */}
+        <div className="flex justify-center my-8">
+          <div
+            id="adsterra-ad"
+            className="w-[300px] h-[250px]"
+            dangerouslySetInnerHTML={{
+              __html: `
+                <script type="text/javascript">
+                  atOptions = {
+                    'key' : '9049b5988a1996a1f861fb1a973374ca',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                  };
+                  document.write('<scr' + 'ipt type="text/javascript" src="https://www.highperformanceformat.com/9049b5988a1996a1f861fb1a973374ca/invoke.js"></scr' + 'ipt>');
+                </script>
+              `
+            }}
+          />
+        </div>
       </main>
 
       <LazyFAQSection />
