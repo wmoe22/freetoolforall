@@ -66,7 +66,7 @@ export function middleware(request: NextRequest) {
         // For now, we'll add headers for Cloudflare to handle
         response.headers.set('X-Rate-Limit-IP', realIp);
     }
-
+    //test
     // Security headers for all routes
     response.headers.set('X-Content-Type-Options', 'nosniff');
     response.headers.set('X-Frame-Options', 'DENY');
