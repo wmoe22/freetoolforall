@@ -135,6 +135,11 @@ export default function RootLayout({
           rel="canonical"
           href={process.env.NEXT_PUBLIC_APP_URL || "https://speechflow.app"}
         />
+        <script
+          async={true}
+          data-cfasync="false"
+          src="//comprehensiveimplementationstrode.com/8250dc77e079516ac855643826e93e7d/invoke.js"
+        ></script>
         <meta name="theme-color" content="#0f172a" />
         <meta name="color-scheme" content="light dark" />
       </head>
@@ -151,6 +156,11 @@ export default function RootLayout({
           src="//comprehensiveimplementationstrode.com/8250dc77e079516ac855643826e93e7d/invoke.js"
         ></script>
       </body>
+      <script
+        async={true}
+        data-cfasync="false"
+        src="//comprehensiveimplementationstrode.com/8250dc77e079516ac855643826e93e7d/invoke.js"
+      ></script>
     </html>
   );
 }
