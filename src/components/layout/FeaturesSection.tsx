@@ -4,7 +4,7 @@ export default function FeaturesSection() {
     return (
         <section className="py-4 sm:py-6" aria-labelledby="features-heading">
             <h2 id="features-heading" className="sr-only">Key Features</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 <div className="text-center p-4 sm:p-6 bg-card rounded-xl sm:rounded-2xl border border-border">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 border border-primary bg-primary/10 rounded-lg sm:rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4">
                         <Volume2 size={20} className="text-primary sm:hidden" />

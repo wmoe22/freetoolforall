@@ -2,10 +2,10 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: 'Privacy Policy',
-    description: 'Learn how Usefreetools protects your privacy and handles your data. We prioritize user privacy and data security.',
+    description: 'Privacy policy for Usefreetools - free online digital utilities including file converter, image tools, voice tools, and business generators. Learn how we protect your data and ensure privacy across all our free tools and services.',
     openGraph: {
         title: 'Privacy Policy | Usefreetools',
-        description: 'Learn how Usefreetools protects your privacy and handles your data.',
+        description: 'Privacy policy for Usefreetools - free online digital utilities including file converter, image tools, voice tools, and business generators.',
     },
 }
 

@@ -32,13 +32,13 @@ export default function SpeechToTextTab({
     setTextInput
 }: SpeechToTextTabProps) {
     return (
-        <Card className="border-0 bg-white dark:bg-slate-900 shadow-xl shadow-slate-200/20 dark:shadow-slate-950/20">
+        <Card className="border-0 bg-white dark:bg-black shadow-xl shadow-slate-200/20 dark:shadow-slate-950/20">
             <CardHeader className="pb-4 sm:pb-6 px-4 sm:px-6">
                 <div className="flex items-center space-x-3 sm:space-x-4 mb-4">
                     <div className="min-w-0">
                         <CardTitle className="text-md sm:text-lg lg:text-xl text-slate-900 dark:text-white">Speech to Text</CardTitle>
                         <CardDescription className="text-slate-600 dark:text-slate-400 text-sm sm:text-base lg:text-md">
-                            <span className="hidden sm:inline">Upload audio files for accurate transcription</span>
+                            <span className="hidden sm:inline text-sm">Upload audio files for accurate transcription</span>
                             <span className="sm:hidden">Upload audio for transcription</span>
                         </CardDescription>
                     </div>
@@ -52,14 +52,15 @@ export default function SpeechToTextTab({
                         id="audio-upload"
                         accept="audio/*,video/mp4,video/webm"
                         onChange={handleFileSelect}
-                        className="hidden"
+                        className="hidden "
+
                         disabled={isTranscribing}
                     />
                     <Label
                         htmlFor="audio-upload"
                         className={`flex flex-col items-center justify-center w-full h-24 sm:h-32 border-2 border-dashed rounded-lg sm:rounded-xl cursor-pointer transition-all duration-200 ${selectedFile
-                            ? 'border-blue-300 bg-blue-50 dark:border-blue-700 dark:bg-blue-950/20'
-                            : 'border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/20'
+                            ? 'border-blue-300 bg-blue-50 dark:border-blue-700 dark:bg-zinc-950/20'
+                            : 'border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-zinc-800/50 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/20'
                             } ${isTranscribing ? 'pointer-events-none opacity-60 animate-pulse' : ''}`}
                     >
                         {selectedFile ? (
@@ -132,7 +133,7 @@ export default function SpeechToTextTab({
 
                 {/* Transcript Display */}
                 <div className="relative">
-                    <div className="min-h-[150px] sm:min-h-[200px] p-4 sm:p-6 lg:p-8 bg-slate-50 dark:bg-slate-800/50 rounded-lg sm:rounded-xl border border-slate-200 dark:border-slate-700">
+                    <div className="min-h-[150px] sm:min-h-[200px] p-4 sm:p-6 lg:p-8 bg-slate-50 dark:bg-zinc-900 rounded-lg sm:rounded-xl border border-slate-200 dark:border-slate-700">
                         <div className="flex items-center justify-between mb-3 sm:mb-4">
                             <p className="text-sm sm:text-base font-medium text-slate-700 dark:text-slate-300">Transcript</p>
                             {transcript && (
@@ -171,7 +172,7 @@ export default function SpeechToTextTab({
                 )}
 
                 {/* Upload Tips */}
-                <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 sm:p-4">
+                <div className="bg-blue-50 dark:bg-zinc-900 border border-blue-200 dark:border-zinc-700 rounded-lg p-3 sm:p-4">
                     <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2 text-sm sm:text-base">Upload Tips:</h4>
                     <ul className="text-xs sm:text-sm text-blue-800 dark:text-blue-200 space-y-1">
                         <li>• Supported formats: MP3, WAV, M4A, FLAC, MP4, WebM, and more</li>

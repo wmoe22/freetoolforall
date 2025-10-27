@@ -294,12 +294,9 @@ export default function RootLayout({
           data-cfasync="false"
           src="//comprehensiveimplementationstrode.com/8250dc77e079516ac855643826e93e7d/invoke.js"
         ></script>
+
+        <script async={true} data-cfasync="false" src="//comprehensiveimplementationstrode.com/d7335c49fed82ef151c040dd10690d7e/invoke.js"></script>
       </body>
-      <script
-        async={true}
-        data-cfasync="false"
-        src="//comprehensiveimplementationstrode.com/8250dc77e079516ac855643826e93e7d/invoke.js"
-      ></script>
     </html>
   );
 }

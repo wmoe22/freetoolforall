@@ -203,7 +203,7 @@ export default function AudioConverterTab({ }: AudioConverterTabProps) {
     }
 
     return (
-        <Card className="w-full bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl">
+        <Card className="w-full bg-white dark:bg-black border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl">
             <CardHeader className="pb-4 gap-0 sm:pb-6">
                 <CardTitle className="text-lg sm:text-xl text-slate-900 dark:text-white">
                     Audio Converter
@@ -231,7 +231,7 @@ export default function AudioConverterTab({ }: AudioConverterTabProps) {
                         <Button
                             variant="outline"
                             onClick={() => fileInputRef.current?.click()}
-                            className="flex-1 h-12 border-dashed border-2 border-slate-300 dark:border-slate-600 hover:border-blue-400 dark:hover:border-blue-500"
+                            className="flex-1 h-12 border-dashed border-2 border-slate-300 dark:border-zinc-600 hover:border-blue-400 dark:hover:border-blue-500"
                         >
                             <Upload size={18} className="mr-2" />
                             Choose Audio File

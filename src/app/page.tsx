@@ -17,7 +17,7 @@ import { useStore } from "@/store/useStore";
 import { Briefcase, Eye, FileText, Shield, Volume2 } from "lucide-react";
 import { useEffect } from "react";
 
-const ICON_SIZE = 18;
+const ICON_SIZE = 20;
 
 export default function Home() {
   const { isDarkMode } = useStore();
@@ -31,9 +31,8 @@ export default function Home() {
   }, [isDarkMode]);
   return (
     <div
-      className={`min-h-screen font-sans transition-colors duration-200 bg-background ${
-        isDarkMode ? "dark" : ""
-      }`}
+      className={`min-h-screen font-sans transition-colors duration-200 bg-background ${isDarkMode ? "dark" : ""
+        }`}
     >
       <Header />
 
@@ -57,7 +56,7 @@ export default function Home() {
           </h2>
           <Tabs defaultValue="voice-hub" className="">
             <TabsList
-              className="grid w-full grid-cols-5 bg-muted rounded-lg sm:rounded-xl h-14 sm:h-auto"
+              className="grid w-full grid-cols-5 bg-muted rounded-lg sm:rounded-xl h-10 sm:h-12"
               role="tablist"
               aria-label="Essential tool hubs"
             >
@@ -65,54 +64,59 @@ export default function Home() {
                 value="voice-hub"
                 role="tab"
                 aria-controls="voice-hub-panel"
-                className="text-sm sm:text-base py-3 sm:py-4 font-medium"
+                className="text-xs sm:text-sm py-2 sm:py-2.5 font-medium"
               >
-                <Volume2 size={ICON_SIZE} className="mr-2" aria-hidden="true" />
-                Voice Hub
+                <Volume2 size={16} className="mr-1 sm:mr-2" aria-hidden="true" />
+                <span className="hidden sm:inline">Voice Hub</span>
+                <span className="sm:hidden">Voice</span>
               </TabsTrigger>
               <TabsTrigger
                 value="document-hub"
                 role="tab"
                 aria-controls="document-hub-panel"
-                className="text-sm sm:text-base py-3 sm:py-4 font-medium"
+                className="text-xs sm:text-sm py-2 sm:py-2.5 font-medium"
               >
                 <FileText
-                  size={ICON_SIZE}
-                  className="mr-2"
+                  size={16}
+                  className="mr-1 sm:mr-2"
                   aria-hidden="true"
                 />
-                Document Hub
+                <span className="hidden sm:inline">Document Hub</span>
+                <span className="sm:hidden">Docs</span>
               </TabsTrigger>
               <TabsTrigger
                 value="business-hub"
                 role="tab"
                 aria-controls="business-hub-panel"
-                className="text-sm sm:text-base py-3 sm:py-4 font-medium"
+                className="text-xs sm:text-sm py-2 sm:py-2.5 font-medium"
               >
                 <Briefcase
-                  size={ICON_SIZE}
-                  className="mr-2"
+                  size={16}
+                  className="mr-1 sm:mr-2"
                   aria-hidden="true"
                 />
-                Business Hub
+                <span className="hidden sm:inline">Business Hub</span>
+                <span className="sm:hidden">Business</span>
               </TabsTrigger>
               <TabsTrigger
                 value="visual-hub"
                 role="tab"
                 aria-controls="visual-hub-panel"
-                className="text-sm sm:text-base py-3 sm:py-4 font-medium"
+                className="text-xs sm:text-sm py-2 sm:py-2.5 font-medium"
               >
-                <Eye size={ICON_SIZE} className="mr-2" aria-hidden="true" />
-                Visual Hub
+                <Eye size={16} className="mr-1 sm:mr-2" aria-hidden="true" />
+                <span className="hidden sm:inline">Visual Hub</span>
+                <span className="sm:hidden">Visual</span>
               </TabsTrigger>
               <TabsTrigger
                 value="security-hub"
                 role="tab"
                 aria-controls="security-hub-panel"
-                className="text-sm sm:text-base py-3 sm:py-4 font-medium"
+                className="text-xs sm:text-sm py-2 sm:py-2.5 font-medium"
               >
-                <Shield size={ICON_SIZE} className="mr-2" aria-hidden="true" />
-                Security Hub
+                <Shield size={16} className="mr-1 sm:mr-2" aria-hidden="true" />
+                <span className="hidden sm:inline">Security Hub</span>
+                <span className="sm:hidden">Security</span>
               </TabsTrigger>
             </TabsList>
 
@@ -168,6 +172,7 @@ export default function Home() {
           </Tabs>
         </section>
         <div id="container-8250dc77e079516ac855643826e93e7d"></div>
+        <div id="container-d7335c49fed82ef151c040dd10690d7e"></div>
         <FeaturesSection />
       </main>
       <LazyFAQSection />

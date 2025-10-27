@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Download, FileAudio, Pause, Play, Scissors, Upload, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
+import { Input } from '../ui/input'
 
 interface AudioTrimmerTabProps {
     // Add any props if needed in the future
@@ -273,7 +274,7 @@ export default function AudioTrimmerTab({ }: AudioTrimmerTabProps) {
     }
 
     return (
-        <Card className="w-full bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl">
+        <Card className="w-full bg-white dark:bg-black border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl">
             <CardHeader className="pb-4 gap-0 sm:pb-6">
                 <CardTitle className="text-lg sm:text-xl text-slate-900 dark:text-white">
                     Audio Trimmer
@@ -290,7 +291,7 @@ export default function AudioTrimmerTab({ }: AudioTrimmerTabProps) {
                         Select Audio File
                     </label>
                     <div className="flex flex-col sm:flex-row gap-3">
-                        <input
+                        <Input
                             ref={fileInputRef}
                             type="file"
                             accept="audio/*"
@@ -301,7 +302,7 @@ export default function AudioTrimmerTab({ }: AudioTrimmerTabProps) {
                         <Button
                             variant="outline"
                             onClick={() => fileInputRef.current?.click()}
-                            className="flex-1 h-12 border-dashed border-2 border-slate-300 dark:border-slate-600 hover:border-blue-400 dark:hover:border-blue-500"
+                            className="flex-1 h-12 border-dashed border-2 "
                         >
                             <Upload size={18} className="mr-2" />
                             Choose Audio File

@@ -5,7 +5,8 @@ import ToolRequestDialog from '@/components/ToolRequestDialog'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { useStore } from '@/store/useStore'
-import { AudioWaveform, MessageSquare, Moon, Plus, Sun } from 'lucide-react'
+import { MessageSquare, Moon, Plus, Sun } from 'lucide-react'
+import Image from 'next/image'
 import { useState } from 'react'
 
 const ICON_SIZE = 15
@@ -20,11 +21,8 @@ export default function Header() {
             <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md border-border">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-14 sm:h-16">
-                        <div className="flex items-center space-x-2 sm:space-x-3">
-                            <div className="w-8 h-8 sm:w-9 sm:h-9 bg-primary border border-primary/80 rounded-lg sm:rounded-xl flex items-center justify-center">
-                                <AudioWaveform size={18} className="text-primary-foreground sm:hidden" />
-                                <AudioWaveform size={20} className="text-primary-foreground hidden sm:block" />
-                            </div>
+                        <div className="flex items-center space-x-1 sm:space-x-2">
+                            <Image className='object-cover rounded-xl' src={`${isDarkMode ? "/logo.png" : "/logo-light.png"}`} alt='Logo' width={40} height={40} />
                             <div className="min-w-0">
                                 <h1 className="text-lg sm:text-xl font-semibold text-foreground truncate">
                                     Usefreetools

@@ -42,7 +42,7 @@ export default function FAQSection() {
     };
 
     return (
-        <section className="py-8 sm:py-12 lg:py-16 bg-white dark:bg-slate-900" aria-labelledby="faq-heading">
+        <section className="py-8 sm:py-12 lg:py-16 bg-white dark:bg-zinc-900" aria-labelledby="faq-heading">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
