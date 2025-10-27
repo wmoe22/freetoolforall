@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     description:
       "Transform your voice with seamless speech-to-text and text-to-speech conversion. Free online tool with no login required.",
     images: ["/og-image.png"],
-    creator: "@speechflow",
+    creator: "@wmoe22",
   },
   robots: {
     index: true,
@@ -140,6 +140,7 @@ export default function RootLayout({
           data-cfasync="false"
           src="//comprehensiveimplementationstrode.com/8250dc77e079516ac855643826e93e7d/invoke.js"
         ></script>
+        <meta name="yandex-verification" content="c8f38899dca7f73e" />
         <meta name="theme-color" content="#0f172a" />
         <meta name="color-scheme" content="light dark" />
       </head>
