@@ -142,4 +142,5 @@ Make sure to set your environment variables in your deployment platform.
 ## License
 
 MIT License - feel free to use this project for personal or commercial purposes.
-# freetoolforall
+
+# usefreetools

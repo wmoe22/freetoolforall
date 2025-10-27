@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "SpeechFlow - Free Voice to Text & Text to Speech Converter",
-    template: "%s | SpeechFlow",
+    default: "usefreetools - Free Voice to Text & Text to Speech Converter",
+    template: "%s | usefreetools",
   },
   description:
     "Transform your voice with seamless speech-to-text and text-to-speech conversion. Free online tool with no login required. Support for multiple languages and voice models.",
@@ -37,9 +37,9 @@ export const metadata: Metadata = {
     "free speech converter",
     "online voice tools",
   ],
-  authors: [{ name: "SpeechFlow Team" }],
-  creator: "SpeechFlow",
-  publisher: "SpeechFlow",
+  authors: [{ name: "Usefreetools Team" }],
+  creator: "Usefreetools",
+  publisher: "Usefreetools",
   formatDetection: {
     email: false,
     address: false,
@@ -52,17 +52,17 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "SpeechFlow - Free Voice to Text & Text to Speech Converter",
+    title: "Usefreetools - Free Voice to Text & Text to Speech Converter",
     description:
       "Transform your voice with seamless speech-to-text and text-to-speech conversion. Free online tool with no login required.",
     url: "/",
-    siteName: "SpeechFlow",
+    siteName: "Usefreetools",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SpeechFlow - Voice Conversion Tools",
+        alt: "Usefreetools - Voice Conversion Tools",
       },
     ],
     locale: "en_US",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SpeechFlow - Free Voice to Text & Text to Speech Converter",
+    title: "Usefreetools - Free Voice to Text & Text to Speech Converter",
     description:
       "Transform your voice with seamless speech-to-text and text-to-speech conversion. Free online tool with no login required.",
     images: ["/og-image.png"],
@@ -122,7 +122,6 @@ export default function RootLayout({
       "Download Audio Files",
     ],
     browserRequirements: "Requires JavaScript. Requires HTML5.",
-    permissions: "microphone",
   };
 
   return (

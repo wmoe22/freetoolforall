@@ -27,7 +27,7 @@ export default function Header() {
                             </div>
                             <div className="min-w-0">
                                 <h1 className="text-lg sm:text-xl font-semibold text-foreground truncate">
-                                    FreeToolForAll
+                                    Usefreetools
                                 </h1>
                                 <p className="text-xs text-muted-foreground hidden sm:block">Essential Tool Hub</p>
                             </div>

@@ -5,7 +5,7 @@ export default function Footer() {
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div className="text-center sm:text-left">
                         <p className="text-muted-foreground text-xs sm:text-sm">
-                            © 2025 FreeToolForAll. Made with ❤️ by @WillMoore
+                            © 2025 Usefreetools. Made with ❤️ by @WillMoore
                         </p>
                     </div>
                     <div className="flex items-center space-x-4 sm:space-x-6">

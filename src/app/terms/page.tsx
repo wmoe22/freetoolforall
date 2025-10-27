@@ -2,10 +2,10 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: 'Terms of Service',
-    description: 'Read the terms of service for using SpeechFlow. Understand your rights and responsibilities when using our voice conversion tools.',
+    description: 'Read the terms of service for using Usefreetools. Understand your rights and responsibilities when using our digital utility tools.',
     openGraph: {
-        title: 'Terms of Service | SpeechFlow',
-        description: 'Read the terms of service for using SpeechFlow voice conversion tools.',
+        title: 'Terms of Service | Usefreetools',
+        description: 'Read the terms of service for using Usefreetools digital utility platform.',
     },
 }
 
@@ -28,7 +28,7 @@ export default function TermsPage() {
                                 Acceptance of Terms
                             </h2>
                             <p className="text-slate-600 dark:text-slate-300 mb-4">
-                                By using SpeechFlow, you agree to these terms of service. If you do not agree to these terms,
+                                By using Usefreetools, you agree to these terms of service. If you do not agree to these terms,
                                 please do not use our service.
                             </p>
                         </section>
@@ -38,8 +38,17 @@ export default function TermsPage() {
                                 Service Description
                             </h2>
                             <p className="text-slate-600 dark:text-slate-300 mb-4">
-                                SpeechFlow provides free speech-to-text and text-to-speech conversion services.
-                                The service is provided "as is" without warranties of any kind.
+                                Usefreetools provides a comprehensive suite of free digital utility tools across five main categories:
+                            </p>
+                            <ul className="list-disc list-inside text-slate-600 dark:text-slate-300 mb-4 space-y-2">
+                                <li><strong>Voice Hub:</strong> Speech to text, text to speech, audio converter, subtitle generator, audio trimmer</li>
+                                <li><strong>Document Hub:</strong> File converter, compress, split and merge documents</li>
+                                <li><strong>Business Hub:</strong> Proposal generator, invoice generator, meeting notes generator</li>
+                                <li><strong>Visual Hub:</strong> Image compress, resize, crop, convert, background removal</li>
+                                <li><strong>Security Hub:</strong> File scanner and URL scanner for viruses and malware</li>
+                            </ul>
+                            <p className="text-slate-600 dark:text-slate-300 mb-4">
+                                All services are provided "as is" without warranties of any kind.
                             </p>
                         </section>
 
@@ -48,13 +57,32 @@ export default function TermsPage() {
                                 Acceptable Use
                             </h2>
                             <p className="text-slate-600 dark:text-slate-300 mb-4">
-                                You agree to use SpeechFlow only for lawful purposes. You may not use the service to:
+                                You agree to use Usefreetools only for lawful purposes. You may not use the service to:
                             </p>
                             <ul className="list-disc list-inside text-slate-600 dark:text-slate-300 mb-4 space-y-2">
-                                <li>Process content that violates any laws or regulations</li>
+                                <li>Process files or content that violates any laws or regulations</li>
+                                <li>Upload or scan malicious files, viruses, or malware intentionally</li>
                                 <li>Generate harmful, offensive, or inappropriate content</li>
                                 <li>Attempt to reverse engineer or compromise the service</li>
+                                <li>Use the service to violate intellectual property rights</li>
+                                <li>Overload our servers with excessive requests or automated tools</li>
                                 <li>Use the service for commercial purposes without permission</li>
+                            </ul>
+                        </section>
+
+                        <section className="mb-8">
+                            <h2 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
+                                File Processing and Data
+                            </h2>
+                            <p className="text-slate-600 dark:text-slate-300 mb-4">
+                                When using our tools, you acknowledge that:
+                            </p>
+                            <ul className="list-disc list-inside text-slate-600 dark:text-slate-300 mb-4 space-y-2">
+                                <li>You own or have the right to process the files you upload</li>
+                                <li>Files are processed temporarily and deleted immediately after processing</li>
+                                <li>We do not store or retain your files or personal data</li>
+                                <li>You are responsible for backing up your original files</li>
+                                <li>Processing accuracy may vary depending on file quality and format</li>
                             </ul>
                         </section>
 
@@ -63,8 +91,8 @@ export default function TermsPage() {
                                 Limitation of Liability
                             </h2>
                             <p className="text-slate-600 dark:text-slate-300 mb-4">
-                                SpeechFlow is provided free of charge and without warranty. We are not liable for any damages
-                                arising from the use of our service.
+                                Usefreetools is provided free of charge and without warranty. We are not liable for any damages,
+                                data loss, or issues arising from the use of our service. You use our tools at your own risk.
                             </p>
                         </section>
 

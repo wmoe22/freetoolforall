@@ -2,10 +2,10 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: 'Privacy Policy',
-    description: 'Learn how SpeechFlow protects your privacy and handles your data. We prioritize user privacy and data security.',
+    description: 'Learn how Usefreetools protects your privacy and handles your data. We prioritize user privacy and data security.',
     openGraph: {
-        title: 'Privacy Policy | SpeechFlow',
-        description: 'Learn how SpeechFlow protects your privacy and handles your data.',
+        title: 'Privacy Policy | Usefreetools',
+        description: 'Learn how Usefreetools protects your privacy and handles your data.',
     },
 }
 
@@ -28,9 +28,25 @@ export default function PrivacyPage() {
                                 Data Collection
                             </h2>
                             <p className="text-slate-600 dark:text-slate-300 mb-4">
-                                SpeechFlow is designed with privacy in mind. We do not store your audio files or transcribed text on our servers.
-                                All processing happens temporarily and your data is immediately discarded after conversion.
+                                Usefreetools is designed with privacy in mind. We do not store your files, documents, images, or any processed data on our servers.
+                                All processing happens temporarily in your browser or on our secure servers, and your data is immediately discarded after processing.
                             </p>
+                        </section>
+
+                        <section className="mb-8">
+                            <h2 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
+                                Our Services
+                            </h2>
+                            <p className="text-slate-600 dark:text-slate-300 mb-4">
+                                Usefreetools provides a comprehensive suite of digital utilities across five main categories:
+                            </p>
+                            <ul className="list-disc list-inside text-slate-600 dark:text-slate-300 mb-4 space-y-2">
+                                <li><strong>Voice Hub:</strong> Speech to text, text to speech, audio converter, subtitle generator, audio trimmer</li>
+                                <li><strong>Document Hub:</strong> File converter, compress, split and merge documents</li>
+                                <li><strong>Business Hub:</strong> Proposal generator, invoice generator, meeting notes generator</li>
+                                <li><strong>Visual Hub:</strong> Image compress, resize, crop, convert, background removal</li>
+                                <li><strong>Security Hub:</strong> File scanner and URL scanner for viruses and malware</li>
+                            </ul>
                         </section>
 
                         <section className="mb-8">
@@ -38,8 +54,9 @@ export default function PrivacyPage() {
                                 How We Use Your Information
                             </h2>
                             <p className="text-slate-600 dark:text-slate-300 mb-4">
-                                We only process your audio and text data to provide the speech conversion services.
+                                We only process your files and data to provide the requested digital utility services.
                                 No personal information is collected or stored beyond what's necessary for the service to function.
+                                Your uploaded files are processed and immediately deleted from our systems.
                             </p>
                         </section>
 
@@ -48,8 +65,9 @@ export default function PrivacyPage() {
                                 Data Security
                             </h2>
                             <p className="text-slate-600 dark:text-slate-300 mb-4">
-                                All data transmission is encrypted using industry-standard protocols.
-                                Your audio files are processed securely and are not accessible to unauthorized parties.
+                                All data transmission is encrypted using industry-standard HTTPS protocols.
+                                Your files are processed securely and are not accessible to unauthorized parties.
+                                We implement strict security measures to protect your data during processing.
                             </p>
                         </section>
 
@@ -58,8 +76,9 @@ export default function PrivacyPage() {
                                 Third-Party Services
                             </h2>
                             <p className="text-slate-600 dark:text-slate-300 mb-4">
-                                We may use third-party AI services for speech processing. These services are bound by strict privacy agreements
-                                and do not retain your data beyond the processing period.
+                                We may use third-party AI and processing services for certain tools like speech recognition, text generation, and file conversion.
+                                These services are bound by strict privacy agreements and do not retain your data beyond the processing period.
+                                All third-party services comply with industry-standard privacy and security practices.
                             </p>
                         </section>
 
