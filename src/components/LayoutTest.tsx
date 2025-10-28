@@ -155,14 +155,14 @@ const LayoutTest = () => {
       // Security Hub Tools
       'file-scanner': '/tools/file-scanner',
       'url-scanner': '/tools/url-scanner',
-      'cookie-compliance': '/tools/cookie-compliance',
-      'email-blacklist': '/tools/email-blacklist',
+      //'cookie-compliance': '/tools/cookie-compliance',
+      // 'email-blacklist': '/tools/email-blacklist',
 
       // Utility Hub Tools
       'url-shortener': '/tools/url-shortener',
       'token-counter': '/tools/token-counter',
       'hash-generator': '/tools/hash-generator',
-      'api-inspector': '/tools/api-inspector',
+      //'api-inspector': '/tools/api-inspector',
     };
 
     const route = toolRoutes[tool.id];

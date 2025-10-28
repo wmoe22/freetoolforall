@@ -439,7 +439,7 @@ export default function ToolPage() {
             <footer className="border-t bg-card mt-16">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <div className="text-center text-sm text-muted-foreground">
-                        <p>© 2024 Usefreetools. All rights reserved.</p>
+                        <p>© 2025 Usefreetools. All rights reserved.</p>
                         <div className="flex justify-center gap-4 mt-2">
                             <Link href="/privacy" className="hover:text-foreground">Privacy Policy</Link>
                             <Link href="/terms" className="hover:text-foreground">Terms of Service</Link>
