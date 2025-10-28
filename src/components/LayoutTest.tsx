@@ -61,6 +61,14 @@ const ALL_TOOLS = [
   // Security Hub Tools
   { id: 'file-scanner', name: 'File Scanner', category: 'security', description: 'Scan files for viruses and malware', icon: Shield, keywords: ['scan', 'virus', 'malware', 'security', 'file'], tabValue: 'file-scanner' },
   { id: 'url-scanner', name: 'URL Scanner', category: 'security', description: 'Check URLs for malicious content', icon: Link, keywords: ['url', 'scan', 'security', 'malicious', 'website'], tabValue: 'url-scanner' },
+  { id: 'cookie-compliance', name: 'GDPR Cookie Checker', category: 'security', description: 'Check website GDPR cookie compliance', icon: Shield, keywords: ['gdpr', 'cookie', 'compliance', 'privacy', 'security'], tabValue: 'cookie-compliance' },
+  { id: 'email-blacklist', name: 'Email Blacklist Checker', category: 'security', description: 'Check if domain or IP is on spam lists', icon: Shield, keywords: ['email', 'blacklist', 'spam', 'reputation', 'domain', 'ip'], tabValue: 'email-blacklist' },
+
+  // Utility Hub Tools
+  { id: 'url-shortener', name: 'URL Shortener', category: 'utility', description: 'Create short, shareable links from long URLs', icon: Link, keywords: ['url', 'shortener', 'link', 'utility'], tabValue: 'url-shortener' },
+  { id: 'token-counter', name: 'LLM Token Counter', category: 'utility', description: 'Count tokens and estimate costs for LLM models', icon: Settings, keywords: ['token', 'counter', 'llm', 'ai'], tabValue: 'token-counter' },
+  { id: 'hash-generator', name: 'Hash Generator', category: 'utility', description: 'Generate MD5, SHA-1, and SHA-256 hashes', icon: Settings, keywords: ['hash', 'generator', 'md5', 'sha'], tabValue: 'hash-generator' },
+  { id: 'api-inspector', name: 'API Response Inspector', category: 'utility', description: 'Inspect and format API responses', icon: Search, keywords: ['api', 'inspector', 'response', 'format'], tabValue: 'api-inspector' },
 ];
 
 const CATEGORIES = [
@@ -69,6 +77,7 @@ const CATEGORIES = [
   { id: 'business', name: 'Business Hub', icon: Briefcase, color: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300' },
   { id: 'visual', name: 'Visual Hub', icon: Eye, color: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300' },
   { id: 'security', name: 'Security Hub', icon: Shield, color: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' },
+  { id: 'utility', name: 'Utility Hub', icon: Settings, color: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-300' },
 ];
 
 const LayoutTest = () => {
@@ -146,6 +155,14 @@ const LayoutTest = () => {
       // Security Hub Tools
       'file-scanner': '/tools/file-scanner',
       'url-scanner': '/tools/url-scanner',
+      'cookie-compliance': '/tools/cookie-compliance',
+      'email-blacklist': '/tools/email-blacklist',
+
+      // Utility Hub Tools
+      'url-shortener': '/tools/url-shortener',
+      'token-counter': '/tools/token-counter',
+      'hash-generator': '/tools/hash-generator',
+      'api-inspector': '/tools/api-inspector',
     };
 
     const route = toolRoutes[tool.id];

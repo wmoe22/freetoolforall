@@ -54,25 +54,65 @@ export async function POST(request: NextRequest) {
         const uploadResult = await uploadResponse.json()
         const analysisId = uploadResult.data.id
 
-        // Wait a moment for initial analysis
-        await new Promise(resolve => setTimeout(resolve, 2000))
+        // Wait for analysis to complete (may take longer for full report)
+        let analysisComplete = false
+        let attempts = 0
+        const maxAttempts = 30 // Wait up to 5 minutes
+        let analysisResult: any
 
-        // Get analysis results
-        const analysisResponse = await fetch(`${VIRUSTOTAL_BASE_URL}/analyses/${analysisId}`, {
+        while (!analysisComplete && attempts < maxAttempts) {
+            await new Promise(resolve => setTimeout(resolve, 10000)) // Wait 10 seconds between checks
+
+            const analysisResponse = await fetch(`${VIRUSTOTAL_BASE_URL}/analyses/${analysisId}`, {
+                headers: {
+                    'X-Apikey': VIRUSTOTAL_API_KEY,
+                },
+            })
+
+            if (!analysisResponse.ok) {
+                return NextResponse.json(
+                    { error: 'Failed to get analysis results' },
+                    { status: analysisResponse.status }
+                )
+            }
+
+            analysisResult = await analysisResponse.json()
+
+            // Check if analysis is complete
+            if (analysisResult.data.attributes.status === 'completed') {
+                analysisComplete = true
+            }
+
+            attempts++
+        }
+
+        if (!analysisComplete) {
+            return NextResponse.json(
+                { error: 'Analysis timeout. Please try again later.' },
+                { status: 408 }
+            )
+        }
+
+        // Get the file hash from the analysis result
+        const fileId = analysisResult.data.links.item.split('/').pop()
+
+        // Fetch detailed file report
+        const fileReportResponse = await fetch(`${VIRUSTOTAL_BASE_URL}/files/${fileId}`, {
             headers: {
                 'X-Apikey': VIRUSTOTAL_API_KEY,
             },
         })
 
-        if (!analysisResponse.ok) {
+        if (!fileReportResponse.ok) {
             return NextResponse.json(
-                { error: 'Failed to get analysis results' },
-                { status: analysisResponse.status }
+                { error: 'Failed to get detailed file report' },
+                { status: fileReportResponse.status }
             )
         }
 
-        const analysisResult = await analysisResponse.json()
+        const fileReport = await fileReportResponse.json()
         const stats = analysisResult.data.attributes.stats
+        const scans = fileReport.data.attributes.last_analysis_results
 
         // Determine status based on results
         let status: 'clean' | 'malicious' | 'suspicious' | 'unknown' = 'unknown'
@@ -85,20 +125,47 @@ export async function POST(request: NextRequest) {
             status = 'clean'
         }
 
+        // Process scan results for detailed report
+        const scanResults = Object.entries(scans || {}).map(([engine, result]: [string, any]) => ({
+            engine,
+            category: result.category,
+            result: result.result,
+            method: result.method,
+            engine_name: result.engine_name,
+            engine_version: result.engine_version,
+            engine_update: result.engine_update
+        }))
+
+        // Sort by category (malicious first, then suspicious, etc.)
+        const categoryOrder = { 'malicious': 0, 'suspicious': 1, 'undetected': 2, 'harmless': 3, 'timeout': 4, 'confirmed-timeout': 5, 'failure': 6, 'type-unsupported': 7 }
+        scanResults.sort((a, b) => (categoryOrder[a.category as keyof typeof categoryOrder] || 99) - (categoryOrder[b.category as keyof typeof categoryOrder] || 99))
+
         const result = {
             status,
             positives: stats.malicious + stats.suspicious,
             total: stats.harmless + stats.malicious + stats.suspicious + stats.undetected,
             scan_date: analysisResult.data.attributes.date,
-            permalink: `https://www.virustotal.com/gui/file-analysis/${analysisId}`,
-            details: {
-                stats,
-                file_info: {
-                    name: file.name,
-                    size: file.size,
-                    type: file.type,
-                }
-            }
+            permalink: `https://www.virustotal.com/gui/file/${fileId}`,
+            file_hash: {
+                md5: fileReport.data.attributes.md5,
+                sha1: fileReport.data.attributes.sha1,
+                sha256: fileReport.data.attributes.sha256
+            },
+            file_info: {
+                name: file.name,
+                size: file.size,
+                type: file.type,
+                magic: fileReport.data.attributes.magic,
+                type_description: fileReport.data.attributes.type_description,
+                type_tag: fileReport.data.attributes.type_tag
+            },
+            stats,
+            scan_results: scanResults,
+            names: fileReport.data.attributes.names || [],
+            first_submission_date: fileReport.data.attributes.first_submission_date,
+            last_submission_date: fileReport.data.attributes.last_submission_date,
+            times_submitted: fileReport.data.attributes.times_submitted,
+            reputation: fileReport.data.attributes.reputation || 0
         }
 
         return NextResponse.json(result)

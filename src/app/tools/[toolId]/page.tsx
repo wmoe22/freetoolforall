@@ -28,6 +28,9 @@ import ProposalGenerator from "@/components/business/ProposalGenerator";
 import { ModeToggle } from "@/components/ModeToggle";
 import FileScanner from "@/components/security/FileScanner";
 import UrlScanner from "@/components/security/UrlScanner";
+import HashGenerator from "@/components/utility/HashGenerator";
+import TokenCounter from "@/components/utility/TokenCounter";
+import UrlShortener from "@/components/utility/UrlShortener";
 import BackgroundRemover from "@/components/visual/BackgroundRemover";
 import FormatConverter from "@/components/visual/FormatConverter";
 import ImageCompressor from "@/components/visual/ImageCompressor";
@@ -67,7 +70,15 @@ const ALL_TOOLS = [
     // Security Hub Tools
     { id: 'file-scanner', name: 'File Scanner', category: 'security', description: 'Scan files for viruses and malware', tabValue: 'file-scanner' },
     { id: 'url-scanner', name: 'URL Scanner', category: 'security', description: 'Check URLs for malicious content', tabValue: 'url-scanner' },
-];
+    /*     { id: 'cookie-compliance', name: 'GDPR Cookie Checker', category: 'security', description: 'Check website GDPR cookie compliance', tabValue: 'cookie-compliance' },
+     { id: 'email-blacklist', name: 'Email Blacklist Checker', category: 'security', description: 'Check if domain or IP is on spam lists', tabValue: 'email-blacklist' },
+    */
+    // Utility Hub Tools
+    { id: 'url-shortener', name: 'URL Shortener', category: 'utility', description: 'Create short, shareable links from long URLs', tabValue: 'url-shortener' },
+    { id: 'token-counter', name: 'LLM Token Counter', category: 'utility', description: 'Count tokens and estimate costs for LLM models', tabValue: 'token-counter' },
+    { id: 'hash-generator', name: 'Hash Generator', category: 'utility', description: 'Generate MD5, SHA-1, and SHA-256 hashes', tabValue: 'hash-generator' },
+/*     { id: 'api-inspector', name: 'API Response Inspector', category: 'utility', description: 'Inspect and format API responses', tabValue: 'api-inspector' },
+ */];
 
 const CATEGORIES = {
     voice: { name: 'Voice Hub', color: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300' },
@@ -75,6 +86,7 @@ const CATEGORIES = {
     business: { name: 'Business Hub', color: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300' },
     visual: { name: 'Visual Hub', color: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300' },
     security: { name: 'Security Hub', color: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' },
+    utility: { name: 'Utility Hub', color: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-300' },
 };
 
 export default function ToolPage() {
@@ -325,6 +337,18 @@ export default function ToolPage() {
                 return <FileScanner />
             case "url-scanner":
                 return <UrlScanner />
+            /* case "cookie-compliance":
+                return <CookieComplianceChecker /> */
+            /* case "email-blacklist":
+                return <EmailBlacklistChecker /> */
+            case "url-shortener":
+                return <UrlShortener />
+            case "token-counter":
+                return <TokenCounter />
+            case "hash-generator":
+                return <HashGenerator />
+            /*  case "api-inspector":
+                 return <ApiResponseInspector /> */
             default:
                 return (
                     <Card>
