@@ -145,3 +145,7 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+body {
+  @apply font-sans;
+}

@@ -44,17 +44,17 @@ export default class ErrorBoundary extends Component<Props, State> {
             }
 
             return (
-                <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 px-4">
-                    <div className="max-w-md w-full bg-white dark:bg-slate-900 rounded-lg shadow-lg p-6 text-center">
+                <div className="min-h-screen flex items-center justify-center text-zinc-50 dark:text-zinc-950 px-4">
+                    <div className="max-w-md w-full bg-white dark:text-zinc-900 rounded-lg shadow-lg p-6 text-center">
                         <div className="w-16 h-16 bg-red-100 dark:bg-red-950/30 rounded-full flex items-center justify-center mx-auto mb-4">
                             <AlertTriangle size={32} className="text-red-600 dark:text-red-400" />
                         </div>
 
-                        <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+                        <h2 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">
                             Something went wrong
                         </h2>
 
-                        <p className="text-slate-600 dark:text-slate-400 mb-6">
+                        <p className="text-zinc-600 dark:text-zinc-400 mb-6">
                             We've been notified about this error and are working to fix it.
                         </p>
 
@@ -68,7 +68,7 @@ export default class ErrorBoundary extends Component<Props, State> {
                             </Button>
 
                             {this.state.eventId && (
-                                <p className="text-xs text-slate-500 dark:text-slate-400">
+                                <p className="text-xs text-zinc-500 dark:text-zinc-400">
                                     Error ID: {this.state.eventId}
                                 </p>
                             )}

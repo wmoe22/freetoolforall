@@ -49,10 +49,10 @@ export default function FAQSection() {
             />
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-8 sm:mb-12">
-                    <h2 id="faq-heading" className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 sm:mb-4">
+                    <h2 id="faq-heading" className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-3 sm:mb-4">
                         Frequently Asked Questions
                     </h2>
-                    <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300">
+                    <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-300">
                         Get answers to common questions about our speech-to-text service
                     </p>
                 </div>
@@ -60,10 +60,10 @@ export default function FAQSection() {
                 <Accordion type="single" collapsible className="w-full">
                     {faqs.map((faq, index) => (
                         <AccordionItem key={index} value={`item-${index}`}>
-                            <AccordionTrigger className="text-left text-lg sm:text-xl font-semibold text-slate-900 dark:text-white">
+                            <AccordionTrigger className="text-left text-lg sm:text-xl font-semibold text-zinc-900 dark:text-white">
                                 {faq.question}
                             </AccordionTrigger>
-                            <AccordionContent className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                            <AccordionContent className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
                                 {faq.answer}
                             </AccordionContent>
                         </AccordionItem>

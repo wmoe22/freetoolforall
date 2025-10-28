@@ -75,12 +75,12 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white dark:bg-slate-900 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-white dark:text-zinc-900 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
                     <div className="flex items-center space-x-3">
                         <BarChart3 size={24} className="text-blue-600" />
-                        <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
+                        <h2 className="text-xl font-semibold text-zinc-900 dark:text-white">
                             Usage & Cost Tracking
                         </h2>
                     </div>
@@ -126,45 +126,45 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
                         <>
                             {/* Today's Usage */}
                             <div className="mb-8">
-                                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 flex items-center">
+                                <h3 className="text-lg font-semibold text-zinc-900 dark:text-white mb-4 flex items-center">
                                     <DollarSign size={20} className="mr-2" />
                                     Today's Usage
                                 </h3>
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                                     {/* Transcription */}
-                                    <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
-                                        <h4 className="font-medium text-slate-900 dark:text-white mb-2">Speech-to-Text</h4>
+                                    <div className="text-zinc-50 dark:text-zinc-800 rounded-lg p-4">
+                                        <h4 className="font-medium text-zinc-900 dark:text-white mb-2">Speech-to-Text</h4>
                                         <div className="space-y-1 text-sm">
                                             <div className="flex justify-between">
-                                                <span className="text-slate-600 dark:text-slate-400">Requests:</span>
+                                                <span className="text-zinc-600 dark:text-zinc-400">Requests:</span>
                                                 <span className="font-medium">{stats.today.transcribe.count}</span>
                                             </div>
                                             <div className="flex justify-between">
-                                                <span className="text-slate-600 dark:text-slate-400">File Size:</span>
+                                                <span className="text-zinc-600 dark:text-zinc-400">File Size:</span>
                                                 <span className="font-medium">{formatFileSize(stats.today.transcribe.totalFileSize)}</span>
                                             </div>
                                             <div className="flex justify-between">
-                                                <span className="text-slate-600 dark:text-slate-400">Est. Cost:</span>
+                                                <span className="text-zinc-600 dark:text-zinc-400">Est. Cost:</span>
                                                 <span className="font-medium text-green-600">{formatCurrency(stats.today.transcribe.estimatedCost)}</span>
                                             </div>
                                         </div>
                                     </div>
 
                                     {/* TTS */}
-                                    <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
-                                        <h4 className="font-medium text-slate-900 dark:text-white mb-2">Text-to-Speech</h4>
+                                    <div className="text-zinc-50 dark:text-zinc-800 rounded-lg p-4">
+                                        <h4 className="font-medium text-zinc-900 dark:text-white mb-2">Text-to-Speech</h4>
                                         <div className="space-y-1 text-sm">
                                             <div className="flex justify-between">
-                                                <span className="text-slate-600 dark:text-slate-400">Requests:</span>
+                                                <span className="text-zinc-600 dark:text-zinc-400">Requests:</span>
                                                 <span className="font-medium">{stats.today.tts.count}</span>
                                             </div>
                                             <div className="flex justify-between">
-                                                <span className="text-slate-600 dark:text-slate-400">Characters:</span>
+                                                <span className="text-zinc-600 dark:text-zinc-400">Characters:</span>
                                                 <span className="font-medium">{stats.today.tts.totalCharacters.toLocaleString()}</span>
                                             </div>
                                             <div className="flex justify-between">
-                                                <span className="text-slate-600 dark:text-slate-400">Est. Cost:</span>
+                                                <span className="text-zinc-600 dark:text-zinc-400">Est. Cost:</span>
                                                 <span className="font-medium text-green-600">{formatCurrency(stats.today.tts.estimatedCost)}</span>
                                             </div>
                                         </div>
@@ -197,14 +197,14 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
                                     <div className="space-y-3">
                                         <div>
                                             <div className="flex justify-between text-sm mb-1">
-                                                <span className="text-slate-600 dark:text-slate-400">Daily Cost Progress</span>
+                                                <span className="text-zinc-600 dark:text-zinc-400">Daily Cost Progress</span>
                                                 <span className="font-medium">{((stats.today.totalCost / limits.total.maxCostCents) * 100).toFixed(1)}%</span>
                                             </div>
-                                            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+                                            <div className="w-full text-zinc-200 dark:text-zinc-700 rounded-full h-2">
                                                 <div
                                                     className={`h-2 rounded-full transition-all duration-300 ${stats.today.totalCost >= limits.total.maxCostCents ? 'bg-red-500' :
-                                                            stats.today.totalCost >= limits.total.maxCostCents * 0.8 ? 'bg-yellow-500' :
-                                                                'bg-green-500'
+                                                        stats.today.totalCost >= limits.total.maxCostCents * 0.8 ? 'bg-yellow-500' :
+                                                            'bg-green-500'
                                                         }`}
                                                     style={{ width: `${Math.min((stats.today.totalCost / limits.total.maxCostCents) * 100, 100)}%` }}
                                                 />
@@ -216,23 +216,23 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
 
                             {/* Weekly Trend */}
                             <div className="mb-8">
-                                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 flex items-center">
+                                <h3 className="text-lg font-semibold text-zinc-900 dark:text-white mb-4 flex items-center">
                                     <TrendingUp size={20} className="mr-2" />
                                     7-Day Trend
                                 </h3>
 
-                                <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+                                <div className="text-zinc-50 dark:text-zinc-800 rounded-lg p-4">
                                     <div className="grid grid-cols-7 gap-2 mb-2">
                                         {stats.thisWeek.map((day, index) => (
                                             <div key={index} className="text-center">
-                                                <div className="text-xs text-slate-500 dark:text-slate-400 mb-1">
+                                                <div className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">
                                                     {new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' })}
                                                 </div>
-                                                <div className="bg-white dark:bg-slate-700 rounded p-2">
-                                                    <div className="text-xs font-medium text-slate-900 dark:text-white">
+                                                <div className="bg-white dark:text-zinc-700 rounded p-2">
+                                                    <div className="text-xs font-medium text-zinc-900 dark:text-white">
                                                         {formatCurrency(day.totalCost)}
                                                     </div>
-                                                    <div className="text-xs text-slate-500 dark:text-slate-400">
+                                                    <div className="text-xs text-zinc-500 dark:text-zinc-400">
                                                         {day.transcribe.count + day.tts.count} req
                                                     </div>
                                                 </div>
@@ -240,7 +240,7 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
                                         ))}
                                     </div>
 
-                                    <div className="text-sm text-slate-600 dark:text-slate-400 text-center">
+                                    <div className="text-sm text-zinc-600 dark:text-zinc-400 text-center">
                                         Weekly Total: {formatCurrency(stats.thisWeek.reduce((sum, day) => sum + day.totalCost, 0))}
                                     </div>
                                 </div>
@@ -248,30 +248,30 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
 
                             {/* All-Time Stats */}
                             <div className="mb-6">
-                                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                                <h3 className="text-lg font-semibold text-zinc-900 dark:text-white mb-4">
                                     All-Time Statistics
                                 </h3>
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4 text-center">
-                                        <div className="text-2xl font-bold text-slate-900 dark:text-white">
+                                    <div className="text-zinc-50 dark:text-zinc-800 rounded-lg p-4 text-center">
+                                        <div className="text-2xl font-bold text-zinc-900 dark:text-white">
                                             {stats.allTime.totalRequests.toLocaleString()}
                                         </div>
-                                        <div className="text-sm text-slate-600 dark:text-slate-400">Total Requests</div>
+                                        <div className="text-sm text-zinc-600 dark:text-zinc-400">Total Requests</div>
                                     </div>
 
-                                    <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4 text-center">
+                                    <div className="text-zinc-50 dark:text-zinc-800 rounded-lg p-4 text-center">
                                         <div className="text-2xl font-bold text-green-600">
                                             {formatCurrency(stats.allTime.totalCost)}
                                         </div>
-                                        <div className="text-sm text-slate-600 dark:text-slate-400">Total Estimated Cost</div>
+                                        <div className="text-sm text-zinc-600 dark:text-zinc-400">Total Estimated Cost</div>
                                     </div>
 
-                                    <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-4 text-center">
-                                        <div className="text-2xl font-bold text-slate-900 dark:text-white">
+                                    <div className="text-zinc-50 dark:text-zinc-800 rounded-lg p-4 text-center">
+                                        <div className="text-2xl font-bold text-zinc-900 dark:text-white">
                                             {Math.ceil((Date.now() - new Date(stats.allTime.firstUsage).getTime()) / (1000 * 60 * 60 * 24))}
                                         </div>
-                                        <div className="text-sm text-slate-600 dark:text-slate-400">Days Using SpeechFlow</div>
+                                        <div className="text-sm text-zinc-600 dark:text-zinc-400">Days Using SpeechFlow</div>
                                     </div>
                                 </div>
                             </div>
@@ -297,27 +297,27 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
 
                     {/* Settings Panel */}
                     {showSettings && limits && (
-                        <div className="mt-6 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
-                            <h4 className="font-medium text-slate-900 dark:text-white mb-3">Daily Limits</h4>
+                        <div className="mt-6 p-4 text-zinc-50 dark:text-zinc-800 rounded-lg">
+                            <h4 className="font-medium text-zinc-900 dark:text-white mb-3">Daily Limits</h4>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                                 <div>
-                                    <label className="block text-slate-600 dark:text-slate-400 mb-1">Max Daily Cost</label>
-                                    <div className="text-slate-900 dark:text-white">{formatCurrency(limits.total.maxCostCents)}</div>
+                                    <label className="block text-zinc-600 dark:text-zinc-400 mb-1">Max Daily Cost</label>
+                                    <div className="text-zinc-900 dark:text-white">{formatCurrency(limits.total.maxCostCents)}</div>
                                 </div>
                                 <div>
-                                    <label className="block text-slate-600 dark:text-slate-400 mb-1">Max STT Requests</label>
-                                    <div className="text-slate-900 dark:text-white">{limits.transcribe.maxRequests}</div>
+                                    <label className="block text-zinc-600 dark:text-zinc-400 mb-1">Max STT Requests</label>
+                                    <div className="text-zinc-900 dark:text-white">{limits.transcribe.maxRequests}</div>
                                 </div>
                                 <div>
-                                    <label className="block text-slate-600 dark:text-slate-400 mb-1">Max TTS Requests</label>
-                                    <div className="text-slate-900 dark:text-white">{limits.tts.maxRequests}</div>
+                                    <label className="block text-zinc-600 dark:text-zinc-400 mb-1">Max TTS Requests</label>
+                                    <div className="text-zinc-900 dark:text-white">{limits.tts.maxRequests}</div>
                                 </div>
                                 <div>
-                                    <label className="block text-slate-600 dark:text-slate-400 mb-1">Max TTS Characters</label>
-                                    <div className="text-slate-900 dark:text-white">{limits.tts.maxCharacters.toLocaleString()}</div>
+                                    <label className="block text-zinc-600 dark:text-zinc-400 mb-1">Max TTS Characters</label>
+                                    <div className="text-zinc-900 dark:text-white">{limits.tts.maxCharacters.toLocaleString()}</div>
                                 </div>
                             </div>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 mt-3">
+                            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-3">
                                 Limits help prevent unexpected charges. Costs are estimates based on Deepgram pricing.
                             </p>
                         </div>

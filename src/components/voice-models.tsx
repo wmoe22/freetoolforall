@@ -63,7 +63,7 @@ const VoiceModels = () => {
         switch (provider.toLowerCase()) {
             case 'deepgram': return 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/30 dark:text-emerald-300'
             case 'elevenlabs': return 'bg-purple-100 text-purple-800 dark:bg-purple-950/30 dark:text-purple-300'
-            default: return 'bg-slate-100 text-slate-800 dark:bg-slate-950/30 dark:text-slate-300'
+            default: return 'text-zinc-100 text-zinc-800 dark:text-zinc-950/30 dark:text-zinc-300'
         }
     }
 
@@ -115,10 +115,10 @@ const VoiceModels = () => {
     return (
         <div className="space-y-6 p-6">
             <div className="text-center space-y-2">
-                <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
+                <h1 className="text-3xl font-bold text-zinc-900 dark:text-white">
                     Voice Models Gallery
                 </h1>
-                <p className="text-slate-600 dark:text-slate-400">
+                <p className="text-zinc-600 dark:text-zinc-400">
                     Discover and preview our collection of AI voice models
                 </p>
                 <div className="inline-flex items-center space-x-2 bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full text-sm">
@@ -131,7 +131,7 @@ const VoiceModels = () => {
                 {models.map((model: VoiceModel) => (
                     <Card
                         key={model.id}
-                        className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 bg-white dark:bg-slate-900 shadow-xl shadow-slate-200/20 dark:shadow-slate-950/20"
+                        className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 bg-white dark:text-zinc-900 shadow-xl shadow-slate-200/20 dark:shadow-slate-950/20"
                         style={{ borderTop: `4px solid ${model.metadata?.color || '#6b7280'}` }}
                     >
                         <CardHeader className="pb-4">
@@ -148,10 +148,10 @@ const VoiceModels = () => {
                                         </AvatarFallback>
                                     </Avatar>
                                     <div>
-                                        <CardTitle className="text-xl text-slate-900 dark:text-white">
+                                        <CardTitle className="text-xl text-zinc-900 dark:text-white">
                                             {model.metadata?.display_name || model.name || 'Unknown Voice'}
                                         </CardTitle>
-                                        <CardDescription className="text-slate-600 dark:text-slate-400">
+                                        <CardDescription className="text-zinc-600 dark:text-zinc-400">
                                             {model.name}
                                         </CardDescription>
                                         <div className="flex items-center gap-2 mt-2">
@@ -188,13 +188,13 @@ const VoiceModels = () => {
                         </CardHeader>
 
                         <CardContent className="space-y-4">
-                            <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                            <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
                                 {model.description}
                             </p>
 
                             <div className="space-y-3">
                                 <div>
-                                    <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-2 flex items-center">
+                                    <h4 className="text-sm font-medium text-zinc-900 dark:text-white mb-2 flex items-center">
                                         <Globe className="w-4 h-4 mr-2" />
                                         Languages & Accent
                                     </h4>
@@ -203,17 +203,17 @@ const VoiceModels = () => {
                                             <Badge key={index} variant="outline" className="text-xs">
                                                 {lang}
                                             </Badge>
-                                        )) || <span className="text-xs text-slate-500">No languages specified</span>}
+                                        )) || <span className="text-xs text-zinc-500">No languages specified</span>}
                                     </div>
                                     {model.metadata?.accent && (
-                                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                                        <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
                                             Accent: {model.metadata.accent}
                                         </p>
                                     )}
                                 </div>
 
                                 <div>
-                                    <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-2">
+                                    <h4 className="text-sm font-medium text-zinc-900 dark:text-white mb-2">
                                         Voice Characteristics
                                     </h4>
                                     <div className="flex flex-wrap gap-1">
@@ -221,16 +221,16 @@ const VoiceModels = () => {
                                             <Badge
                                                 key={index}
                                                 variant="secondary"
-                                                className="text-xs bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300"
+                                                className="text-xs text-zinc-100 text-zinc-700 dark:text-zinc-800 dark:text-zinc-300"
                                             >
                                                 {tag}
                                             </Badge>
-                                        )) || <span className="text-xs text-slate-500">No characteristics specified</span>}
+                                        )) || <span className="text-xs text-zinc-500">No characteristics specified</span>}
                                     </div>
                                 </div>
 
                                 <div>
-                                    <h4 className="text-sm font-medium text-slate-900 dark:text-white mb-2">
+                                    <h4 className="text-sm font-medium text-zinc-900 dark:text-white mb-2">
                                         Best Use Cases
                                     </h4>
                                     <div className="flex flex-wrap gap-1">
@@ -242,12 +242,12 @@ const VoiceModels = () => {
                                             >
                                                 {useCase}
                                             </Badge>
-                                        )) || <span className="text-xs text-slate-500">No use cases specified</span>}
+                                        )) || <span className="text-xs text-zinc-500">No use cases specified</span>}
                                     </div>
                                 </div>
 
                                 <div className="pt-2 border-t border-slate-200 dark:border-slate-700">
-                                    <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                                    <div className="flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400">
                                         <div className="flex items-center space-x-4">
                                             {model.provider && (
                                                 <Badge variant="outline" className={getProviderColor(model.provider)}>
@@ -270,13 +270,13 @@ const VoiceModels = () => {
 
             {models.length === 0 && (
                 <div className="text-center py-12">
-                    <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Mic className="w-8 h-8 text-slate-400" />
+                    <div className="w-16 h-16 text-zinc-100 dark:text-zinc-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Mic className="w-8 h-8 text-zinc-400" />
                     </div>
-                    <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">
+                    <h3 className="text-lg font-medium text-zinc-900 dark:text-white mb-2">
                         No Voice Models Found
                     </h3>
-                    <p className="text-slate-600 dark:text-slate-400">
+                    <p className="text-zinc-600 dark:text-zinc-400">
                         No voice models are currently available.
                     </p>
                 </div>

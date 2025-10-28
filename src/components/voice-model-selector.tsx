@@ -208,7 +208,7 @@ const VoiceModelSelector = ({ onModelSelect, selectedModel }: VoiceModelSelector
                 <CardContent>
                     <div className="animate-pulse space-y-4">
                         {Array.from({ length: 3 }).map((_, i) => (
-                            <div key={i} className="h-20 bg-slate-200 dark:bg-slate-700 rounded"></div>
+                            <div key={i} className="h-20 text-zinc-200 dark:text-zinc-700 rounded"></div>
                         ))}
                     </div>
                 </CardContent>
@@ -244,7 +244,7 @@ const VoiceModelSelector = ({ onModelSelect, selectedModel }: VoiceModelSelector
                             placeholder="Search by name, description, or tags..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="flex-1 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                            className="flex-1 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:text-zinc-800 text-zinc-900 dark:text-white"
                         />
                         <Select value={sortBy} onValueChange={setSortBy}>
                             <SelectTrigger className="w-40">
@@ -277,7 +277,7 @@ const VoiceModelSelector = ({ onModelSelect, selectedModel }: VoiceModelSelector
 
                     {/* Advanced Filters */}
                     {showFilters && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 text-zinc-50 dark:text-zinc-800/50 rounded-lg">
                             {/* Gender Filter - Radio Group */}
                             <div className="space-y-3">
                                 <Label className="text-sm font-medium">Gender</Label>
@@ -422,7 +422,7 @@ const VoiceModelSelector = ({ onModelSelect, selectedModel }: VoiceModelSelector
                             </Avatar>
                             <div className="flex-1">
                                 <h3 className="font-semibold">{selectedModel.metadata?.display_name || selectedModel.name}</h3>
-                                <p className="text-sm text-slate-600 dark:text-slate-400">{selectedModel.description}</p>
+                                <p className="text-sm text-zinc-600 dark:text-zinc-400">{selectedModel.description}</p>
                                 <div className="flex gap-2 mt-2">
                                     {selectedModel.gender && (
                                         <Badge variant="secondary" className={getGenderColor(selectedModel.gender)}>
@@ -466,7 +466,7 @@ const VoiceModelSelector = ({ onModelSelect, selectedModel }: VoiceModelSelector
                                     <h3 className="font-medium text-sm truncate">
                                         {model.metadata?.display_name || model.name || 'Unknown'}
                                     </h3>
-                                    <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2">
+                                    <p className="text-xs text-zinc-600 dark:text-zinc-400 line-clamp-2">
                                         {model.description}
                                     </p>
 
@@ -489,7 +489,7 @@ const VoiceModelSelector = ({ onModelSelect, selectedModel }: VoiceModelSelector
                                     {model.metadata?.tags && model.metadata.tags.length > 0 && (
                                         <div className="flex flex-wrap gap-1 mt-2">
                                             {model.metadata.tags.slice(0, 2).map((tag, index) => (
-                                                <Badge key={index} variant="secondary" className="text-xs bg-slate-100 dark:bg-slate-800">
+                                                <Badge key={index} variant="secondary" className="text-xs text-zinc-100 dark:text-zinc-800">
                                                     {tag}
                                                 </Badge>
                                             ))}
@@ -528,11 +528,11 @@ const VoiceModelSelector = ({ onModelSelect, selectedModel }: VoiceModelSelector
             {filteredModels.length === 0 && (
                 <Card>
                     <CardContent className="text-center py-12">
-                        <Volume2 className="w-12 h-12 text-slate-400 mx-auto mb-4" />
-                        <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-2">
+                        <Volume2 className="w-12 h-12 text-zinc-400 mx-auto mb-4" />
+                        <h3 className="text-lg font-medium text-zinc-900 dark:text-white mb-2">
                             No Models Found
                         </h3>
-                        <p className="text-slate-600 dark:text-slate-400 mb-4">
+                        <p className="text-zinc-600 dark:text-zinc-400 mb-4">
                             Try adjusting your filters or search terms
                         </p>
                         <Button variant="outline" onClick={clearFilters}>

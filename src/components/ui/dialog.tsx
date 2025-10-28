@@ -62,7 +62,7 @@ function DialogContent({ className, children, ...props }: DialogContentProps) {
     return (
         <div
             className={cn(
-                "relative z-50 w-full max-w-lg mx-4 bg-white dark:bg-slate-900 rounded-lg shadow-lg border border-slate-200 dark:border-slate-800",
+                "relative z-50 w-full max-w-lg mx-4 bg-white dark:text-zinc-900 rounded-lg shadow-lg border border-slate-200 dark:border-slate-800",
                 className
             )}
             {...props}
@@ -86,7 +86,7 @@ function DialogHeader({ className, children, ...props }: DialogHeaderProps) {
 function DialogTitle({ className, children, ...props }: DialogTitleProps) {
     return (
         <h2
-            className={cn("text-lg font-semibold leading-none tracking-tight text-slate-900 dark:text-white", className)}
+            className={cn("text-lg font-semibold leading-none tracking-tight text-zinc-900 dark:text-white", className)}
             {...props}
         >
             {children}
@@ -97,7 +97,7 @@ function DialogTitle({ className, children, ...props }: DialogTitleProps) {
 function DialogDescription({ className, children, ...props }: DialogDescriptionProps) {
     return (
         <p
-            className={cn("text-sm text-slate-600 dark:text-slate-400", className)}
+            className={cn("text-sm text-zinc-600 dark:text-zinc-400", className)}
             {...props}
         >
             {children}
@@ -125,3 +125,4 @@ export {
     Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader,
     DialogTitle
 }
+

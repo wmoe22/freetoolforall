@@ -205,10 +205,10 @@ export default function AudioConverterTab({ }: AudioConverterTabProps) {
     return (
         <Card className="w-full bg-white dark:bg-black border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl">
             <CardHeader className="pb-4 gap-0 sm:pb-6">
-                <CardTitle className="text-lg sm:text-xl text-slate-900 dark:text-white">
+                <CardTitle className="text-lg sm:text-xl text-zinc-900 dark:text-white">
                     Audio Converter
                 </CardTitle>
-                <CardDescription className="text-sm text-slate-600 dark:text-slate-400">
+                <CardDescription className="text-sm text-zinc-600 dark:text-zinc-400">
                     Convert between MP3, WAV, OGG, and M4A formats
                 </CardDescription>
             </CardHeader>
@@ -216,7 +216,7 @@ export default function AudioConverterTab({ }: AudioConverterTabProps) {
             <CardContent className="space-y-4 sm:space-y-6">
                 {/* File Upload */}
                 <div className="space-y-3">
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                    <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
                         Select Audio File
                     </label>
                     <div className="flex flex-col sm:flex-row gap-3">
@@ -236,37 +236,37 @@ export default function AudioConverterTab({ }: AudioConverterTabProps) {
                             <Upload size={18} className="mr-2" />
                             Choose Audio File
                         </Button>
-                        {selectedFile && (
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={clearFile}
-                                className="text-slate-500 hover:text-red-500"
-                            >
-                                <X size={16} />
-                            </Button>
-                        )}
+
                     </div>
 
                     {selectedFile && (
-                        <div className="flex items-center gap-2 p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                        <div className="flex items-center gap-2 p-3 text-zinc-50 dark:bg-zinc-800 border dark:border-zinc-700 rounded-lg">
                             <FileAudio size={16} className="text-blue-600" />
-                            <span className="text-sm text-slate-700 dark:text-slate-300 truncate">
+                            <span className="text-sm text-zinc-700 dark:text-zinc-300 truncate">
                                 {selectedFile.name}
                             </span>
-                            <span className="text-xs text-slate-500 ml-auto">
+                            <span className="text-xs text-zinc-500 ml-auto">
                                 {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
                             </span>
+                            {selectedFile && (
+                                <Button
+                                    variant="destructive"
+                                    size="icon"
+                                    onClick={clearFile}
+                                >
+                                    <X size={16} />
+                                </Button>
+                            )}
                         </div>
                     )}
                 </div>
 
                 {/* Output Format Selection */}
                 <div className="flex flex-col gap-3">
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                    <label className="block text-sm text-right font-medium text-zinc-700 dark:text-zinc-300">
                         Output Format
                     </label>
-                    <div className='flex gap-3'>
+                    <div className='flex justify-end gap-3'>
                         <Select value={outputFormat} onValueChange={setOutputFormat}>
                             <SelectTrigger className="h-12">
                                 <SelectValue placeholder="Select output format" />
@@ -292,8 +292,8 @@ export default function AudioConverterTab({ }: AudioConverterTabProps) {
                                 </>
                             ) : (
                                 <>
-                                    <FileAudio size={18} className="mr-2" />
-                                    Convert Audio
+                                    <FileAudio size={18} className="" />
+                                    Convert
                                 </>
                             )}
                         </Button>
@@ -318,7 +318,7 @@ export default function AudioConverterTab({ }: AudioConverterTabProps) {
                 )}
 
                 {/* Format Info */}
-                <div className="text-xs text-slate-500 dark:text-slate-400 space-y-1">
+                <div className="text-xs text-zinc-500 dark:text-zinc-400 space-y-1">
                     <p>• MP3: Compressed, smaller file size, good for music</p>
                     <p>• WAV: Uncompressed, high quality, larger file size</p>
                     <p>• OGG: Open source, good compression, web-friendly</p>

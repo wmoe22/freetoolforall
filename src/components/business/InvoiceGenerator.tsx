@@ -1,0 +1,319 @@
+'use client'
+
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Download, RefreshCw } from 'lucide-react'
+import { useState } from 'react'
+import { toast } from 'sonner'
+
+export default function InvoiceGenerator() {
+    const [invoiceData, setInvoiceData] = useState({
+        invoiceNumber: '',
+        clientName: '',
+        clientAddress: '',
+        items: [{ description: '', quantity: 1, rate: 0, amount: 0 }],
+        dueDate: '',
+        companyName: '',
+        companyAddress: '',
+        notes: ''
+    })
+    const [isGeneratingInvoice, setIsGeneratingInvoice] = useState(false)
+    const [invoiceFormat, setInvoiceFormat] = useState<'pdf' | 'excel'>('pdf')
+
+    const handleInvoiceItemChange = (index: number, field: string, value: any) => {
+        const newItems = [...invoiceData.items]
+        newItems[index] = { ...newItems[index], [field]: value }
+
+        if (field === 'quantity' || field === 'rate') {
+            newItems[index].amount = newItems[index].quantity * newItems[index].rate
+        }
+
+        setInvoiceData(prev => ({ ...prev, items: newItems }))
+    }
+
+    const addInvoiceItem = () => {
+        setInvoiceData(prev => ({
+            ...prev,
+            items: [...prev.items, { description: '', quantity: 1, rate: 0, amount: 0 }]
+        }))
+    }
+
+    const removeInvoiceItem = (index: number) => {
+        if (invoiceData.items.length > 1) {
+            setInvoiceData(prev => ({
+                ...prev,
+                items: prev.items.filter((_, i) => i !== index)
+            }))
+        }
+    }
+
+    const handleGenerateInvoice = async () => {
+        if (!invoiceData.clientName || !invoiceData.companyName || invoiceData.items.some(item => !item.description)) {
+            toast.error('Please fill in all required fields')
+            return
+        }
+
+        setIsGeneratingInvoice(true)
+        try {
+            const response = await fetch('/api/business/generate-invoice', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...invoiceData, format: invoiceFormat })
+            })
+
+            if (!response.ok) throw new Error('Failed to generate invoice')
+
+            const blob = await response.blob()
+            const url = URL.createObjectURL(blob)
+            const a = document.createElement('a')
+            a.href = url
+            a.download = `invoice_${invoiceData.invoiceNumber || 'new'}.${invoiceFormat}`
+            document.body.appendChild(a)
+            a.click()
+            document.body.removeChild(a)
+            URL.revokeObjectURL(url)
+
+            toast.success('Invoice generated successfully!')
+        } catch (error) {
+            console.error('Invoice generation failed:', error)
+            toast.error('Failed to generate invoice. Please try again.')
+        } finally {
+            setIsGeneratingInvoice(false)
+        }
+    }
+
+    const totalAmount = invoiceData.items.reduce((sum, item) => sum + item.amount, 0)
+
+    return (
+        <Card className="w-full bg-zinc-800 border-zinc-700 rounded-xl sm:rounded-2xl">
+            <CardContent className="p-6">
+                <div className="space-y-4">
+                    <div>
+                        <h3 className="text-lg font-semibold text-zinc-900 dark:text-white mb-2">Invoice Generator</h3>
+                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
+                            Create professional invoices in PDF or Excel format
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                                Invoice Number
+                            </label>
+                            <input
+                                type="text"
+                                value={invoiceData.invoiceNumber}
+                                onChange={(e) => setInvoiceData(prev => ({ ...prev, invoiceNumber: e.target.value }))}
+                                className="w-full p-3 border border-zinc-700 rounded-lg bg-zinc-800 text-zinc-900 dark:text-white"
+                                placeholder="INV-001"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                                Due Date
+                            </label>
+                            <input
+                                type="date"
+                                value={invoiceData.dueDate}
+                                onChange={(e) => setInvoiceData(prev => ({ ...prev, dueDate: e.target.value }))}
+                                className="w-full p-3 border border-zinc-700 rounded-lg bg-zinc-800 text-zinc-900 dark:text-white"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                                Company Name *
+                            </label>
+                            <input
+                                type="text"
+                                value={invoiceData.companyName}
+                                onChange={(e) => setInvoiceData(prev => ({ ...prev, companyName: e.target.value }))}
+                                className="w-full p-3 border border-zinc-700 rounded-lg bg-zinc-800 text-zinc-900 dark:text-white"
+                                placeholder="Your company name"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                                Client Name *
+                            </label>
+                            <input
+                                type="text"
+                                value={invoiceData.clientName}
+                                onChange={(e) => setInvoiceData(prev => ({ ...prev, clientName: e.target.value }))}
+                                className="w-full p-3 border border-zinc-700 rounded-lg bg-zinc-800 text-zinc-900 dark:text-white"
+                                placeholder="Client name"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                            Company Address
+                        </label>
+                        <textarea
+                            value={invoiceData.companyAddress}
+                            onChange={(e) => setInvoiceData(prev => ({ ...prev, companyAddress: e.target.value }))}
+                            rows={2}
+                            className="w-full p-3 border border-zinc-700 rounded-lg bg-zinc-800 text-zinc-900 dark:text-white"
+                            placeholder="Your company address"
+                        />
+                    </div>
+
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                            Client Address
+                        </label>
+                        <textarea
+                            value={invoiceData.clientAddress}
+                            onChange={(e) => setInvoiceData(prev => ({ ...prev, clientAddress: e.target.value }))}
+                            rows={2}
+                            className="w-full p-3 border border-zinc-700 rounded-lg bg-zinc-800 text-zinc-900 dark:text-white"
+                            placeholder="Client address"
+                        />
+                    </div>
+
+                    {/* Invoice Items */}
+                    <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                            <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                                Invoice Items *
+                            </label>
+                            <Button
+                                type="button"
+                                onClick={addInvoiceItem}
+                                variant="outline"
+                                size="sm"
+                                className="border-zinc-700"
+                            >
+                                Add Item
+                            </Button>
+                        </div>
+
+                        {invoiceData.items.map((item, index) => (
+                            <div key={index} className="grid grid-cols-12 gap-2 items-end">
+                                <div className="col-span-5">
+                                    <input
+                                        type="text"
+                                        value={item.description}
+                                        onChange={(e) => handleInvoiceItemChange(index, 'description', e.target.value)}
+                                        className="w-full p-2 text-sm border border-zinc-700 rounded bg-zinc-800 text-zinc-900 dark:text-white"
+                                        placeholder="Item description"
+                                    />
+                                </div>
+                                <div className="col-span-2">
+                                    <input
+                                        type="number"
+                                        value={item.quantity}
+                                        onChange={(e) => handleInvoiceItemChange(index, 'quantity', parseInt(e.target.value) || 0)}
+                                        className="w-full p-2 text-sm border border-zinc-700 rounded bg-zinc-800 text-zinc-900 dark:text-white"
+                                        placeholder="Qty"
+                                        min="0"
+                                    />
+                                </div>
+                                <div className="col-span-2">
+                                    <input
+                                        type="number"
+                                        value={item.rate}
+                                        onChange={(e) => handleInvoiceItemChange(index, 'rate', parseFloat(e.target.value) || 0)}
+                                        className="w-full p-2 text-sm border border-zinc-700 rounded bg-zinc-800 text-zinc-900 dark:text-white"
+                                        placeholder="Rate"
+                                        min="0"
+                                        step="0.01"
+                                    />
+                                </div>
+                                <div className="col-span-2">
+                                    <input
+                                        type="text"
+                                        value={`$${item.amount.toFixed(2)}`}
+                                        readOnly
+                                        className="w-full p-2 text-sm border border-zinc-700 rounded bg-zinc-800 text-zinc-900 dark:text-white"
+                                    />
+                                </div>
+                                <div className="col-span-1">
+                                    {invoiceData.items.length > 1 && (
+                                        <Button
+                                            type="button"
+                                            onClick={() => removeInvoiceItem(index)}
+                                            variant="outline"
+                                            size="sm"
+                                            className="text-red-600 hover:text-red-700 border-zinc-700"
+                                        >
+                                            ×
+                                        </Button>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+
+                        <div className="flex justify-end">
+                            <div className="text-lg font-semibold text-zinc-900 dark:text-white">
+                                Total: ${totalAmount.toFixed(2)}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                            Notes
+                        </label>
+                        <textarea
+                            value={invoiceData.notes}
+                            onChange={(e) => setInvoiceData(prev => ({ ...prev, notes: e.target.value }))}
+                            rows={2}
+                            className="w-full p-3 border border-zinc-700 rounded-lg bg-zinc-800 text-zinc-900 dark:text-white"
+                            placeholder="Additional notes or payment terms"
+                        />
+                    </div>
+
+                    <div className="space-y-3">
+                        <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-zinc-700">
+                            <h4 className="text-sm font-medium text-purple-900 dark:text-purple-300 mb-2">
+                                Export Format
+                            </h4>
+                            <div className="space-y-2">
+                                <label className="flex items-center gap-2 text-sm text-purple-700 dark:text-purple-400">
+                                    <input
+                                        type="radio"
+                                        name="format"
+                                        checked={invoiceFormat === 'pdf'}
+                                        onChange={() => setInvoiceFormat('pdf')}
+                                    />
+                                    PDF (Recommended)
+                                </label>
+                                <label className="flex items-center gap-2 text-sm text-purple-700 dark:text-purple-400">
+                                    <input
+                                        type="radio"
+                                        name="format"
+                                        checked={invoiceFormat === 'excel'}
+                                        onChange={() => setInvoiceFormat('excel')}
+                                    />
+                                    Excel (XLSX)
+                                </label>
+                            </div>
+                        </div>
+
+                        <Button
+                            onClick={handleGenerateInvoice}
+                            disabled={isGeneratingInvoice}
+                            className="w-full"
+                        >
+                            {isGeneratingInvoice ? (
+                                <>
+                                    <RefreshCw size={16} className="mr-2 animate-spin" />
+                                    Generating Invoice...
+                                </>
+                            ) : (
+                                <>
+                                    <Download size={16} className="mr-2" />
+                                    Generate Invoice ({invoiceFormat.toUpperCase()})
+                                </>
+                            )}
+                        </Button>
+                    </div>
+                </div>
+            </CardContent>
+        </Card>
+    )
+}

@@ -3,16 +3,14 @@
 import FeedbackDialog from '@/components/FeedbackDialog'
 import ToolRequestDialog from '@/components/ToolRequestDialog'
 import { Button } from '@/components/ui/button'
-import { Switch } from '@/components/ui/switch'
-import { useStore } from '@/store/useStore'
-import { MessageSquare, Moon, Plus, Sun } from 'lucide-react'
+import { MessageSquare, Plus } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
+import { ModeToggle } from '../ModeToggle'
 
 const ICON_SIZE = 15
 
 export default function Header() {
-    const { isDarkMode, toggleDarkMode } = useStore()
     const [showToolRequestDialog, setShowToolRequestDialog] = useState(false)
     const [showFeedbackDialog, setShowFeedbackDialog] = useState(false)
 
@@ -22,7 +20,7 @@ export default function Header() {
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-14 sm:h-16">
                         <div className="flex items-center space-x-1 sm:space-x-2">
-                            <Image className='object-cover rounded-xl' src={`${isDarkMode ? "/logo.png" : "/logo-light.png"}`} alt='Logo' width={40} height={40} />
+                            <Image className='object-cover rounded-xl' src={"/logo.png"} alt='Logo' width={40} height={40} />
                             <div className="min-w-0">
                                 <h1 className="text-lg sm:text-xl font-semibold text-foreground truncate">
                                     Usefreetools
@@ -72,15 +70,7 @@ export default function Header() {
                                 <MessageSquare size={16} />
                             </Button>
 
-                            <div className="flex items-center space-x-1 sm:space-x-2 bg-muted rounded-full border border-border p-2">
-                                <Sun size={ICON_SIZE} className="text-muted-foreground" />
-                                <Switch
-                                    checked={isDarkMode}
-                                    onCheckedChange={toggleDarkMode}
-                                    className="scale-75 sm:scale-100"
-                                />
-                                <Moon size={ICON_SIZE} className="text-muted-foreground" />
-                            </div>
+                            <ModeToggle />
                         </div>
                     </div>
                 </div>

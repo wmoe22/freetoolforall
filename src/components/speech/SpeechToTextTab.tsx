@@ -36,8 +36,8 @@ export default function SpeechToTextTab({
             <CardHeader className="pb-4 sm:pb-6 px-4 sm:px-6">
                 <div className="flex items-center space-x-3 sm:space-x-4 mb-4">
                     <div className="min-w-0">
-                        <CardTitle className="text-md sm:text-lg lg:text-xl text-slate-900 dark:text-white">Speech to Text</CardTitle>
-                        <CardDescription className="text-slate-600 dark:text-slate-400 text-sm sm:text-base lg:text-md">
+                        <CardTitle className="text-md sm:text-lg lg:text-xl text-zinc-900 dark:text-white">Speech to Text</CardTitle>
+                        <CardDescription className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base lg:text-md">
                             <span className="hidden sm:inline text-sm">Upload audio files for accurate transcription</span>
                             <span className="sm:hidden">Upload audio for transcription</span>
                         </CardDescription>
@@ -60,7 +60,7 @@ export default function SpeechToTextTab({
                         htmlFor="audio-upload"
                         className={`flex flex-col items-center justify-center w-full h-24 sm:h-32 border-2 border-dashed rounded-lg sm:rounded-xl cursor-pointer transition-all duration-200 ${selectedFile
                             ? 'border-blue-300 bg-blue-50 dark:border-blue-700 dark:bg-zinc-950/20'
-                            : 'border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-zinc-800/50 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/20'
+                            : 'border-slate-300 dark:border-slate-600 text-zinc-50 dark:bg-zinc-800/50 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/20'
                             } ${isTranscribing ? 'pointer-events-none opacity-60 animate-pulse' : ''}`}
                     >
                         {selectedFile ? (
@@ -77,13 +77,13 @@ export default function SpeechToTextTab({
                             </div>
                         ) : (
                             <div className="text-center px-4">
-                                <Upload size={20} className="text-slate-400 mx-auto mb-2 sm:hidden" />
-                                <Upload size={24} className="text-slate-400 mx-auto mb-2 hidden sm:block" />
-                                <p className="text-sm sm:text-lg font-medium text-slate-700 dark:text-slate-300">
+                                <Upload size={20} className="text-zinc-400 mx-auto mb-2 sm:hidden" />
+                                <Upload size={24} className="text-zinc-400 mx-auto mb-2 hidden sm:block" />
+                                <p className="text-sm sm:text-lg font-medium text-zinc-700 dark:text-zinc-300">
                                     <span className="hidden sm:inline">Drop your audio file here or click to browse</span>
                                     <span className="sm:hidden">Tap to select audio file</span>
                                 </p>
-                                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
                                     <span className="hidden sm:inline">Supports MP3, WAV, M4A, MP4, WebM and more</span>
                                     <span className="sm:hidden">MP3, WAV, M4A, MP4, WebM</span>
                                 </p>
@@ -133,9 +133,9 @@ export default function SpeechToTextTab({
 
                 {/* Transcript Display */}
                 <div className="relative">
-                    <div className="min-h-[150px] sm:min-h-[200px] p-4 sm:p-6 lg:p-8 bg-slate-50 dark:bg-zinc-900 rounded-lg sm:rounded-xl border border-slate-200 dark:border-slate-700">
+                    <div className="min-h-[150px] sm:min-h-[200px] p-4 sm:p-6 lg:p-8 text-zinc-50 dark:bg-zinc-900 rounded-lg sm:rounded-xl border border-slate-200 dark:border-slate-700">
                         <div className="flex items-center justify-between mb-3 sm:mb-4">
-                            <p className="text-sm sm:text-base font-medium text-slate-700 dark:text-slate-300">Transcript</p>
+                            <p className="text-sm sm:text-base font-medium text-zinc-700 dark:text-zinc-300">Transcript</p>
                             {transcript && (
                                 <Button
                                     size="sm"
@@ -147,7 +147,7 @@ export default function SpeechToTextTab({
                                 </Button>
                             )}
                         </div>
-                        <p className="text-slate-900 dark:text-white leading-relaxed text-sm sm:text-base lg:text-md">
+                        <p className="text-zinc-900 dark:text-white leading-relaxed text-sm sm:text-base lg:text-md">
                             {transcript || (
                                 <>
                                     <span className="hidden sm:inline">Upload an audio file and click "Transcribe Audio" to see the transcript here...</span>

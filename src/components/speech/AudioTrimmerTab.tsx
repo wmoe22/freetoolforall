@@ -276,10 +276,10 @@ export default function AudioTrimmerTab({ }: AudioTrimmerTabProps) {
     return (
         <Card className="w-full bg-white dark:bg-black border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl">
             <CardHeader className="pb-4 gap-0 sm:pb-6">
-                <CardTitle className="text-lg sm:text-xl text-slate-900 dark:text-white">
+                <CardTitle className="text-lg sm:text-xl text-zinc-900 dark:text-white">
                     Audio Trimmer
                 </CardTitle>
-                <CardDescription className="text-sm text-slate-600 dark:text-slate-400">
+                <CardDescription className="text-sm text-zinc-600 dark:text-zinc-400">
                     Trim and cut audio files to your desired length
                 </CardDescription>
             </CardHeader>
@@ -287,7 +287,7 @@ export default function AudioTrimmerTab({ }: AudioTrimmerTabProps) {
             <CardContent className="space-y-4 sm:space-y-6">
                 {/* File Upload */}
                 <div className="space-y-3">
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                    <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
                         Select Audio File
                     </label>
                     <div className="flex flex-col sm:flex-row gap-3">
@@ -307,34 +307,34 @@ export default function AudioTrimmerTab({ }: AudioTrimmerTabProps) {
                             <Upload size={18} className="mr-2" />
                             Choose Audio File
                         </Button>
-                        {selectedFile && (
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={clearFile}
-                                className="text-slate-500 hover:text-red-500"
-                            >
-                                <X size={16} />
-                            </Button>
-                        )}
+
                     </div>
 
                     {selectedFile && (
-                        <div className="flex items-center gap-2 p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                        <div className="flex items-center gap-2 p-3 text-zinc-50 dark:text-zinc-800 rounded-lg">
                             <FileAudio size={16} className="text-blue-600" />
-                            <span className="text-sm text-slate-700 dark:text-slate-300 truncate">
+                            <span className="text-sm text-zinc-700 dark:text-zinc-300 truncate">
                                 {selectedFile.name}
                             </span>
-                            <span className="text-xs text-slate-500 ml-auto">
+                            <span className="text-xs text-zinc-500 ml-auto">
                                 {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
                             </span>
+                            {selectedFile && (
+                                <Button
+                                    variant="destructive"
+                                    size="icon"
+                                    onClick={clearFile}
+                                >
+                                    <X size={16} />
+                                </Button>
+                            )}
                         </div>
                     )}
                 </div>
 
                 {/* Audio Player */}
                 {audioUrl && (
-                    <div className="space-y-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                    <div className="space-y-4 p-4 text-zinc-50 dark:bg-zinc-800 rounded-lg">
                         <audio ref={audioRef} src={audioUrl} preload="metadata" />
 
                         {/* Play Controls */}
@@ -348,14 +348,14 @@ export default function AudioTrimmerTab({ }: AudioTrimmerTabProps) {
                                 {isPlaying ? <Pause size={18} /> : <Play size={18} />}
                             </Button>
 
-                            <div className="flex-1 text-sm text-slate-600 dark:text-slate-400">
+                            <div className="flex-1 text-sm text-zinc-600 dark:text-zinc-400">
                                 <span>{formatTime(currentTime)} / {formatTime(duration)}</span>
                             </div>
                         </div>
 
                         {/* Waveform/Progress Bar */}
                         <div className="relative">
-                            <div className="w-full h-12 bg-slate-200 dark:bg-slate-700 rounded-lg relative overflow-hidden">
+                            <div className="w-full h-12 text-zinc-200 dark:text-zinc-700 rounded-lg relative overflow-hidden">
                                 {/* Progress bar */}
                                 <div
                                     className="h-full bg-blue-500 transition-all duration-100"
@@ -392,7 +392,7 @@ export default function AudioTrimmerTab({ }: AudioTrimmerTabProps) {
                             </div>
 
                             {/* Time markers */}
-                            <div className="flex justify-between text-xs text-slate-500 mt-1">
+                            <div className="flex justify-between text-xs text-zinc-500 mt-1">
                                 <span>0:00</span>
                                 <span>{formatTime(duration)}</span>
                             </div>
@@ -457,7 +457,7 @@ export default function AudioTrimmerTab({ }: AudioTrimmerTabProps) {
                 )}
 
                 {/* Instructions */}
-                <div className="text-xs text-slate-500 dark:text-slate-400 space-y-1">
+                <div className="text-xs text-zinc-500 dark:text-zinc-400 space-y-1">
                     <p>• Click on the progress bar to seek to a specific time</p>
                     <p>• Use "Set Start" and "Set End" to mark your trim points</p>
                     <p>• Green line = start marker, Red line = end marker</p>

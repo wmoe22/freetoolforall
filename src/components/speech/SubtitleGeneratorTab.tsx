@@ -268,10 +268,10 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     return (
         <Card className="w-full bg-white dark:bg-black border-slate-200 dark:border-slate-800 rounded-xl sm:rounded-2xl">
             <CardHeader className="pb-4 gap-0 sm:pb-6">
-                <CardTitle className="text-lg sm:text-xl text-slate-900 dark:text-white">
+                <CardTitle className="text-lg sm:text-xl text-zinc-900 dark:text-white">
                     AI Subtitle Generator
                 </CardTitle>
-                <CardDescription className="text-sm text-slate-600 dark:text-slate-400">
+                <CardDescription className="text-sm text-zinc-600 dark:text-zinc-400">
                     Upload video/audio → auto-generate and download subtitles (.srt, .vtt, .ass)
                 </CardDescription>
             </CardHeader>
@@ -279,7 +279,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             <CardContent className="space-y-4 sm:space-y-6">
                 {/* File Upload */}
                 <div className="space-y-3">
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                    <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
                         Select Video or Audio File
                     </label>
                     <div className="flex flex-col sm:flex-row gap-3">
@@ -299,27 +299,27 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                             <Upload size={18} className="mr-2" />
                             Choose Video/Audio File
                         </Button>
-                        {selectedFile && (
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={clearFile}
-                                className="text-slate-500 hover:text-red-500"
-                            >
-                                <X size={16} />
-                            </Button>
-                        )}
+
                     </div>
 
                     {selectedFile && (
-                        <div className="flex items-center gap-2 p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                        <div className="flex items-center gap-2 p-3 text-zinc-50 dark:text-zinc-800 rounded-lg">
                             <FileVideo size={16} className="text-purple-600" />
-                            <span className="text-sm text-slate-700 dark:text-slate-300 truncate">
+                            <span className="text-sm text-zinc-700 dark:text-zinc-300 truncate">
                                 {selectedFile.name}
                             </span>
-                            <span className="text-xs text-slate-500 ml-auto">
+                            <span className="text-xs text-zinc-500 ml-auto">
                                 {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
                             </span>
+                            {selectedFile && (
+                                <Button
+                                    variant="destructive"
+                                    size="icon"
+                                    onClick={clearFile}
+                                >
+                                    <X size={16} />
+                                </Button>
+                            )}
                         </div>
                     )}
                 </div>
@@ -327,10 +327,10 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                 {/* Subtitle Format Selection */}
                 <div className='flex flex-col gap-3'>
 
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                    <label className="block text-sm text-right font-medium text-zinc-700 dark:text-zinc-300">
                         Subtitle Format
                     </label>
-                    <div className="flex gap-3">
+                    <div className="flex justify-end gap-3">
                         <Select value={subtitleFormat} onValueChange={setSubtitleFormat}>
                             <SelectTrigger className="h-12">
                                 <SelectValue placeholder="Select subtitle format" />
@@ -356,7 +356,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                                 </>
                             ) : (
                                 <>
-                                    <FileText size={18} className="mr-2" />
+                                    <FileText size={18} className="" />
                                     Generate Subtitles
                                 </>
                             )}
@@ -367,7 +367,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                 {/* Subtitle Preview */}
                 {subtitleText && (
                     <div className="space-y-3">
-                        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                        <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">
                             Generated Subtitles Preview
                         </label>
                         <Textarea
@@ -376,7 +376,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                             className="min-h-[200px] font-mono text-xs"
                             placeholder="Generated subtitles will appear here..."
                         />
-                        <p className="text-xs text-slate-500 dark:text-slate-400">
+                        <p className="text-xs text-zinc-500 dark:text-zinc-400">
                             You can edit the subtitles above before downloading
                         </p>
                     </div>
@@ -402,7 +402,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                 )}
 
                 {/* Format Info */}
-                <div className="text-xs text-slate-500 dark:text-slate-400 space-y-1">
+                <div className="text-xs text-zinc-500 dark:text-zinc-400 space-y-1">
                     <p>• SRT: Most compatible format, works with YouTube, VLC, most players</p>
                     <p>• WebVTT: Web standard, great for HTML5 video players</p>
                     <p>• ASS/SSA: Advanced format with styling support, used by anime community</p>

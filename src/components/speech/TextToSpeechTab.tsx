@@ -42,8 +42,8 @@ export default function TextToSpeechTab({
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
                     <div className="flex items-center space-x-3 sm:space-x-4">
                         <div className="min-w-0">
-                            <CardTitle className="text-md sm:text-lg lg:text-xl text-slate-900 dark:text-white">Text to Speech</CardTitle>
-                            <CardDescription className="text-slate-600 dark:text-slate-400  ">
+                            <CardTitle className="text-md sm:text-lg lg:text-xl text-zinc-900 dark:text-white">Text to Speech</CardTitle>
+                            <CardDescription className="text-zinc-600 dark:text-zinc-400  ">
                                 <span className="hidden sm:inline text-xs sm:text-sm ">Natural voice synthesis with customizable AI voice models</span>
                             </CardDescription>
                         </div>
@@ -60,7 +60,7 @@ export default function TextToSpeechTab({
             <CardContent className="space-y-4 sm:space-y-6 lg:space-y-8 px-4 sm:px-6">
                 {/* Voice Model Selector */}
                 {showVoiceSelector && (
-                    <div className="border border-slate-200 dark:border-slate-700 rounded-lg p-4 sm:p-6 bg-slate-50 dark:bg-slate-800/50">
+                    <div className="border border-slate-200 dark:border-slate-700 rounded-lg p-4 sm:p-6 text-zinc-50 dark:text-zinc-800/50">
                         <VoiceModelSelector
                             onModelSelect={(model) => {
                                 setSelectedVoiceModel(model)
@@ -105,9 +105,9 @@ export default function TextToSpeechTab({
                         placeholder="Type or paste your text here. The AI will convert it to natural-sounding speech using your selected voice model..."
                         value={textInput}
                         onChange={(e) => setTextInput(e.target.value)}
-                        className="min-h-[150px] sm:min-h-[200px] resize-none text-sm sm:text-base lg:text-md font-mono  leading-relaxed bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 focus:border-blue-500 dark:focus:border-blue-400 p-4 sm:p-6"
+                        className="min-h-[150px] sm:min-h-[200px] resize-none text-sm sm:text-base lg:text-md font-mono  leading-relaxed text-zinc-50 dark:text-zinc-800/50 border-slate-200 dark:border-slate-700 focus:border-blue-500 dark:focus:border-blue-400 p-4 sm:p-6"
                     />
-                    <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 text-xs sm:text-sm text-slate-400">
+                    <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 text-xs sm:text-sm text-zinc-400">
                         {textInput.length} characters
                     </div>
                 </div>
@@ -163,9 +163,9 @@ export default function TextToSpeechTab({
 
                 {/* Voice Model Quick Info */}
                 {selectedVoiceModel && (
-                    <div className="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-3 sm:p-4 space-y-2">
-                        <h4 className="font-medium text-slate-900 dark:text-white text-sm sm:text-base">Voice Model Details:</h4>
-                        <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                    <div className="text-zinc-50 dark:text-zinc-800/50 rounded-lg p-3 sm:p-4 space-y-2">
+                        <h4 className="font-medium text-zinc-900 dark:text-white text-sm sm:text-base">Voice Model Details:</h4>
+                        <div className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 space-y-1">
                             <p><strong>Description:</strong> {selectedVoiceModel.description}</p>
                             {selectedVoiceModel.metadata?.tags && (
                                 <p><strong>Characteristics:</strong> {selectedVoiceModel.metadata.tags.slice(0, 4).join(', ')}</p>

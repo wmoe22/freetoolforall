@@ -3,6 +3,7 @@ import { Providers } from "@/components/providers";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 
+import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -132,13 +133,13 @@ export default function RootLayout({
     browserRequirements: "Requires JavaScript. Requires HTML5.",
     softwareVersion: "1.0",
     datePublished: "2024-01-01",
-    dateModified: new Date().toISOString().split('T')[0],
+    dateModified: new Date().toISOString().split("T")[0],
     inLanguage: "en-US",
     isAccessibleForFree: true,
     creator: {
       "@type": "Organization",
       name: "Usefreetools Team",
-      url: process.env.NEXT_PUBLIC_APP_URL || "https://usefreetools.site"
+      url: process.env.NEXT_PUBLIC_APP_URL || "https://usefreetools.site",
     },
     publisher: {
       "@type": "Organization",
@@ -146,17 +147,18 @@ export default function RootLayout({
       url: process.env.NEXT_PUBLIC_APP_URL || "https://usefreetools.site",
       logo: {
         "@type": "ImageObject",
-        url: `${process.env.NEXT_PUBLIC_APP_URL || "https://usefreetools.site"}/logo.png`,
+        url: `${process.env.NEXT_PUBLIC_APP_URL || "https://usefreetools.site"
+          }/logo.png`,
         width: 512,
-        height: 512
-      }
+        height: 512,
+      },
     },
     offers: {
       "@type": "Offer",
       price: "0",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
-      validFrom: "2024-01-01"
+      validFrom: "2024-01-01",
     },
     featureList: [
       "Speech to Text Converter",
@@ -177,14 +179,14 @@ export default function RootLayout({
       "Meeting Notes Generator",
       "File Virus Scanner",
       "URL Malware Scanner",
-      "Security Analysis Tools"
+      "Security Analysis Tools",
     ],
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.8",
       ratingCount: "1250",
       bestRating: "5",
-      worstRating: "1"
+      worstRating: "1",
     },
     review: [
       {
@@ -192,19 +194,20 @@ export default function RootLayout({
         reviewRating: {
           "@type": "Rating",
           ratingValue: "5",
-          bestRating: "5"
+          bestRating: "5",
         },
         author: {
           "@type": "Person",
-          name: "Digital Tools User"
+          name: "Digital Tools User",
         },
-        reviewBody: "Amazing collection of free tools. Everything works perfectly and no registration required!"
-      }
-    ]
+        reviewBody:
+          "Amazing collection of free tools. Everything works perfectly and no registration required!",
+      },
+    ],
   };
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -215,8 +218,14 @@ export default function RootLayout({
           href={process.env.NEXT_PUBLIC_APP_URL || "https://usefreetools.site"}
         />
         {/* SEO Meta Tags */}
-        <meta name="google-site-verification" content="QckK5UKbbaFN0iyIx0y6hXcuK6-LWFB3sDMmlTt3p28" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta
+          name="google-site-verification"
+          content="QckK5UKbbaFN0iyIx0y6hXcuK6-LWFB3sDMmlTt3p28"
+        />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
         <meta name="googlebot" content="index, follow" />
         <meta name="bingbot" content="index, follow" />
         <meta name="language" content="English" />
@@ -227,13 +236,31 @@ export default function RootLayout({
         <meta name="geo.placename" content="United States" />
 
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Usefreetools - Essential Digital Tools & Utilities" />
-        <meta property="og:description" content="Complete toolkit with voice processing, document conversion, visual tools, business generators, and security features. Everything you need in one powerful, free platform." />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_APP_URL || "https://usefreetools.site"}/logo.png`} />
+        <meta
+          property="og:title"
+          content="Usefreetools - Essential Digital Tools & Utilities"
+        />
+        <meta
+          property="og:description"
+          content="Complete toolkit with voice processing, document conversion, visual tools, business generators, and security features. Everything you need in one powerful, free platform."
+        />
+        <meta
+          property="og:image"
+          content={`${process.env.NEXT_PUBLIC_APP_URL || "https://usefreetools.site"
+            }/logo.png`}
+        />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Usefreetools - Free Digital Tools and Utilities" />
-        <meta property="og:url" content={process.env.NEXT_PUBLIC_APP_URL || "https://usefreetools.site"} />
+        <meta
+          property="og:image:alt"
+          content="Usefreetools - Free Digital Tools and Utilities"
+        />
+        <meta
+          property="og:url"
+          content={
+            process.env.NEXT_PUBLIC_APP_URL || "https://usefreetools.site"
+          }
+        />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Usefreetools" />
         <meta property="og:locale" content="en_US" />
@@ -242,37 +269,75 @@ export default function RootLayout({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@wmoe22" />
         <meta name="twitter:creator" content="@wmoe22" />
-        <meta name="twitter:title" content="Usefreetools - Essential Digital Tools & Utilities" />
-        <meta name="twitter:description" content="Complete toolkit with voice processing, document conversion, visual tools, business generators, and security features." />
-        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_APP_URL || "https://usefreetools.site"}/logo.png`} />
-        <meta name="twitter:image:alt" content="Usefreetools - Free Digital Tools and Utilities" />
+        <meta
+          name="twitter:title"
+          content="Usefreetools - Essential Digital Tools & Utilities"
+        />
+        <meta
+          name="twitter:description"
+          content="Complete toolkit with voice processing, document conversion, visual tools, business generators, and security features."
+        />
+        <meta
+          name="twitter:image"
+          content={`${process.env.NEXT_PUBLIC_APP_URL || "https://usefreetools.site"
+            }/logo.png`}
+        />
+        <meta
+          name="twitter:image:alt"
+          content="Usefreetools - Free Digital Tools and Utilities"
+        />
 
         {/* Additional SEO Meta Tags */}
         <meta name="author" content="Usefreetools Team" />
         <meta name="publisher" content="Usefreetools" />
-        <meta name="copyright" content="© 2024 Usefreetools. All rights reserved." />
+        <meta
+          name="copyright"
+          content="© 2024 Usefreetools. All rights reserved."
+        />
         <meta name="application-name" content="Usefreetools" />
         <meta name="msapplication-TileColor" content="#0f172a" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
 
         {/* Mobile Optimization */}
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
         <meta name="apple-mobile-web-app-title" content="Usefreetools" />
 
         {/* Favicon and Icons */}
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
         <link rel="manifest" href="/site.webmanifest" />
 
         {/* Preconnect for Performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link rel="preconnect" href="https://www.google-analytics.com" />
-        <link rel="preconnect" href="https://comprehensiveimplementationstrode.com" />
+        <link
+          rel="preconnect"
+          href="https://comprehensiveimplementationstrode.com"
+        />
         <script
           async={true}
           data-cfasync="false"
@@ -285,17 +350,35 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Analytics />
-        <ErrorBoundary>
-          <Providers>{children}</Providers>
-        </ErrorBoundary>
-        <script
-          async={true}
-          data-cfasync="false"
-          src="//comprehensiveimplementationstrode.com/8250dc77e079516ac855643826e93e7d/invoke.js"
-        ></script>
-
-        <script async={true} data-cfasync="false" src="//comprehensiveimplementationstrode.com/d7335c49fed82ef151c040dd10690d7e/invoke.js"></script>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Analytics />
+          <ErrorBoundary>
+            <Providers>{children}</Providers>
+          </ErrorBoundary>
+          <script
+            async={true}
+            data-cfasync="false"
+            src="//comprehensiveimplementationstrode.com/8250dc77e079516ac855643826e93e7d/invoke.js"
+          ></script>
+          <script
+            type="text/javascript"
+            src="//comprehensiveimplementationstrode.com/5f5974a83798aa28cd290cbee513c6e2/invoke.js"
+          ></script>
+          <script
+            type="text/javascript"
+            src="//comprehensiveimplementationstrode.com/782ab596c62dc6dc9cbd9e788cf492d5/invoke.js"
+          ></script>
+          <script
+            async={true}
+            data-cfasync="false"
+            src="//comprehensiveimplementationstrode.com/d7335c49fed82ef151c040dd10690d7e/invoke.js"
+          ></script>
+        </ThemeProvider>
       </body>
     </html>
   );
