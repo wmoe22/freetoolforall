@@ -246,11 +246,10 @@ export default function RootLayout({
         />
         <meta
           property="og:image"
-          content={`${process.env.NEXT_PUBLIC_APP_URL || "https://usefreetools.site"
-            }/logo.png`}
+          content={`https://usefreetools.site/logo.png`}
         />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+        <meta property="og:image:width" content="2048" />
+        <meta property="og:image:height" content="2048" />
         <meta
           property="og:image:alt"
           content="Usefreetools - Free Digital Tools and Utilities"
