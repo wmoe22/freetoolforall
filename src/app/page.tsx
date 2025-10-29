@@ -1,5 +1,6 @@
 "use client";
 
+import Banner from "@/components/Banner";
 import BrowserCompatibility from "@/components/BrowserCompatibility";
 import FeaturesSection from "@/components/layout/FeaturesSection";
 import Footer from "@/components/layout/Footer";
@@ -44,7 +45,9 @@ function HomeInner() {
         <BrowserCompatibility />
         <UsageWarning />
         <LayoutTest />
-
+        <div id="container-de2e714740ad1db7511b430d8eb34225"></div>
+        <div id="container-2b58113fcb3b44d4d69b7b220984a81f"></div>
+        <Banner />
         <Script id="adsterra-options-1" strategy="afterInteractive">
           {`
             atOptions = {

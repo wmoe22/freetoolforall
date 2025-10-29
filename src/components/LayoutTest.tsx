@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   InputGroup,
   InputGroupAddon,
-  InputGroupInput
+  InputGroupInput,
 } from "@/components/ui/input-group";
 import {
   AudioWaveform,
@@ -26,7 +26,7 @@ import {
   Upload,
   Volume2,
   X,
-  Zap
+  Zap,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
@@ -34,55 +34,287 @@ import { useMemo, useState } from "react";
 // Define all available tools with their categories and metadata
 const ALL_TOOLS = [
   // Voice Hub Tools
-  { id: 'speech-to-text', name: 'Speech to Text', category: 'voice', description: 'Convert audio files to text', icon: Upload, keywords: ['speech', 'audio', 'transcribe', 'voice', 'stt'], tabValue: 'speech-to-text' },
-  { id: 'text-to-speech', name: 'Text to Speech', category: 'voice', description: 'Convert text to audio', icon: Volume2, keywords: ['text', 'speech', 'voice', 'audio', 'tts'], tabValue: 'text-to-speech' },
-  { id: 'audio-converter', name: 'Audio Converter', category: 'voice', description: 'Convert between audio formats', icon: AudioWaveform, keywords: ['audio', 'convert', 'format', 'mp3', 'wav'], tabValue: 'audio-converter' },
-  { id: 'subtitle-generator', name: 'Subtitle Generator', category: 'voice', description: 'Generate subtitles from audio', icon: FileText, keywords: ['subtitle', 'captions', 'srt', 'audio', 'video'], tabValue: 'subtitle-generator' },
-  { id: 'audio-trimmer', name: 'Audio Trimmer', category: 'voice', description: 'Trim and edit audio files', icon: Scissors, keywords: ['audio', 'trim', 'cut', 'edit'], tabValue: 'audio-trimmer' },
+  {
+    id: "speech-to-text",
+    name: "Speech to Text",
+    category: "voice",
+    description: "Convert audio files to text",
+    icon: Upload,
+    keywords: ["speech", "audio", "transcribe", "voice", "stt"],
+    tabValue: "speech-to-text",
+  },
+  {
+    id: "text-to-speech",
+    name: "Text to Speech",
+    category: "voice",
+    description: "Convert text to audio",
+    icon: Volume2,
+    keywords: ["text", "speech", "voice", "audio", "tts"],
+    tabValue: "text-to-speech",
+  },
+  {
+    id: "audio-converter",
+    name: "Audio Converter",
+    category: "voice",
+    description: "Convert between audio formats",
+    icon: AudioWaveform,
+    keywords: ["audio", "convert", "format", "mp3", "wav"],
+    tabValue: "audio-converter",
+  },
+  {
+    id: "subtitle-generator",
+    name: "Subtitle Generator",
+    category: "voice",
+    description: "Generate subtitles from audio",
+    icon: FileText,
+    keywords: ["subtitle", "captions", "srt", "audio", "video"],
+    tabValue: "subtitle-generator",
+  },
+  {
+    id: "audio-trimmer",
+    name: "Audio Trimmer",
+    category: "voice",
+    description: "Trim and edit audio files",
+    icon: Scissors,
+    keywords: ["audio", "trim", "cut", "edit"],
+    tabValue: "audio-trimmer",
+  },
 
   // Document Hub Tools
-  { id: 'file-converter', name: 'File Converter', category: 'document', description: 'Convert between document formats', icon: RefreshCw, keywords: ['convert', 'pdf', 'word', 'excel', 'document'], tabValue: 'converter' },
-  { id: 'pdf-compress', name: 'PDF Compressor', category: 'document', description: 'Compress PDF files', icon: Settings, keywords: ['pdf', 'compress', 'reduce', 'size'], tabValue: 'compress' },
-  { id: 'pdf-split', name: 'PDF Splitter', category: 'document', description: 'Split PDF into multiple files', icon: Scissors, keywords: ['pdf', 'split', 'divide', 'pages'], tabValue: 'split' },
-  { id: 'pdf-merge', name: 'PDF Merger', category: 'document', description: 'Merge multiple PDFs', icon: Copy, keywords: ['pdf', 'merge', 'combine', 'join'], tabValue: 'merge' },
+  {
+    id: "file-converter",
+    name: "File Converter",
+    category: "document",
+    description: "Convert between document formats",
+    icon: RefreshCw,
+    keywords: ["convert", "pdf", "word", "excel", "document"],
+    tabValue: "converter",
+  },
+  {
+    id: "pdf-compress",
+    name: "PDF Compressor",
+    category: "document",
+    description: "Compress PDF files",
+    icon: Settings,
+    keywords: ["pdf", "compress", "reduce", "size"],
+    tabValue: "compress",
+  },
+  {
+    id: "pdf-split",
+    name: "PDF Splitter",
+    category: "document",
+    description: "Split PDF into multiple files",
+    icon: Scissors,
+    keywords: ["pdf", "split", "divide", "pages"],
+    tabValue: "split",
+  },
+  {
+    id: "pdf-merge",
+    name: "PDF Merger",
+    category: "document",
+    description: "Merge multiple PDFs",
+    icon: Copy,
+    keywords: ["pdf", "merge", "combine", "join"],
+    tabValue: "merge",
+  },
 
   // Business Hub Tools
-  { id: 'proposal-generator', name: 'Proposal Generator', category: 'business', description: 'Generate business proposals', icon: FileText, keywords: ['proposal', 'business', 'generate', 'document'], tabValue: 'proposal' },
-  { id: 'invoice-generator', name: 'Invoice Generator', category: 'business', description: 'Create professional invoices', icon: FileText, keywords: ['invoice', 'billing', 'business', 'payment'], tabValue: 'invoice' },
-  { id: 'meeting-notes', name: 'Meeting Notes', category: 'business', description: 'Generate meeting notes from audio', icon: Mic, keywords: ['meeting', 'notes', 'transcribe', 'business'], tabValue: 'meeting' },
+  {
+    id: "proposal-generator",
+    name: "Proposal Generator",
+    category: "business",
+    description: "Generate business proposals",
+    icon: FileText,
+    keywords: ["proposal", "business", "generate", "document"],
+    tabValue: "proposal",
+  },
+  {
+    id: "invoice-generator",
+    name: "Invoice Generator",
+    category: "business",
+    description: "Create professional invoices",
+    icon: FileText,
+    keywords: ["invoice", "billing", "business", "payment"],
+    tabValue: "invoice",
+  },
+  {
+    id: "meeting-notes",
+    name: "Meeting Notes",
+    category: "business",
+    description: "Generate meeting notes from audio",
+    icon: Mic,
+    keywords: ["meeting", "notes", "transcribe", "business"],
+    tabValue: "meeting",
+  },
 
   // Visual Hub Tools
-  { id: 'image-compress', name: 'Image Compressor', category: 'visual', description: 'Compress images while maintaining quality', icon: Zap, keywords: ['image', 'compress', 'optimize', 'reduce'], tabValue: 'compress' },
-  { id: 'image-resize', name: 'Image Resizer', category: 'visual', description: 'Resize images to specific dimensions', icon: Maximize2, keywords: ['image', 'resize', 'dimensions', 'scale'], tabValue: 'resize' },
-  { id: 'image-crop', name: 'Image Cropper', category: 'visual', description: 'Crop images to specific areas', icon: Scissors, keywords: ['image', 'crop', 'cut', 'trim'], tabValue: 'crop' },
-  { id: 'image-convert', name: 'Image Converter', category: 'visual', description: 'Convert between image formats', icon: RefreshCw, keywords: ['image', 'convert', 'format', 'jpg', 'png', 'webp'], tabValue: 'convert' },
-  { id: 'background-remove', name: 'Background Remover', category: 'visual', description: 'Remove backgrounds from images', icon: Palette, keywords: ['background', 'remove', 'transparent', 'image'], tabValue: 'background' },
+  {
+    id: "image-compress",
+    name: "Image Compressor",
+    category: "visual",
+    description: "Compress images while maintaining quality",
+    icon: Zap,
+    keywords: ["image", "compress", "optimize", "reduce"],
+    tabValue: "compress",
+  },
+  {
+    id: "image-resize",
+    name: "Image Resizer",
+    category: "visual",
+    description: "Resize images to specific dimensions",
+    icon: Maximize2,
+    keywords: ["image", "resize", "dimensions", "scale"],
+    tabValue: "resize",
+  },
+  {
+    id: "image-crop",
+    name: "Image Cropper",
+    category: "visual",
+    description: "Crop images to specific areas",
+    icon: Scissors,
+    keywords: ["image", "crop", "cut", "trim"],
+    tabValue: "crop",
+  },
+  {
+    id: "image-convert",
+    name: "Image Converter",
+    category: "visual",
+    description: "Convert between image formats",
+    icon: RefreshCw,
+    keywords: ["image", "convert", "format", "jpg", "png", "webp"],
+    tabValue: "convert",
+  },
+  {
+    id: "background-remove",
+    name: "Background Remover",
+    category: "visual",
+    description: "Remove backgrounds from images",
+    icon: Palette,
+    keywords: ["background", "remove", "transparent", "image"],
+    tabValue: "background",
+  },
 
   // Security Hub Tools
-  { id: 'file-scanner', name: 'File Scanner', category: 'security', description: 'Scan files for viruses and malware', icon: Shield, keywords: ['scan', 'virus', 'malware', 'security', 'file'], tabValue: 'file-scanner' },
-  { id: 'url-scanner', name: 'URL Scanner', category: 'security', description: 'Check URLs for malicious content', icon: Link, keywords: ['url', 'scan', 'security', 'malicious', 'website'], tabValue: 'url-scanner' },
-  { id: 'cookie-compliance', name: 'GDPR Cookie Checker', category: 'security', description: 'Check website GDPR cookie compliance', icon: Shield, keywords: ['gdpr', 'cookie', 'compliance', 'privacy', 'security'], tabValue: 'cookie-compliance' },
-  { id: 'email-blacklist', name: 'Email Blacklist Checker', category: 'security', description: 'Check if domain or IP is on spam lists', icon: Shield, keywords: ['email', 'blacklist', 'spam', 'reputation', 'domain', 'ip'], tabValue: 'email-blacklist' },
+  {
+    id: "file-scanner",
+    name: "File Scanner",
+    category: "security",
+    description: "Scan files for viruses and malware",
+    icon: Shield,
+    keywords: ["scan", "virus", "malware", "security", "file"],
+    tabValue: "file-scanner",
+  },
+  {
+    id: "url-scanner",
+    name: "URL Scanner",
+    category: "security",
+    description: "Check URLs for malicious content",
+    icon: Link,
+    keywords: ["url", "scan", "security", "malicious", "website"],
+    tabValue: "url-scanner",
+  },
+  /*  {
+    id: "cookie-compliance",
+    name: "GDPR Cookie Checker",
+    category: "security",
+    description: "Check website GDPR cookie compliance",
+    icon: Shield,
+    keywords: ["gdpr", "cookie", "compliance", "privacy", "security"],
+    tabValue: "cookie-compliance",
+  },
+  {
+    id: "email-blacklist",
+    name: "Email Blacklist Checker",
+    category: "security",
+    description: "Check if domain or IP is on spam lists",
+    icon: Shield,
+    keywords: ["email", "blacklist", "spam", "reputation", "domain", "ip"],
+    tabValue: "email-blacklist",
+  }, */
 
   // Utility Hub Tools
-  { id: 'url-shortener', name: 'URL Shortener', category: 'utility', description: 'Create short, shareable links from long URLs', icon: Link, keywords: ['url', 'shortener', 'link', 'utility'], tabValue: 'url-shortener' },
-  { id: 'token-counter', name: 'LLM Token Counter', category: 'utility', description: 'Count tokens and estimate costs for LLM models', icon: Settings, keywords: ['token', 'counter', 'llm', 'ai'], tabValue: 'token-counter' },
-  { id: 'hash-generator', name: 'Hash Generator', category: 'utility', description: 'Generate MD5, SHA-1, and SHA-256 hashes', icon: Settings, keywords: ['hash', 'generator', 'md5', 'sha'], tabValue: 'hash-generator' },
-  { id: 'api-inspector', name: 'API Response Inspector', category: 'utility', description: 'Inspect and format API responses', icon: Search, keywords: ['api', 'inspector', 'response', 'format'], tabValue: 'api-inspector' },
+  {
+    id: "url-shortener",
+    name: "URL Shortener",
+    category: "utility",
+    description: "Create short, shareable links from long URLs",
+    icon: Link,
+    keywords: ["url", "shortener", "link", "utility"],
+    tabValue: "url-shortener",
+  },
+  {
+    id: "token-counter",
+    name: "LLM Token Counter",
+    category: "utility",
+    description: "Count tokens and estimate costs for LLM models",
+    icon: Settings,
+    keywords: ["token", "counter", "llm", "ai"],
+    tabValue: "token-counter",
+  },
+  /*  {
+    id: "hash-generator",
+    name: "Hash Generator",
+    category: "utility",
+    description: "Generate MD5, SHA-1, and SHA-256 hashes",
+    icon: Settings,
+    keywords: ["hash", "generator", "md5", "sha"],
+    tabValue: "hash-generator",
+  }, 
+  {
+    id: "api-inspector",
+    name: "API Response Inspector",
+    category: "utility",
+    description: "Inspect and format API responses",
+    icon: Search,
+    keywords: ["api", "inspector", "response", "format"],
+    tabValue: "api-inspector",
+  },*/
 ];
 
 const CATEGORIES = [
-  { id: 'voice', name: 'Voice Hub', icon: Volume2, color: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300' },
-  { id: 'document', name: 'Document Hub', icon: FileText, color: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' },
-  { id: 'business', name: 'Business Hub', icon: Briefcase, color: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300' },
-  { id: 'visual', name: 'Visual Hub', icon: Eye, color: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300' },
-  { id: 'security', name: 'Security Hub', icon: Shield, color: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' },
-  { id: 'utility', name: 'Utility Hub', icon: Settings, color: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-300' },
+  {
+    id: "voice",
+    name: "Voice Hub",
+    icon: Volume2,
+    color: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
+  },
+  {
+    id: "document",
+    name: "Document Hub",
+    icon: FileText,
+    color: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300",
+  },
+  {
+    id: "business",
+    name: "Business Hub",
+    icon: Briefcase,
+    color:
+      "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300",
+  },
+  {
+    id: "visual",
+    name: "Visual Hub",
+    icon: Eye,
+    color:
+      "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300",
+  },
+  {
+    id: "security",
+    name: "Security Hub",
+    icon: Shield,
+    color: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300",
+  },
+  {
+    id: "utility",
+    name: "Utility Hub",
+    icon: Settings,
+    color: "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-300",
+  },
 ];
 
 const LayoutTest = () => {
   const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   // Filter tools based on search query and selected categories
@@ -92,76 +324,79 @@ const LayoutTest = () => {
     // Filter by search query
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(tool =>
-        tool.name.toLowerCase().includes(query) ||
-        tool.description.toLowerCase().includes(query) ||
-        tool.keywords.some(keyword => keyword.toLowerCase().includes(query))
+      filtered = filtered.filter(
+        (tool) =>
+          tool.name.toLowerCase().includes(query) ||
+          tool.description.toLowerCase().includes(query) ||
+          tool.keywords.some((keyword) => keyword.toLowerCase().includes(query))
       );
     }
 
     // Filter by selected categories
     if (selectedCategories.length > 0) {
-      filtered = filtered.filter(tool => selectedCategories.includes(tool.category));
+      filtered = filtered.filter((tool) =>
+        selectedCategories.includes(tool.category)
+      );
     }
 
     return filtered;
   }, [searchQuery, selectedCategories]);
 
   const handleCategoryToggle = (categoryId: string) => {
-    setSelectedCategories(prev =>
+    setSelectedCategories((prev) =>
       prev.includes(categoryId)
-        ? prev.filter(id => id !== categoryId)
+        ? prev.filter((id) => id !== categoryId)
         : [...prev, categoryId]
     );
   };
 
   const clearFilters = () => {
-    setSearchQuery('');
+    setSearchQuery("");
     setSelectedCategories([]);
   };
 
   const getCategoryInfo = (categoryId: string) => {
-    return CATEGORIES.find(cat => cat.id === categoryId);
+    return CATEGORIES.find((cat) => cat.id === categoryId);
   };
 
-  const handleToolClick = (tool: typeof ALL_TOOLS[0]) => {
+  const handleToolClick = (tool: (typeof ALL_TOOLS)[0]) => {
     // Navigate to dedicated tool pages
     const toolRoutes: { [key: string]: string } = {
       // Voice Hub Tools
-      'speech-to-text': '/tools/speech-to-text',
-      'text-to-speech': '/tools/text-to-speech',
-      'audio-converter': '/tools/audio-converter',
-      'subtitle-generator': '/tools/subtitle-generator',
-      'audio-trimmer': '/tools/audio-trimmer',
+      "speech-to-text": "/tools/speech-to-text",
+      "text-to-speech": "/tools/text-to-speech",
+      "audio-converter": "/tools/audio-converter",
+      "subtitle-generator": "/tools/subtitle-generator",
+      "audio-trimmer": "/tools/audio-trimmer",
 
       // Document Hub Tools
-      'file-converter': '/tools/file-converter',
-      'pdf-compress': '/tools/pdf-compressor',
-      'pdf-split': '/tools/pdf-splitter',
-      'pdf-merge': '/tools/pdf-merger',
+      "file-converter": "/tools/file-converter",
+      "pdf-compress": "/tools/pdf-compressor",
+      "pdf-split": "/tools/pdf-splitter",
+      "pdf-merge": "/tools/pdf-merger",
 
       // Business Hub Tools
-      'proposal-generator': '/tools/proposal-generator',
-      'invoice-generator': '/tools/invoice-generator',
-      'meeting-notes': '/tools/meeting-notes',
+      "proposal-generator": "/tools/proposal-generator",
+      "invoice-generator": "/tools/invoice-generator",
+      "meeting-notes": "/tools/meeting-notes",
 
       // Visual Hub Tools
-      'image-compress': '/tools/image-compressor',
-      'image-resize': '/tools/image-resizer',
-      'image-crop': '/tools/image-cropper',
-      'image-convert': '/tools/image-converter',
-      'background-remove': '/tools/background-remover',
+      "image-compress": "/tools/image-compressor",
+      "image-resize": "/tools/image-resizer",
+      "image-crop": "/tools/image-cropper",
+      "image-convert": "/tools/image-converter",
+      "background-remove": "/tools/background-remover",
 
       // Security Hub Tools
-      'file-scanner': '/tools/file-scanner',
-      'url-scanner': '/tools/url-scanner',
+      "file-scanner": "/tools/file-scanner",
+      "url-scanner": "/tools/url-scanner",
       //'cookie-compliance': '/tools/cookie-compliance',
       // 'email-blacklist': '/tools/email-blacklist',
 
       // Utility Hub Tools
-      'url-shortener': '/tools/url-shortener',
-      'token-counter': '/tools/token-counter',
-      'hash-generator': '/tools/hash-generator',
+      "url-shortener": "/tools/url-shortener",
+      "token-counter": "/tools/token-counter",
+      //'hash-generator': '/tools/hash-generator',
       //'api-inspector': '/tools/api-inspector',
     };
 
@@ -171,14 +406,15 @@ const LayoutTest = () => {
     } else {
       // Fallback to home page with parameters if route not found
       const categoryMap = {
-        'voice': 'voice-hub',
-        'document': 'document-hub',
-        'business': 'business-hub',
-        'visual': 'visual-hub',
-        'security': 'security-hub'
+        voice: "voice-hub",
+        document: "document-hub",
+        business: "business-hub",
+        visual: "visual-hub",
+        security: "security-hub",
       };
 
-      const categoryTab = categoryMap[tool.category as keyof typeof categoryMap];
+      const categoryTab =
+        categoryMap[tool.category as keyof typeof categoryMap];
       const toolTab = tool.tabValue;
       router.push(`/?category=${categoryTab}&tool=${toolTab}`);
     }
@@ -199,7 +435,7 @@ const LayoutTest = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <InputGroupAddon align="inline-end">
-            {filteredTools.length} result{filteredTools.length !== 1 ? 's' : ''}
+            {filteredTools.length} result{filteredTools.length !== 1 ? "s" : ""}
           </InputGroupAddon>
         </InputGroup>
 
@@ -302,11 +538,14 @@ const LayoutTest = () => {
                   className="hover:shadow-md transition-shadow cursor-pointer"
                   onClick={() => handleToolClick(tool)}
                 >
-                  <CardContent >
+                  <CardContent>
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-2">
                         <div className="p-2 bg-zinc-100 border dark:border-zinc-700 dark:bg-zinc-800 rounded-lg">
-                          <Icon size={20} className="text-zinc-700 dark:text-zinc-300" />
+                          <Icon
+                            size={20}
+                            className="text-zinc-700 dark:text-zinc-300"
+                          />
                         </div>
                         <div>
                           <h3 className="font-semibold text-zinc-900 dark:text-white text-sm">
@@ -315,9 +554,12 @@ const LayoutTest = () => {
                         </div>
                       </div>
                       {category && (
-                        <Badge variant="secondary" className="flex items-center gap-1 text-xs">
+                        <Badge
+                          variant="secondary"
+                          className="flex items-center gap-1 text-xs"
+                        >
                           <CategoryIcon size={10} />
-                          {category.name.replace(' Hub', '')}
+                          {category.name.replace(" Hub", "")}
                         </Badge>
                       )}
                     </div>
@@ -328,12 +570,19 @@ const LayoutTest = () => {
 
                     <div className="flex flex-wrap gap-1">
                       {tool.keywords.slice(0, 3).map((keyword) => (
-                        <Badge key={keyword} variant="outline" className="text-xs px-1.5 py-0.5">
+                        <Badge
+                          key={keyword}
+                          variant="outline"
+                          className="text-xs px-1.5 py-0.5"
+                        >
                           {keyword}
                         </Badge>
                       ))}
                       {tool.keywords.length > 3 && (
-                        <Badge variant="outline" className="text-xs px-1.5 py-0.5">
+                        <Badge
+                          variant="outline"
+                          className="text-xs px-1.5 py-0.5"
+                        >
                           +{tool.keywords.length - 3}
                         </Badge>
                       )}

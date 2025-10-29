@@ -292,7 +292,7 @@ export default function RootLayout({
         <meta name="publisher" content="Usefreetools" />
         <meta
           name="copyright"
-          content="© 2024 Usefreetools. All rights reserved."
+          content="© 2025 Usefreetools. All rights reserved."
         />
         <meta name="application-name" content="Usefreetools" />
         <meta name="msapplication-TileColor" content="#0f172a" />
@@ -325,8 +325,6 @@ export default function RootLayout({
           href="/apple-touch-icon.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
-
-        {/* Preconnect for Performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -334,17 +332,59 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link rel="preconnect" href="https://www.google-analytics.com" />
+        {/* Comprehensive Implementation Strode Integration */}
         <link
           rel="preconnect"
           href="https://comprehensiveimplementationstrode.com"
         />
+        <link
+          rel="dns-prefetch"
+          href="//comprehensiveimplementationstrode.com"
+        />
+
+        {/* Primary Ad Scripts */}
+        <script
+          async={true}
+          data-cfasync="false"
+          src="//comprehensiveimplementationstrode.com/2b58113fcb3b44d4d69b7b220984a81f/invoke.js"
+        ></script>
         <script
           async={true}
           data-cfasync="false"
           src="//comprehensiveimplementationstrode.com/8250dc77e079516ac855643826e93e7d/invoke.js"
         ></script>
+        <script
+          type="text/javascript"
+          src="//comprehensiveimplementationstrode.com/5f5974a83798aa28cd290cbee513c6e2/invoke.js"
+        ></script>
+        <script
+          type="text/javascript"
+          src="//comprehensiveimplementationstrode.com/782ab596c62dc6dc9cbd9e788cf492d5/invoke.js"
+        ></script>
+        <script
+          async={true}
+          data-cfasync="false"
+          src="//comprehensiveimplementationstrode.com/d7335c49fed82ef151c040dd10690d7e/invoke.js"
+        ></script>
+        <script async={true} data-cfasync="false" src="//comprehensiveimplementationstrode.com/de2e714740ad1db7511b430d8eb34225/invoke.js"></script>
+        {/* Additional Ad Network Scripts */}
+        <script
+          type="text/javascript"
+          data-cfasync="false"
+          src="//comprehensiveimplementationstrode.com/invoke.js"
+        ></script>
+
+        {/* Meta tags for ad optimization */}
         <meta name="yandex-verification" content="c8f38899dca7f73e" />
         <meta name="theme-color" content="#0f172a" />
+        <meta
+          name="bitmedia-site-verification"
+          content="724df444da160618143ca5dcec69fd65"
+        />
+
+        {/* Ad-friendly meta tags */}
+        <meta name="referrer" content="no-referrer-when-downgrade" />
+        <meta name="format-detection" content="telephone=no" />
         <meta name="color-scheme" content="light dark" />
       </head>
       <body
@@ -360,25 +400,48 @@ export default function RootLayout({
           <ErrorBoundary>
             <Providers>{children}</Providers>
           </ErrorBoundary>
-          <script
-            async={true}
-            data-cfasync="false"
-            src="//comprehensiveimplementationstrode.com/8250dc77e079516ac855643826e93e7d/invoke.js"
-          ></script>
-          <script
-            type="text/javascript"
-            src="//comprehensiveimplementationstrode.com/5f5974a83798aa28cd290cbee513c6e2/invoke.js"
-          ></script>
-          <script
-            type="text/javascript"
-            src="//comprehensiveimplementationstrode.com/782ab596c62dc6dc9cbd9e788cf492d5/invoke.js"
-          ></script>
-          <script
-            async={true}
-            data-cfasync="false"
-            src="//comprehensiveimplementationstrode.com/d7335c49fed82ef151c040dd10690d7e/invoke.js"
-          ></script>
+
         </ThemeProvider>
+
+        {/* Comprehensive Ads Initialization Script */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Initialize comprehensive ads
+              (function() {
+                if (typeof window !== 'undefined') {
+                  // Set up ad configuration
+                  window.comprehensiveAdsConfig = {
+                    autoLoad: true,
+                    refreshInterval: 30000,
+                    maxAds: 10
+                  };
+                  
+                  // Load ads after page load
+                  window.addEventListener('load', function() {
+                    setTimeout(function() {
+                      // Trigger additional ad loading
+                      var additionalScripts = [
+                        '//comprehensiveimplementationstrode.com/invoke.js'
+                      ];
+                      
+                      additionalScripts.forEach(function(src, index) {
+                        setTimeout(function() {
+                          var script = document.createElement('script');
+                          script.type = 'text/javascript';
+                          script.src = src;
+                          script.async = true;
+                          script.setAttribute('data-cfasync', 'false');
+                          document.head.appendChild(script);
+                        }, index * 300);
+                      });
+                    }, 1000);
+                  });
+                }
+              })();
+            `
+          }}
+        />
       </body>
     </html>
   );
