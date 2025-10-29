@@ -311,7 +311,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Usefreetools" />
 
         {/* Favicon and Icons */}
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="48x48" href="/favicon.ico" />
         <link
           rel="icon"
           type="image/png"
