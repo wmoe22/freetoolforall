@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+/* import { useEffect, useRef } from "react";
 export default function Banner() {
   const bannerRef = useRef(null);
   useEffect(() => {
@@ -22,3 +22,4 @@ export default function Banner() {
   }, []);
   return <div ref={bannerRef} className="ad-banner"></div>;
 }
+ */
