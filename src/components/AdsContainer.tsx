@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 
 import { useEffect } from "react";
 
@@ -20,3 +20,4 @@ export default function AdBox2() {
 
   return <div id="container-2b58113fcb3b44d4d69b7b220984a81f"></div>;
 }
+ */

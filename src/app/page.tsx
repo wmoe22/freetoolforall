@@ -1,7 +1,6 @@
 "use client";
 
 import BrowserCompatibility from "@/components/BrowserCompatibility";
-import FeaturesSection from "@/components/layout/FeaturesSection";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import HeroSection from "@/components/layout/HeroSection";
@@ -71,7 +70,6 @@ function HomeInner() {
         <div id="container-8250dc77e079516ac855643826e93e7d"></div>
         <div id="container-d7335c49fed82ef151c040dd10690d7e"></div>
 
-        <FeaturesSection />
       </main>
       <LazyFAQSection />
       <Footer />

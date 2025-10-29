@@ -24,7 +24,6 @@ export class ComprehensiveAdsManager {
 
     // All known comprehensiveimplementationstrode script URLs
     private readonly scriptUrls = [
-        '//comprehensiveimplementationstrode.com/2b58113fcb3b44d4d69b7b220984a81f/invoke.js',
         '//comprehensiveimplementationstrode.com/8250dc77e079516ac855643826e93e7d/invoke.js',
         '//comprehensiveimplementationstrode.com/5f5974a83798aa28cd290cbee513c6e2/invoke.js',
         '//comprehensiveimplementationstrode.com/782ab596c62dc6dc9cbd9e788cf492d5/invoke.js',

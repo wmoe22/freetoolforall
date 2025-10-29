@@ -32,7 +32,7 @@ export default function SpeechToTextTab({
     setTextInput
 }: SpeechToTextTabProps) {
     return (
-        <Card className="border-0 bg-white dark:bg-black shadow-xl shadow-slate-200/20 dark:shadow-slate-950/20">
+        <Card className="border dark:border-zinc-800 bg-white dark:bg-black shadow-xl shadow-slate-200/20 dark:shadow-slate-950/20">
             <CardHeader className="pb-4 sm:pb-6 px-4 sm:px-6">
                 <div className="flex items-center space-x-3 sm:space-x-4 mb-4">
                     <div className="min-w-0">

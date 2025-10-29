@@ -37,7 +37,7 @@ export default function TextToSpeechTab({
     handleDownloadAudio
 }: TextToSpeechTabProps) {
     return (
-        <Card className="border-0 bg-white dark:bg-black shadow-xl shadow-slate-200/20 dark:shadow-slate-950/20">
+        <Card className="  border dark:border-zinc-800 bg-white dark:bg-black shadow-xl shadow-slate-200/20 dark:shadow-slate-950/20">
             <CardHeader className="pb-4  sm:pb-6 px-4 sm:px-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
                     <div className="flex items-center space-x-3 sm:space-x-4">
@@ -105,7 +105,7 @@ export default function TextToSpeechTab({
                         placeholder="Type or paste your text here. The AI will convert it to natural-sounding speech using your selected voice model..."
                         value={textInput}
                         onChange={(e) => setTextInput(e.target.value)}
-                        className="min-h-[150px] sm:min-h-[200px] resize-none text-sm sm:text-base lg:text-md font-mono  leading-relaxed text-zinc-50 dark:text-zinc-800/50 border-slate-200 dark:border-slate-700 focus:border-blue-500 dark:focus:border-blue-400 p-4 sm:p-6"
+                        className="min-h-[150px] sm:min-h-[200px] resize-none text-sm sm:text-base lg:text-md font-mono  leading-relaxed text-zinc-700 dark:text-zinc-200 border-slate-200 dark:border-slate-900 focus:border-blue-500 dark:focus:border-blue-400 p-4 sm:p-6"
                     />
                     <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 text-xs sm:text-sm text-zinc-400">
                         {textInput.length} characters
