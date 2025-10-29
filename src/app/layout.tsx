@@ -346,11 +346,6 @@ export default function RootLayout({
         <script
           async={true}
           data-cfasync="false"
-          src="//comprehensiveimplementationstrode.com/2b58113fcb3b44d4d69b7b220984a81f/invoke.js"
-        ></script>
-        <script
-          async={true}
-          data-cfasync="false"
           src="//comprehensiveimplementationstrode.com/8250dc77e079516ac855643826e93e7d/invoke.js"
         ></script>
         <script
@@ -402,46 +397,6 @@ export default function RootLayout({
           </ErrorBoundary>
 
         </ThemeProvider>
-
-        {/* Comprehensive Ads Initialization Script */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Initialize comprehensive ads
-              (function() {
-                if (typeof window !== 'undefined') {
-                  // Set up ad configuration
-                  window.comprehensiveAdsConfig = {
-                    autoLoad: true,
-                    refreshInterval: 30000,
-                    maxAds: 10
-                  };
-                  
-                  // Load ads after page load
-                  window.addEventListener('load', function() {
-                    setTimeout(function() {
-                      // Trigger additional ad loading
-                      var additionalScripts = [
-                        '//comprehensiveimplementationstrode.com/invoke.js'
-                      ];
-                      
-                      additionalScripts.forEach(function(src, index) {
-                        setTimeout(function() {
-                          var script = document.createElement('script');
-                          script.type = 'text/javascript';
-                          script.src = src;
-                          script.async = true;
-                          script.setAttribute('data-cfasync', 'false');
-                          document.head.appendChild(script);
-                        }, index * 300);
-                      });
-                    }, 1000);
-                  });
-                }
-              })();
-            `
-          }}
-        />
       </body>
     </html>
   );
