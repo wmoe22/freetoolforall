@@ -465,10 +465,8 @@ const LayoutTest = () => {
 
           {(searchQuery || selectedCategories.length > 0) && (
             <Button
-              variant="ghost"
               size="sm"
               onClick={clearFilters}
-              className="h-8 text-zinc-500 hover:text-zinc-700"
             >
               <X size={14} className="mr-1" />
               Clear filters
@@ -535,39 +533,39 @@ const LayoutTest = () => {
               return (
                 <Card
                   key={tool.id}
-                  className="hover:shadow-md transition-shadow cursor-pointer"
+                  className="hover:shadow-md dark:hover:border dark:hover:border-blue-500 transition-all cursor-pointer"
                   onClick={() => handleToolClick(tool)}
                 >
                   <CardContent>
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center ">
+                      <div className="flex items-center justify-center flex-col  gap-2">
                         <div className="p-2 bg-zinc-100 border dark:border-zinc-700 dark:bg-zinc-800 rounded-lg">
                           <Icon
                             size={20}
                             className="text-zinc-700 dark:text-zinc-300"
                           />
                         </div>
-                        <div>
+                        <div className="flex flex-col items-center justify-center gap-1">
                           <h3 className="font-semibold text-zinc-900 dark:text-white text-sm">
                             {tool.name}
                           </h3>
+                          <p className="text-xs text-zinc-600 dark:text-zinc-400 mb-3">
+                            {tool.description}
+                          </p>
                         </div>
+                        {/*                         {category && (
+                          <Badge
+                            variant="secondary"
+                            className="flex items-center justify-end gap-1 text-xs"
+                          >
+                            <CategoryIcon size={10} />
+                            {category.name.replace(" Hub", "")}
+                          </Badge>
+                        )} */}
                       </div>
-                      {category && (
-                        <Badge
-                          variant="secondary"
-                          className="flex items-center gap-1 text-xs"
-                        >
-                          <CategoryIcon size={10} />
-                          {category.name.replace(" Hub", "")}
-                        </Badge>
-                      )}
+
                     </div>
-
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 mb-3">
-                      {tool.description}
-                    </p>
-
+                    {/*
                     <div className="flex flex-wrap gap-1">
                       {tool.keywords.slice(0, 3).map((keyword) => (
                         <Badge
@@ -586,7 +584,7 @@ const LayoutTest = () => {
                           +{tool.keywords.length - 3}
                         </Badge>
                       )}
-                    </div>
+                    </div> */}
                   </CardContent>
                 </Card>
               );

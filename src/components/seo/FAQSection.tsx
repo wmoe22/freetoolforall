@@ -3,28 +3,28 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "..
 export default function FAQSection() {
     const faqs = [
         {
-            question: "How do I convert speech to text?",
-            answer: "Simply upload your audio file or record directly in your browser. Our AI will automatically transcribe your speech into text within seconds. No account required."
+            question: "How do I use this platform?",
+            answer: "Simply select the tool you need from our collection, upload your files or input your data, and let our AI-powered tools process it instantly. No account registration required - just visit and use any tool immediately."
         },
         {
-            question: "What file formats can I upload?",
-            answer: "We support all common audio formats including MP3, WAV, M4A, FLAC, and video files like MP4. Maximum file size is 100MB."
+            question: "What types of tools are available?",
+            answer: "We offer a comprehensive suite of AI-powered tools including text processing, audio conversion, image editing, and productivity utilities. All tools are designed to be fast, accurate, and easy to use."
         },
         {
             question: "Is my data private and secure?",
-            answer: "Yes, your privacy is our top priority. Files are processed temporarily and automatically deleted after conversion. We never store or share your audio data."
+            answer: "Absolutely. Your privacy is our top priority. All files are processed securely and automatically deleted after use. We never store, share, or access your content. All processing happens with great security."
         },
         {
-            question: "How accurate is the transcription?",
-            answer: "Our AI provides high accuracy for clear audio with minimal background noise. For best results, use good quality recordings with clear speech."
+            question: "Do I need to create an account?",
+            answer: "No account required! Our platform works completely anonymously. Simply visit the site, choose your tool, and start using it instantly. This ensures maximum privacy and convenience for all users."
         },
         {
-            question: "Can I edit the transcribed text?",
-            answer: "Yes, you can edit the transcribed text directly in the interface before copying or downloading it."
+            question: "Are these tools free to use?",
+            answer: "Yes! All our basic tools are completely free with no hidden costs. We provide these as a public service to help users accomplish their tasks quickly and efficiently without any barriers."
         },
         {
-            question: "Is there a limit on file length?",
-            answer: "You can upload files up to 2 hours long. For longer files, consider splitting them into smaller segments for better processing."
+            question: "What file formats do you support?",
+            answer: "We support all major file formats including documents, images, audio, and video files. Each tool specifies its supported formats, with most accepting common formats like PDF, JPG, MP3, MP4, and many others."
         }
     ];
 
@@ -42,33 +42,35 @@ export default function FAQSection() {
     };
 
     return (
-        <section className="py-8 sm:py-12 lg:py-16 bg-white dark:bg-zinc-900" aria-labelledby="faq-heading">
+        <section className="py-8 sm:py-12 lg:py-16 bg-zinc-800 border border-zinc-700" aria-labelledby="faq-heading">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-8 sm:mb-12">
-                    <h2 id="faq-heading" className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-3 sm:mb-4">
+                    <h2 id="faq-heading" className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">
                         Frequently Asked Questions
                     </h2>
-                    <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-300">
-                        Get answers to common questions about our speech-to-text service
+                    <p className="text-base sm:text-lg text-zinc-300">
+                        Get answers to common questions about our free AI-powered tools
                     </p>
                 </div>
 
-                <Accordion type="single" collapsible className="w-full">
-                    {faqs.map((faq, index) => (
-                        <AccordionItem key={index} value={`item-${index}`}>
-                            <AccordionTrigger className="text-left text-lg sm:text-xl font-semibold text-zinc-900 dark:text-white">
-                                {faq.question}
-                            </AccordionTrigger>
-                            <AccordionContent className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                                {faq.answer}
-                            </AccordionContent>
-                        </AccordionItem>
-                    ))}
-                </Accordion>
+                <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-6">
+                    <Accordion type="single" collapsible className="w-full">
+                        {faqs.map((faq, index) => (
+                            <AccordionItem key={index} value={`item-${index}`} className="border-b border-zinc-700 last:border-b-0">
+                                <AccordionTrigger className="text-left text-lg sm:text-xl font-semibold text-white hover:text-zinc-200">
+                                    {faq.question}
+                                </AccordionTrigger>
+                                <AccordionContent className="text-sm sm:text-base text-zinc-300 leading-relaxed pt-2">
+                                    {faq.answer}
+                                </AccordionContent>
+                            </AccordionItem>
+                        ))}
+                    </Accordion>
+                </div>
             </div>
         </section>
     );
