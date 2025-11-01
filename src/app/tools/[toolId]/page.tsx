@@ -29,6 +29,9 @@ import { ModeToggle } from "@/components/ModeToggle";
 import FileScanner from "@/components/security/FileScanner";
 import UrlScanner from "@/components/security/UrlScanner";
 import HashGenerator from "@/components/utility/HashGenerator";
+import JsonXmlFormatter from "@/components/utility/JsonXmlFormatter";
+import PageSpeedAnalyzer from "@/components/utility/PageSpeedAnalyzer";
+import SeoAnalyzer from "@/components/utility/SeoAnalyzer";
 import TokenCounter from "@/components/utility/TokenCounter";
 import UrlShortener from "@/components/utility/UrlShortener";
 import BackgroundRemover from "@/components/visual/BackgroundRemover";
@@ -77,6 +80,9 @@ const ALL_TOOLS = [
     { id: 'url-shortener', name: 'URL Shortener', category: 'utility', description: 'Create short, shareable links from long URLs', tabValue: 'url-shortener' },
     { id: 'token-counter', name: 'LLM Token Counter', category: 'utility', description: 'Count tokens and estimate costs for LLM models', tabValue: 'token-counter' },
     { id: 'hash-generator', name: 'Hash Generator', category: 'utility', description: 'Generate MD5, SHA-1, and SHA-256 hashes', tabValue: 'hash-generator' },
+    { id: 'json-xml-formatter', name: 'JSON/XML Formatter', category: 'utility', description: 'Format, validate, and minify JSON or XML content', tabValue: 'json-xml-formatter' },
+    { id: 'seo-analyzer', name: 'SEO Analyzer', category: 'utility', description: 'Analyze website SEO with AI-powered insights', tabValue: 'seo-analyzer' },
+    { id: 'pagespeed-analyzer', name: 'PageSpeed Insights', category: 'utility', description: 'Analyze website performance with Google PageSpeed Insights', tabValue: 'pagespeed-analyzer' },
 /*     { id: 'api-inspector', name: 'API Response Inspector', category: 'utility', description: 'Inspect and format API responses', tabValue: 'api-inspector' },
  */];
 
@@ -347,6 +353,12 @@ export default function ToolPage() {
                 return <TokenCounter />
             case "hash-generator":
                 return <HashGenerator />
+            case "json-xml-formatter":
+                return <JsonXmlFormatter />
+            case "seo-analyzer":
+                return <SeoAnalyzer />
+            case "pagespeed-analyzer":
+                return <PageSpeedAnalyzer />
             /*  case "api-inspector":
                  return <ApiResponseInspector /> */
             default:
@@ -434,7 +446,7 @@ export default function ToolPage() {
             <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8"> {/* Narrowed max-width for focus */}
                 {renderToolComponent()}
             </main>
-
+            <div id="container-d7335c49fed82ef151c040dd10690d7e"></div>
             {/* Footer */}
             <footer className="border-t bg-card mt-16">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

@@ -36,6 +36,7 @@ const ALL_TOOLS = [
   // Voice Hub Tools
   {
     id: "speech-to-text",
+    featured: true,
     name: "Speech to Text",
     category: "voice",
     description: "Convert audio files to text",
@@ -47,6 +48,7 @@ const ALL_TOOLS = [
     id: "text-to-speech",
     name: "Text to Speech",
     category: "voice",
+    featured: true,
     description: "Convert text to audio",
     icon: Volume2,
     keywords: ["text", "speech", "voice", "audio", "tts"],
@@ -55,6 +57,7 @@ const ALL_TOOLS = [
   {
     id: "audio-converter",
     name: "Audio Converter",
+    featured: false,
     category: "voice",
     description: "Convert between audio formats",
     icon: AudioWaveform,
@@ -65,6 +68,7 @@ const ALL_TOOLS = [
     id: "subtitle-generator",
     name: "Subtitle Generator",
     category: "voice",
+    featured: false,
     description: "Generate subtitles from audio",
     icon: FileText,
     keywords: ["subtitle", "captions", "srt", "audio", "video"],
@@ -74,6 +78,9 @@ const ALL_TOOLS = [
     id: "audio-trimmer",
     name: "Audio Trimmer",
     category: "voice",
+
+    featured: false,
+
     description: "Trim and edit audio files",
     icon: Scissors,
     keywords: ["audio", "trim", "cut", "edit"],
@@ -84,6 +91,8 @@ const ALL_TOOLS = [
   {
     id: "file-converter",
     name: "File Converter",
+    featured: false,
+
     category: "document",
     description: "Convert between document formats",
     icon: RefreshCw,
@@ -96,6 +105,8 @@ const ALL_TOOLS = [
     category: "document",
     description: "Compress PDF files",
     icon: Settings,
+    featured: true,
+
     keywords: ["pdf", "compress", "reduce", "size"],
     tabValue: "compress",
   },
@@ -103,6 +114,8 @@ const ALL_TOOLS = [
     id: "pdf-split",
     name: "PDF Splitter",
     category: "document",
+    featured: false,
+
     description: "Split PDF into multiple files",
     icon: Scissors,
     keywords: ["pdf", "split", "divide", "pages"],
@@ -112,6 +125,8 @@ const ALL_TOOLS = [
     id: "pdf-merge",
     name: "PDF Merger",
     category: "document",
+    featured: false,
+
     description: "Merge multiple PDFs",
     icon: Copy,
     keywords: ["pdf", "merge", "combine", "join"],
@@ -122,6 +137,8 @@ const ALL_TOOLS = [
   {
     id: "proposal-generator",
     name: "Proposal Generator",
+    featured: false,
+
     category: "business",
     description: "Generate business proposals",
     icon: FileText,
@@ -130,6 +147,8 @@ const ALL_TOOLS = [
   },
   {
     id: "invoice-generator",
+    featured: false,
+
     name: "Invoice Generator",
     category: "business",
     description: "Create professional invoices",
@@ -141,6 +160,8 @@ const ALL_TOOLS = [
     id: "meeting-notes",
     name: "Meeting Notes",
     category: "business",
+    featured: false,
+
     description: "Generate meeting notes from audio",
     icon: Mic,
     keywords: ["meeting", "notes", "transcribe", "business"],
@@ -151,6 +172,8 @@ const ALL_TOOLS = [
   {
     id: "image-compress",
     name: "Image Compressor",
+    featured: false,
+
     category: "visual",
     description: "Compress images while maintaining quality",
     icon: Zap,
@@ -160,6 +183,8 @@ const ALL_TOOLS = [
   {
     id: "image-resize",
     name: "Image Resizer",
+    featured: true,
+
     category: "visual",
     description: "Resize images to specific dimensions",
     icon: Maximize2,
@@ -170,6 +195,8 @@ const ALL_TOOLS = [
     id: "image-crop",
     name: "Image Cropper",
     category: "visual",
+    featured: false,
+
     description: "Crop images to specific areas",
     icon: Scissors,
     keywords: ["image", "crop", "cut", "trim"],
@@ -178,6 +205,8 @@ const ALL_TOOLS = [
   {
     id: "image-convert",
     name: "Image Converter",
+    featured: false,
+
     category: "visual",
     description: "Convert between image formats",
     icon: RefreshCw,
@@ -187,6 +216,8 @@ const ALL_TOOLS = [
   {
     id: "background-remove",
     name: "Background Remover",
+    featured: false,
+
     category: "visual",
     description: "Remove backgrounds from images",
     icon: Palette,
@@ -198,6 +229,8 @@ const ALL_TOOLS = [
   {
     id: "file-scanner",
     name: "File Scanner",
+    featured: false,
+
     category: "security",
     description: "Scan files for viruses and malware",
     icon: Shield,
@@ -206,6 +239,8 @@ const ALL_TOOLS = [
   },
   {
     id: "url-scanner",
+    featured: false,
+
     name: "URL Scanner",
     category: "security",
     description: "Check URLs for malicious content",
@@ -237,10 +272,13 @@ const ALL_TOOLS = [
     id: "url-shortener",
     name: "URL Shortener",
     category: "utility",
+    featured: true,
+
     description: "Create short, shareable links from long URLs",
     icon: Link,
     keywords: ["url", "shortener", "link", "utility"],
     tabValue: "url-shortener",
+    isNew: true,
   },
   {
     id: "token-counter",
@@ -250,6 +288,42 @@ const ALL_TOOLS = [
     icon: Settings,
     keywords: ["token", "counter", "llm", "ai"],
     tabValue: "token-counter",
+  },
+  {
+    id: "json-xml-formatter",
+    featured: true,
+
+    name: "JSON/XML Formatter",
+    category: "utility",
+    description: "Format, validate, and minify JSON or XML content",
+    icon: Settings,
+    keywords: ["json", "xml", "formatter", "validator", "minify", "format"],
+    tabValue: "json-xml-formatter",
+    isNew: true,
+  },
+  {
+    id: "seo-analyzer",
+    name: "SEO Analyzer",
+    category: "utility",
+    featured: true,
+
+    description: "Analyze website SEO with AI-powered insights",
+    icon: Settings,
+    keywords: ["seo", "analyzer", "website", "optimization", "ai", "search"],
+    tabValue: "seo-analyzer",
+    isNew: true,
+  },
+  {
+    id: "pagespeed-analyzer",
+    name: "PageSpeed Insights",
+    featured: true,
+
+    category: "utility",
+    description: "Analyze website performance with Google PageSpeed Insights",
+    icon: Settings,
+    keywords: ["pagespeed", "performance", "speed", "insights", "google", "lighthouse", "web vitals"],
+    tabValue: "pagespeed-analyzer",
+    isNew: true,
   },
   /*  {
     id: "hash-generator",
@@ -339,6 +413,16 @@ const LayoutTest = () => {
       );
     }
 
+    // Sort by featured status (featured tools first), then alphabetically
+    filtered = filtered.sort((a, b) => {
+      // Featured tools come first
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+
+      // If both are featured or both are not featured, sort alphabetically
+      return a.name.localeCompare(b.name);
+    });
+
     return filtered;
   }, [searchQuery, selectedCategories]);
 
@@ -396,6 +480,9 @@ const LayoutTest = () => {
       // Utility Hub Tools
       "url-shortener": "/tools/url-shortener",
       "token-counter": "/tools/token-counter",
+      "json-xml-formatter": "/tools/json-xml-formatter",
+      "seo-analyzer": "/tools/seo-analyzer",
+      "pagespeed-analyzer": "/tools/pagespeed-analyzer",
       //'hash-generator': '/tools/hash-generator',
       //'api-inspector': '/tools/api-inspector',
     };
@@ -533,9 +620,16 @@ const LayoutTest = () => {
               return (
                 <Card
                   key={tool.id}
-                  className="hover:shadow-md dark:hover:border dark:hover:border-blue-500 transition-all cursor-pointer"
+                  className="hover:shadow-md dark:hover:border dark:hover:border-blue-500 transition-all cursor-pointer relative"
                   onClick={() => handleToolClick(tool)}
                 >
+                  {tool.isNew && (
+                    <div className="absolute top-2 right-2">
+                      <Badge className="bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[8px] px-2 py-0.5 border-0">
+                        NEW
+                      </Badge>
+                    </div>
+                  )}
                   <CardContent>
                     <div className="flex items-center justify-center ">
                       <div className="flex items-center justify-center flex-col  gap-2">
@@ -549,7 +643,7 @@ const LayoutTest = () => {
                           <h3 className="font-semibold text-zinc-900 dark:text-white text-sm">
                             {tool.name}
                           </h3>
-                          <p className="text-xs text-zinc-600 dark:text-zinc-400 mb-3">
+                          <p className="text-xs text-center text-zinc-600 dark:text-zinc-400 mb-3">
                             {tool.description}
                           </p>
                         </div>
