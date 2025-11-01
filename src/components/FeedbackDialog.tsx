@@ -77,7 +77,7 @@ ${formData.name}
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="max-w-md">
+            <DialogContent className="max-w-md dark:bg-zinc-800">
                 <DialogHeader>
                     <DialogTitle className="flex items-center gap-2">
                         <MessageSquare className="h-5 w-5 text-primary" />
@@ -93,7 +93,7 @@ ${formData.name}
                 <form onSubmit={handleSubmit} className="space-y-4 p-6 pt-0">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <Label htmlFor="name">Your Name *</Label>
+                            <Label className='dark:text-zinc-400' htmlFor="name">Your Name *</Label>
                             <Input
                                 id="name"
                                 name="name"
@@ -101,11 +101,11 @@ ${formData.name}
                                 onChange={handleInputChange}
                                 placeholder="John Doe"
                                 required
-                                className="mt-1"
+                                className="mt-1 dark:text-zinc-300"
                             />
                         </div>
                         <div>
-                            <Label htmlFor="email">Your Email *</Label>
+                            <Label className='dark:text-zinc-400' htmlFor="email">Your Email *</Label>
                             <Input
                                 id="email"
                                 name="email"
@@ -114,19 +114,19 @@ ${formData.name}
                                 onChange={handleInputChange}
                                 placeholder="john@example.com"
                                 required
-                                className="mt-1"
+                                className="mt-1 dark:text-zinc-300"
                             />
                         </div>
                     </div>
 
                     <div>
-                        <Label htmlFor="feedbackType">Feedback Type *</Label>
+                        <Label className='dark:text-zinc-400' htmlFor="feedbackType">Feedback Type *</Label>
                         <Select value={formData.feedbackType} onValueChange={handleSelectChange}>
                             <SelectTrigger className="mt-1">
                                 <SelectValue placeholder="Select feedback type" />
                             </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="bug-report">Bug Report</SelectItem>
+                            <SelectContent className='dark:text-zinc-300'>
+                                <SelectItem value="bug-report" className='dark:text-zinc-300'>Bug Report</SelectItem>
                                 <SelectItem value="feature-request">Feature Request</SelectItem>
                                 <SelectItem value="improvement">Improvement Suggestion</SelectItem>
                                 <SelectItem value="compliment">Compliment</SelectItem>
@@ -137,7 +137,7 @@ ${formData.name}
                     </div>
 
                     <div>
-                        <Label htmlFor="subject">Subject *</Label>
+                        <Label className='dark:text-zinc-400' htmlFor="subject">Subject *</Label>
                         <Input
                             id="subject"
                             name="subject"
@@ -145,12 +145,12 @@ ${formData.name}
                             onChange={handleInputChange}
                             placeholder="Brief description of your feedback"
                             required
-                            className="mt-1"
+                            className="mt-1 dark:text-zinc-300"
                         />
                     </div>
 
                     <div>
-                        <Label htmlFor="message">Your Message *</Label>
+                        <Label className='dark:text-zinc-400' htmlFor="message">Your Message *</Label>
                         <Textarea
                             id="message"
                             name="message"
@@ -158,7 +158,7 @@ ${formData.name}
                             onChange={handleInputChange}
                             placeholder="Please share your detailed feedback, suggestions, or describe any issues you've encountered..."
                             required
-                            className="mt-1 min-h-[100px]"
+                            className="mt-1 min-h-[100px] dark:text-zinc-300"
                         />
                     </div>
 

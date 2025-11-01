@@ -1,10 +1,26 @@
 // Usage tracking service for monitoring API costs and usage
 
+type ToolType =
+    // Voice tools
+    | 'speech-to-text' | 'text-to-speech' | 'audio-converter' | 'subtitle-generator' | 'audio-trimmer'
+    // Document tools
+    | 'file-converter' | 'pdf-compress' | 'pdf-split' | 'pdf-merge'
+    // Business tools
+    | 'proposal-generator' | 'invoice-generator' | 'meeting-notes'
+    // Visual tools
+    | 'image-compress' | 'image-resize' | 'image-crop' | 'image-convert' | 'background-remove'
+    // Security tools
+    | 'file-scanner' | 'url-scanner'
+    // Utility tools
+    | 'url-shortener' | 'token-counter'
+    // Legacy types
+    | 'transcribe' | 'tts' | 'voice-models';
+
 interface UsageRecord {
     id: string;
     timestamp: number;
-    type: 'transcribe' | 'tts' | 'voice-models';
-    service: 'deepgram' | 'fallback' | 'browser';
+    type: ToolType;
+    service: 'deepgram' | 'fallback' | 'browser' | 'client' | 'api';
     metadata: {
         fileSize?: number;
         textLength?: number;
@@ -17,24 +33,26 @@ interface UsageRecord {
     estimatedCost: number; // in USD cents
 }
 
+interface ToolUsage {
+    count: number;
+    totalFileSize?: number;
+    totalDuration?: number;
+    totalCharacters?: number;
+    estimatedCost: number;
+}
+
 interface DailyUsage {
     date: string; // YYYY-MM-DD
-    transcribe: {
-        count: number;
-        totalFileSize: number;
-        totalDuration: number;
-        estimatedCost: number;
-    };
-    tts: {
-        count: number;
-        totalCharacters: number;
-        estimatedCost: number;
-    };
-    voiceModels: {
-        count: number;
-        estimatedCost: number;
+    // Legacy fields for backward compatibility
+    transcribe: ToolUsage;
+    tts: ToolUsage;
+    voiceModels: ToolUsage;
+    // New tool-specific tracking
+    tools: {
+        [key: string]: ToolUsage;
     };
     totalCost: number;
+    totalRequests: number;
 }
 
 interface UsageStats {
@@ -165,8 +183,8 @@ export class UsageTracker {
 
     // Track a usage event
     trackUsage(
-        type: 'transcribe' | 'tts' | 'voice-models',
-        service: 'deepgram' | 'fallback' | 'browser',
+        type: ToolType,
+        service: 'deepgram' | 'fallback' | 'browser' | 'client' | 'api',
         metadata: UsageRecord['metadata']
     ): string {
         const id = `${type}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -176,17 +194,25 @@ export class UsageTracker {
         // Calculate estimated cost
         switch (type) {
             case 'transcribe':
+            case 'speech-to-text':
+            case 'subtitle-generator':
+            case 'meeting-notes':
                 if (metadata.fileSize) {
                     estimatedCost = this.calculateTranscribeCost(metadata.fileSize, metadata.duration);
                 }
                 break;
             case 'tts':
+            case 'text-to-speech':
                 if (metadata.textLength) {
                     estimatedCost = this.calculateTTSCost(metadata.textLength);
                 }
                 break;
             case 'voice-models':
                 estimatedCost = COST_ESTIMATES.voiceModels.perRequest;
+                break;
+            // All other tools are free (client-side processing)
+            default:
+                estimatedCost = 0;
                 break;
         }
 
@@ -229,21 +255,43 @@ export class UsageTracker {
                     transcribe: { count: 0, totalFileSize: 0, totalDuration: 0, estimatedCost: 0 },
                     tts: { count: 0, totalCharacters: 0, estimatedCost: 0 },
                     voiceModels: { count: 0, estimatedCost: 0 },
-                    totalCost: 0
+                    tools: {},
+                    totalCost: 0,
+                    totalRequests: 0
                 };
             }
 
             const todayStats = dailyStats[today];
 
-            // Update stats based on record type
+            // Initialize tool stats if not exists
+            if (!todayStats.tools[record.type]) {
+                todayStats.tools[record.type] = {
+                    count: 0,
+                    totalFileSize: 0,
+                    totalDuration: 0,
+                    totalCharacters: 0,
+                    estimatedCost: 0
+                };
+            }
+
+            // Update tool-specific stats
+            todayStats.tools[record.type].count++;
+            todayStats.tools[record.type].totalFileSize = (todayStats.tools[record.type].totalFileSize || 0) + (record.metadata.fileSize || 0);
+            todayStats.tools[record.type].totalDuration = (todayStats.tools[record.type].totalDuration || 0) + (record.metadata.duration || 0);
+            todayStats.tools[record.type].totalCharacters = (todayStats.tools[record.type].totalCharacters || 0) + (record.metadata.textLength || 0);
+            todayStats.tools[record.type].estimatedCost += record.estimatedCost;
+
+            // Update legacy stats for backward compatibility
             switch (record.type) {
                 case 'transcribe':
+                case 'speech-to-text':
                     todayStats.transcribe.count++;
                     todayStats.transcribe.totalFileSize += record.metadata.fileSize || 0;
                     todayStats.transcribe.totalDuration += record.metadata.duration || 0;
                     todayStats.transcribe.estimatedCost += record.estimatedCost;
                     break;
                 case 'tts':
+                case 'text-to-speech':
                     todayStats.tts.count++;
                     todayStats.tts.totalCharacters += record.metadata.textLength || 0;
                     todayStats.tts.estimatedCost += record.estimatedCost;
@@ -254,10 +302,9 @@ export class UsageTracker {
                     break;
             }
 
-            todayStats.totalCost =
-                todayStats.transcribe.estimatedCost +
-                todayStats.tts.estimatedCost +
-                todayStats.voiceModels.estimatedCost;
+            // Calculate totals
+            todayStats.totalRequests = Object.values(todayStats.tools).reduce((sum: number, tool: any) => sum + tool.count, 0);
+            todayStats.totalCost = Object.values(todayStats.tools).reduce((sum: number, tool: any) => sum + tool.estimatedCost, 0);
 
             localStorage.setItem(this.dailyStatsKey, JSON.stringify(dailyStats));
         } catch (error) {
@@ -326,7 +373,9 @@ export class UsageTracker {
                 transcribe: { count: 0, totalFileSize: 0, totalDuration: 0, estimatedCost: 0 },
                 tts: { count: 0, totalCharacters: 0, estimatedCost: 0 },
                 voiceModels: { count: 0, estimatedCost: 0 },
-                totalCost: 0
+                tools: {},
+                totalCost: 0,
+                totalRequests: 0
             };
         } catch (error) {
             console.error('Failed to get today usage:', error);
@@ -336,7 +385,9 @@ export class UsageTracker {
                 transcribe: { count: 0, totalFileSize: 0, totalDuration: 0, estimatedCost: 0 },
                 tts: { count: 0, totalCharacters: 0, estimatedCost: 0 },
                 voiceModels: { count: 0, estimatedCost: 0 },
-                totalCost: 0
+                tools: {},
+                totalCost: 0,
+                totalRequests: 0
             };
         }
     }
@@ -361,7 +412,9 @@ export class UsageTracker {
                     transcribe: { count: 0, totalFileSize: 0, totalDuration: 0, estimatedCost: 0 },
                     tts: { count: 0, totalCharacters: 0, estimatedCost: 0 },
                     voiceModels: { count: 0, estimatedCost: 0 },
-                    totalCost: 0
+                    tools: {},
+                    totalCost: 0,
+                    totalRequests: 0
                 });
             } catch (error) {
                 console.error('Failed to get weekly stats:', error);
@@ -383,7 +436,9 @@ export class UsageTracker {
                     transcribe: { count: 0, totalFileSize: 0, totalDuration: 0, estimatedCost: 0 },
                     tts: { count: 0, totalCharacters: 0, estimatedCost: 0 },
                     voiceModels: { count: 0, estimatedCost: 0 },
-                    totalCost: 0
+                    tools: {},
+                    totalCost: 0,
+                    totalRequests: 0
                 });
             } catch (error) {
                 console.error('Failed to get monthly stats:', error);

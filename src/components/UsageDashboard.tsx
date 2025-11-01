@@ -15,9 +15,10 @@ interface UsageStats {
 interface UsageDashboardProps {
     isOpen: boolean;
     onClose: () => void;
+    isAdmin?: boolean;
 }
 
-export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps) {
+export default function UsageDashboard({ isOpen, onClose, isAdmin = false }: UsageDashboardProps) {
     const [usageTracker] = useState(() => new UsageTracker());
     const [stats, setStats] = useState<UsageStats | null>(null);
     const [limits, setLimits] = useState<any>(null);
@@ -73,15 +74,23 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
 
     if (!isOpen) return null;
 
+    const containerClasses = isAdmin
+        ? "bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl w-full"
+        : "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4";
+
+    const contentClasses = isAdmin
+        ? "w-full"
+        : "bg-white dark:bg-zinc-900 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto";
+
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white dark:text-zinc-900 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div className={containerClasses}>
+            <div className={contentClasses}>
                 {/* Header */}
-                <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700">
+                <div className={`flex items-center justify-between p-6 ${isAdmin ? 'border-b border-zinc-700' : 'border-b border-slate-200 dark:border-slate-700'}`}>
                     <div className="flex items-center space-x-3">
-                        <BarChart3 size={24} className="text-blue-600" />
-                        <h2 className="text-xl font-semibold text-zinc-900 dark:text-white">
-                            Usage & Cost Tracking
+                        <BarChart3 size={24} className={isAdmin ? "text-zinc-400" : "text-blue-600"} />
+                        <h2 className={`text-xl font-semibold ${isAdmin ? 'text-white' : 'text-zinc-900 dark:text-white'}`}>
+                            {isAdmin ? 'Usage & Analytics Dashboard' : 'Usage & Cost Tracking'}
                         </h2>
                     </div>
                     <div className="flex items-center space-x-2">
@@ -92,13 +101,15 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
                         >
                             <Settings size={20} />
                         </Button>
-                        <Button
-                            onClick={onClose}
-                            variant="ghost"
-                            size="icon"
-                        >
-                            ✕
-                        </Button>
+                        {!isAdmin && (
+                            <Button
+                                onClick={onClose}
+                                variant="ghost"
+                                size="icon"
+                            >
+                                ✕
+                            </Button>
+                        )}
                     </div>
                 </div>
 
@@ -131,76 +142,196 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
                                     Today's Usage
                                 </h3>
 
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                                    {/* Transcription */}
-                                    <div className="text-zinc-50 dark:text-zinc-800 rounded-lg p-4">
-                                        <h4 className="font-medium text-zinc-900 dark:text-white mb-2">Speech-to-Text</h4>
+                                <div className={`grid grid-cols-1 ${isAdmin ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-4 mb-6`}>
+                                    {/* Speech-to-Text */}
+                                    <div className={`${isAdmin ? 'bg-zinc-700 border border-zinc-600' : 'bg-zinc-50 dark:bg-zinc-800'} rounded-lg p-4`}>
+                                        <h4 className={`font-medium ${isAdmin ? 'text-white' : 'text-zinc-900 dark:text-white'} mb-2`}>Speech-to-Text</h4>
                                         <div className="space-y-1 text-sm">
                                             <div className="flex justify-between">
-                                                <span className="text-zinc-600 dark:text-zinc-400">Requests:</span>
+                                                <span className={isAdmin ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'}>Requests:</span>
                                                 <span className="font-medium">{stats.today.transcribe.count}</span>
                                             </div>
                                             <div className="flex justify-between">
-                                                <span className="text-zinc-600 dark:text-zinc-400">File Size:</span>
+                                                <span className={isAdmin ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'}>File Size:</span>
                                                 <span className="font-medium">{formatFileSize(stats.today.transcribe.totalFileSize)}</span>
                                             </div>
                                             <div className="flex justify-between">
-                                                <span className="text-zinc-600 dark:text-zinc-400">Est. Cost:</span>
-                                                <span className="font-medium text-green-600">{formatCurrency(stats.today.transcribe.estimatedCost)}</span>
+                                                <span className={isAdmin ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'}>Est. Cost:</span>
+                                                <span className="font-medium text-green-400">${formatCurrency(stats.today.transcribe.estimatedCost)}</span>
                                             </div>
                                         </div>
                                     </div>
 
-                                    {/* TTS */}
-                                    <div className="text-zinc-50 dark:text-zinc-800 rounded-lg p-4">
-                                        <h4 className="font-medium text-zinc-900 dark:text-white mb-2">Text-to-Speech</h4>
+                                    {/* Text-to-Speech */}
+                                    <div className={`${isAdmin ? 'bg-zinc-700 border border-zinc-600' : 'bg-zinc-50 dark:bg-zinc-800'} rounded-lg p-4`}>
+                                        <h4 className={`font-medium ${isAdmin ? 'text-white' : 'text-zinc-900 dark:text-white'} mb-2`}>Text-to-Speech</h4>
                                         <div className="space-y-1 text-sm">
                                             <div className="flex justify-between">
-                                                <span className="text-zinc-600 dark:text-zinc-400">Requests:</span>
+                                                <span className={isAdmin ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'}>Requests:</span>
                                                 <span className="font-medium">{stats.today.tts.count}</span>
                                             </div>
                                             <div className="flex justify-between">
-                                                <span className="text-zinc-600 dark:text-zinc-400">Characters:</span>
+                                                <span className={isAdmin ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'}>Characters:</span>
                                                 <span className="font-medium">{stats.today.tts.totalCharacters.toLocaleString()}</span>
                                             </div>
                                             <div className="flex justify-between">
-                                                <span className="text-zinc-600 dark:text-zinc-400">Est. Cost:</span>
-                                                <span className="font-medium text-green-600">{formatCurrency(stats.today.tts.estimatedCost)}</span>
+                                                <span className={isAdmin ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'}>Est. Cost:</span>
+                                                <span className="font-medium text-green-400">${formatCurrency(stats.today.tts.estimatedCost)}</span>
                                             </div>
                                         </div>
                                     </div>
 
+                                    {/* Voice Models (if admin) */}
+                                    {isAdmin && (
+                                        <div className="bg-zinc-700 border border-zinc-600 rounded-lg p-4">
+                                            <h4 className="font-medium text-white mb-2">Voice Models</h4>
+                                            <div className="space-y-1 text-sm">
+                                                <div className="flex justify-between">
+                                                    <span className="text-zinc-300">Requests:</span>
+                                                    <span className="font-medium">{stats.today.voiceModels?.count || 0}</span>
+                                                </div>
+                                                <div className="flex justify-between">
+                                                    <span className="text-zinc-300">Processing:</span>
+                                                    <span className="font-medium">{stats.today.voiceModels?.totalProcessingTime || 0}s</span>
+                                                </div>
+                                                <div className="flex justify-between">
+                                                    <span className="text-zinc-300">Est. Cost:</span>
+                                                    <span className="font-medium text-green-400">${formatCurrency(stats.today.voiceModels?.estimatedCost || 0)}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
                                     {/* Total */}
-                                    <div className="bg-blue-50 dark:bg-blue-950/20 rounded-lg p-4">
-                                        <h4 className="font-medium text-blue-900 dark:text-blue-100 mb-2">Total Today</h4>
+                                    <div className={`${isAdmin ? 'bg-zinc-600 border border-zinc-500' : 'bg-blue-50 dark:bg-blue-950/20'} rounded-lg p-4`}>
+                                        <h4 className={`font-medium ${isAdmin ? 'text-white' : 'text-blue-900 dark:text-blue-100'} mb-2`}>Total Today</h4>
                                         <div className="space-y-1 text-sm">
                                             <div className="flex justify-between">
-                                                <span className="text-blue-700 dark:text-blue-300">All Requests:</span>
-                                                <span className="font-medium">{stats.today.transcribe.count + stats.today.tts.count + stats.today.voiceModels.count}</span>
+                                                <span className={isAdmin ? 'text-zinc-200' : 'text-blue-700 dark:text-blue-300'}>All Requests:</span>
+                                                <span className="font-medium">{stats.today.totalRequests || (stats.today.transcribe.count + stats.today.tts.count + (stats.today.voiceModels?.count || 0))}</span>
                                             </div>
                                             <div className="flex justify-between">
-                                                <span className="text-blue-700 dark:text-blue-300">Est. Cost:</span>
-                                                <span className="font-bold text-blue-900 dark:text-blue-100 text-lg">{formatCurrency(stats.today.totalCost)}</span>
+                                                <span className={isAdmin ? 'text-zinc-200' : 'text-blue-700 dark:text-blue-300'}>Est. Cost:</span>
+                                                <span className={`font-bold text-lg ${isAdmin ? 'text-green-400' : 'text-blue-900 dark:text-blue-100'}`}>${formatCurrency(stats.today.totalCost)}</span>
                                             </div>
                                             {limits && (
                                                 <div className="flex justify-between">
-                                                    <span className="text-blue-700 dark:text-blue-300">Daily Limit:</span>
-                                                    <span className="font-medium">{formatCurrency(limits.total.maxCostCents)}</span>
+                                                    <span className={isAdmin ? 'text-zinc-200' : 'text-blue-700 dark:text-blue-300'}>Daily Limit:</span>
+                                                    <span className="font-medium">${formatCurrency(limits.total.maxCostCents)}</span>
                                                 </div>
                                             )}
                                         </div>
                                     </div>
                                 </div>
 
+                                {/* All Tools Usage (Admin Only) */}
+                                {isAdmin && (() => {
+                                    // Define all available tools
+                                    const allTools = [
+                                        { id: 'speech-to-text', name: 'Speech to Text', category: 'Voice' },
+                                        { id: 'text-to-speech', name: 'Text to Speech', category: 'Voice' },
+                                        { id: 'audio-converter', name: 'Audio Converter', category: 'Voice' },
+                                        { id: 'subtitle-generator', name: 'Subtitle Generator', category: 'Voice' },
+                                        { id: 'audio-trimmer', name: 'Audio Trimmer', category: 'Voice' },
+                                        { id: 'file-converter', name: 'File Converter', category: 'Document' },
+                                        { id: 'pdf-compress', name: 'PDF Compressor', category: 'Document' },
+                                        { id: 'pdf-split', name: 'PDF Splitter', category: 'Document' },
+                                        { id: 'pdf-merge', name: 'PDF Merger', category: 'Document' },
+                                        { id: 'proposal-generator', name: 'Proposal Generator', category: 'Business' },
+                                        { id: 'invoice-generator', name: 'Invoice Generator', category: 'Business' },
+                                        { id: 'meeting-notes', name: 'Meeting Notes', category: 'Business' },
+                                        { id: 'image-compress', name: 'Image Compressor', category: 'Visual' },
+                                        { id: 'image-resize', name: 'Image Resizer', category: 'Visual' },
+                                        { id: 'image-crop', name: 'Image Cropper', category: 'Visual' },
+                                        { id: 'image-convert', name: 'Image Converter', category: 'Visual' },
+                                        { id: 'background-remove', name: 'Background Remover', category: 'Visual' },
+                                        { id: 'file-scanner', name: 'File Scanner', category: 'Security' },
+                                        { id: 'url-scanner', name: 'URL Scanner', category: 'Security' },
+                                        { id: 'url-shortener', name: 'URL Shortener', category: 'Utility' },
+                                        { id: 'token-counter', name: 'Token Counter', category: 'Utility' },
+                                    ];
+
+                                    // Merge with actual usage data
+                                    const toolsWithUsage = allTools.map(tool => {
+                                        const usage = stats.today.tools?.[tool.id] || {
+                                            count: 0,
+                                            totalFileSize: 0,
+                                            totalCharacters: 0,
+                                            estimatedCost: 0
+                                        };
+                                        return { ...tool, usage };
+                                    });
+
+                                    // Sort by usage count (most used first)
+                                    const sortedTools = toolsWithUsage.sort((a, b) => b.usage.count - a.usage.count);
+
+                                    // Group by category
+                                    const categories = ['Voice', 'Document', 'Business', 'Visual', 'Security', 'Utility'];
+
+                                    return (
+                                        <div className="mt-6">
+                                            <h4 className="text-md font-semibold text-white mb-3">All Tools Usage Today</h4>
+                                            <div className="space-y-4">
+                                                {categories.map(category => {
+                                                    const categoryTools = sortedTools.filter(t => t.category === category);
+                                                    return (
+                                                        <div key={category}>
+                                                            <h5 className="text-sm font-medium text-zinc-400 mb-2">{category} Tools</h5>
+                                                            <div className="bg-zinc-700 border border-zinc-600 rounded-lg p-4">
+                                                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                                                                    {categoryTools.map(tool => (
+                                                                        <div
+                                                                            key={tool.id}
+                                                                            className={`${tool.usage.count > 0 ? 'bg-zinc-600 border-zinc-500' : 'bg-zinc-700 border-zinc-600'} border rounded p-3`}
+                                                                        >
+                                                                            <div className="flex justify-between items-start mb-2">
+                                                                                <span className={`text-sm font-medium ${tool.usage.count > 0 ? 'text-white' : 'text-zinc-400'}`}>
+                                                                                    {tool.name}
+                                                                                </span>
+                                                                                <span className={`text-xs px-2 py-1 rounded ${tool.usage.count > 0 ? 'bg-zinc-700 text-zinc-300' : 'bg-zinc-600 text-zinc-500'}`}>
+                                                                                    {tool.usage.count}
+                                                                                </span>
+                                                                            </div>
+                                                                            {tool.usage.count > 0 && (
+                                                                                <>
+                                                                                    {tool.usage.totalFileSize > 0 && (
+                                                                                        <div className="text-xs text-zinc-300">
+                                                                                            Size: {formatFileSize(tool.usage.totalFileSize)}
+                                                                                        </div>
+                                                                                    )}
+                                                                                    {tool.usage.totalCharacters > 0 && (
+                                                                                        <div className="text-xs text-zinc-300">
+                                                                                            Chars: {tool.usage.totalCharacters.toLocaleString()}
+                                                                                        </div>
+                                                                                    )}
+                                                                                    {tool.usage.estimatedCost > 0 && (
+                                                                                        <div className="text-xs text-green-400 mt-1">
+                                                                                            Cost: ${formatCurrency(tool.usage.estimatedCost)}
+                                                                                        </div>
+                                                                                    )}
+                                                                                </>
+                                                                            )}
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    );
+                                })()}
+
                                 {/* Progress Bars */}
                                 {limits && (
-                                    <div className="space-y-3">
+                                    <div className="space-y-3 mt-6">
                                         <div>
                                             <div className="flex justify-between text-sm mb-1">
-                                                <span className="text-zinc-600 dark:text-zinc-400">Daily Cost Progress</span>
+                                                <span className={isAdmin ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'}>Daily Cost Progress</span>
                                                 <span className="font-medium">{((stats.today.totalCost / limits.total.maxCostCents) * 100).toFixed(1)}%</span>
                                             </div>
-                                            <div className="w-full text-zinc-200 dark:text-zinc-700 rounded-full h-2">
+                                            <div className="w-full bg-zinc-700 rounded-full h-2">
                                                 <div
                                                     className={`h-2 rounded-full transition-all duration-300 ${stats.today.totalCost >= limits.total.maxCostCents ? 'bg-red-500' :
                                                         stats.today.totalCost >= limits.total.maxCostCents * 0.8 ? 'bg-yellow-500' :
@@ -221,27 +352,27 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
                                     7-Day Trend
                                 </h3>
 
-                                <div className="text-zinc-50 dark:text-zinc-800 rounded-lg p-4">
+                                <div className={`${isAdmin ? 'bg-zinc-700 border border-zinc-600' : 'bg-zinc-50 dark:bg-zinc-800'} rounded-lg p-4`}>
                                     <div className="grid grid-cols-7 gap-2 mb-2">
                                         {stats.thisWeek.map((day, index) => (
                                             <div key={index} className="text-center">
-                                                <div className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">
+                                                <div className={`text-xs ${isAdmin ? 'text-zinc-400' : 'text-zinc-500 dark:text-zinc-400'} mb-1`}>
                                                     {new Date(day.date).toLocaleDateString('en-US', { weekday: 'short' })}
                                                 </div>
-                                                <div className="bg-white dark:text-zinc-700 rounded p-2">
-                                                    <div className="text-xs font-medium text-zinc-900 dark:text-white">
-                                                        {formatCurrency(day.totalCost)}
+                                                <div className={`${isAdmin ? 'bg-zinc-600 border border-zinc-500' : 'bg-white dark:bg-zinc-700'} rounded p-2`}>
+                                                    <div className={`text-xs font-medium ${isAdmin ? 'text-white' : 'text-zinc-900 dark:text-white'}`}>
+                                                        ${formatCurrency(day.totalCost)}
                                                     </div>
-                                                    <div className="text-xs text-zinc-500 dark:text-zinc-400">
-                                                        {day.transcribe.count + day.tts.count} req
+                                                    <div className={`text-xs ${isAdmin ? 'text-zinc-300' : 'text-zinc-500 dark:text-zinc-400'}`}>
+                                                        {day.transcribe.count + day.tts.count + (day.voiceModels?.count || 0)} req
                                                     </div>
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
 
-                                    <div className="text-sm text-zinc-600 dark:text-zinc-400 text-center">
-                                        Weekly Total: {formatCurrency(stats.thisWeek.reduce((sum, day) => sum + day.totalCost, 0))}
+                                    <div className={`text-sm ${isAdmin ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'} text-center`}>
+                                        Weekly Total: ${formatCurrency(stats.thisWeek.reduce((sum, day) => sum + day.totalCost, 0))}
                                     </div>
                                 </div>
                             </div>
@@ -252,27 +383,36 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
                                     All-Time Statistics
                                 </h3>
 
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <div className="text-zinc-50 dark:text-zinc-800 rounded-lg p-4 text-center">
-                                        <div className="text-2xl font-bold text-zinc-900 dark:text-white">
+                                <div className={`grid grid-cols-1 ${isAdmin ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-4`}>
+                                    <div className={`${isAdmin ? 'bg-zinc-700 border border-zinc-600' : 'bg-zinc-50 dark:bg-zinc-800'} rounded-lg p-4 text-center`}>
+                                        <div className={`text-2xl font-bold ${isAdmin ? 'text-white' : 'text-zinc-900 dark:text-white'}`}>
                                             {stats.allTime.totalRequests.toLocaleString()}
                                         </div>
-                                        <div className="text-sm text-zinc-600 dark:text-zinc-400">Total Requests</div>
+                                        <div className={`text-sm ${isAdmin ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'}`}>Total Requests</div>
                                     </div>
 
-                                    <div className="text-zinc-50 dark:text-zinc-800 rounded-lg p-4 text-center">
-                                        <div className="text-2xl font-bold text-green-600">
-                                            {formatCurrency(stats.allTime.totalCost)}
+                                    <div className={`${isAdmin ? 'bg-zinc-700 border border-zinc-600' : 'bg-zinc-50 dark:bg-zinc-800'} rounded-lg p-4 text-center`}>
+                                        <div className="text-2xl font-bold text-green-400">
+                                            ${formatCurrency(stats.allTime.totalCost)}
                                         </div>
-                                        <div className="text-sm text-zinc-600 dark:text-zinc-400">Total Estimated Cost</div>
+                                        <div className={`text-sm ${isAdmin ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'}`}>Total Estimated Cost</div>
                                     </div>
 
-                                    <div className="text-zinc-50 dark:text-zinc-800 rounded-lg p-4 text-center">
-                                        <div className="text-2xl font-bold text-zinc-900 dark:text-white">
+                                    <div className={`${isAdmin ? 'bg-zinc-700 border border-zinc-600' : 'bg-zinc-50 dark:bg-zinc-800'} rounded-lg p-4 text-center`}>
+                                        <div className={`text-2xl font-bold ${isAdmin ? 'text-white' : 'text-zinc-900 dark:text-white'}`}>
                                             {Math.ceil((Date.now() - new Date(stats.allTime.firstUsage).getTime()) / (1000 * 60 * 60 * 24))}
                                         </div>
-                                        <div className="text-sm text-zinc-600 dark:text-zinc-400">Days Using SpeechFlow</div>
+                                        <div className={`text-sm ${isAdmin ? 'text-zinc-300' : 'text-zinc-600 dark:text-zinc-400'}`}>Days Active</div>
                                     </div>
+
+                                    {isAdmin && (
+                                        <div className="bg-zinc-700 border border-zinc-600 rounded-lg p-4 text-center">
+                                            <div className="text-2xl font-bold text-blue-400">
+                                                {stats.allTime.uniqueUsers || 'N/A'}
+                                            </div>
+                                            <div className="text-sm text-zinc-300">Unique Users</div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </>
@@ -326,4 +466,4 @@ export default function UsageDashboard({ isOpen, onClose }: UsageDashboardProps)
             </div>
         </div>
     );
-}
+}   

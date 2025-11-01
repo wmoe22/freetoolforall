@@ -72,9 +72,48 @@ export default function LazyUsageDashboardWrapper({ isOpen, onClose }: LazyUsage
 // Admin version without modal overlay
 export function AdminUsageDashboard() {
     return (
-        <Suspense fallback={<UsageDashboardSkeleton />}>
-            <LazyUsageDashboard isOpen={true} onClose={() => { }} />
-        </Suspense>
+        <div className="w-full max-w-7xl mx-auto">
+            <Suspense fallback={<AdminUsageDashboardSkeleton />}>
+                <LazyUsageDashboard isOpen={true} onClose={() => { }} isAdmin={true} />
+            </Suspense>
+        </div>
+    );
+}
+
+// Admin-specific loading skeleton
+function AdminUsageDashboardSkeleton() {
+    return (
+        <div className="w-full max-w-7xl mx-auto">
+            <div className="bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl">
+                <div className="p-6 border-b border-zinc-700">
+                    <div className="flex items-center space-x-3">
+                        <BarChart3 size={24} className="text-zinc-400" />
+                        <h2 className="text-xl font-semibold text-white">
+                            Usage & Analytics Dashboard
+                        </h2>
+                    </div>
+                </div>
+
+                <div className="p-6">
+                    <div className="animate-pulse space-y-6">
+                        {/* Loading skeleton */}
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            {[1, 2, 3, 4].map(i => (
+                                <div key={i} className="bg-zinc-700 rounded-lg h-24"></div>
+                            ))}
+                        </div>
+
+                        <div className="bg-zinc-700 rounded-lg h-32"></div>
+
+                        <div className="grid grid-cols-7 gap-2">
+                            {[1, 2, 3, 4, 5, 6, 7].map(i => (
+                                <div key={i} className="bg-zinc-700 rounded h-16"></div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
 

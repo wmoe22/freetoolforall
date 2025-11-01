@@ -58,10 +58,10 @@ export default function AdminPage() {
 
     if (isAuthenticated) {
         return (
-            <div className="min-h-screen text-zinc-50 dark:text-zinc-900">
-                <div className="container mx-auto px-4 py-8">
-                    <div className="flex justify-between items-center mb-8">
-                        <h1 className="text-3xl font-bold text-zinc-900 dark:text-white">
+            <div className="min-h-screen bg-zinc-800 border border-zinc-700">
+                <div className="w-full px-4 py-8">
+                    <div className="flex justify-between items-center mb-8 max-w-7xl mx-auto">
+                        <h1 className="text-3xl font-bold text-white">
                             Admin Dashboard
                         </h1>
                         <Button
@@ -79,24 +79,24 @@ export default function AdminPage() {
     }
 
     return (
-        <div className="min-h-screen text-zinc-50 dark:text-zinc-900 flex items-center justify-center p-4">
-            <div className="bg-white dark:text-zinc-800 rounded-lg shadow-xl p-8 w-full max-w-md">
+        <div className="min-h-screen bg-zinc-800 border border-zinc-700 flex items-center justify-center p-4">
+            <div className="bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl p-8 w-full max-w-md">
                 <div className="flex items-center justify-center mb-8">
-                    <div className="bg-blue-100 dark:bg-blue-900 p-3 rounded-full">
-                        <Lock size={32} className="text-blue-600 dark:text-blue-400" />
+                    <div className="bg-zinc-700 border border-zinc-600 p-3 rounded-full">
+                        <Lock size={32} className="text-zinc-300" />
                     </div>
                 </div>
 
-                <h1 className="text-2xl font-bold text-center text-zinc-900 dark:text-white mb-2">
+                <h1 className="text-2xl font-bold text-center text-white mb-2">
                     Admin Access
                 </h1>
-                <p className="text-zinc-600 dark:text-zinc-400 text-center mb-8">
+                <p className="text-zinc-300 text-center mb-8">
                     Enter the admin password to access the dashboard
                 </p>
 
                 <form onSubmit={handleLogin} className="space-y-6">
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+                        <label htmlFor="password" className="block text-sm font-medium text-zinc-300 mb-2">
                             Password
                         </label>
                         <div className="relative">
@@ -124,8 +124,8 @@ export default function AdminPage() {
                     </div>
 
                     {error && (
-                        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3">
-                            <p className="text-red-600 dark:text-red-400 text-sm">{error}</p>
+                        <div className="bg-red-900/20 border border-red-800 rounded-lg p-3">
+                            <p className="text-red-400 text-sm">{error}</p>
                         </div>
                     )}
 
@@ -139,7 +139,7 @@ export default function AdminPage() {
                 </form>
 
                 <div className="mt-6 text-center">
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                    <p className="text-xs text-zinc-400">
                         Authorized personnel only
                     </p>
                 </div>

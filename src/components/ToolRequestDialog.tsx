@@ -72,7 +72,7 @@ ${formData.name}
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="max-w-md">
+            <DialogContent className="max-w-md dark:bg-zinc-800">
                 <DialogHeader>
                     <DialogTitle className="flex items-center gap-2">
                         <Mail className="h-5 w-5 text-primary" />
@@ -88,7 +88,7 @@ ${formData.name}
                 <form onSubmit={handleSubmit} className="space-y-4 p-6 pt-0">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <Label htmlFor="name">Your Name *</Label>
+                            <Label className='dark:text-zinc-400' htmlFor="name">Your Name *</Label>
                             <Input
                                 id="name"
                                 name="name"
@@ -96,11 +96,11 @@ ${formData.name}
                                 onChange={handleInputChange}
                                 placeholder="John Doe"
                                 required
-                                className="mt-1"
+                                className="mt-1 dark:text-zinc-300"
                             />
                         </div>
                         <div>
-                            <Label htmlFor="email">Your Email *</Label>
+                            <Label className='dark:text-zinc-400' htmlFor="email">Your Email *</Label>
                             <Input
                                 id="email"
                                 name="email"
@@ -109,13 +109,13 @@ ${formData.name}
                                 onChange={handleInputChange}
                                 placeholder="john@example.com"
                                 required
-                                className="mt-1"
+                                className="mt-1 dark:text-zinc-300"
                             />
                         </div>
                     </div>
 
                     <div>
-                        <Label htmlFor="toolName">Tool Name *</Label>
+                        <Label className='dark:text-zinc-400' htmlFor="toolName">Tool Name *</Label>
                         <Input
                             id="toolName"
                             name="toolName"
@@ -123,12 +123,12 @@ ${formData.name}
                             onChange={handleInputChange}
                             placeholder="e.g., QR Code Generator, Password Manager"
                             required
-                            className="mt-1"
+                            className="mt-1 dark:text-zinc-300"
                         />
                     </div>
 
                     <div>
-                        <Label htmlFor="description">Tool Description *</Label>
+                        <Label className='dark:text-zinc-400' htmlFor="description">Tool Description *</Label>
                         <Textarea
                             id="description"
                             name="description"
@@ -136,19 +136,19 @@ ${formData.name}
                             onChange={handleInputChange}
                             placeholder="Describe what this tool should do and its main features..."
                             required
-                            className="mt-1 min-h-[80px]"
+                            className="mt-1 min-h-[80px] dark:text-zinc-300"
                         />
                     </div>
 
                     <div>
-                        <Label htmlFor="useCase">Use Case</Label>
+                        <Label className='dark:text-zinc-400' htmlFor="useCase">Use Case</Label>
                         <Textarea
                             id="useCase"
                             name="useCase"
                             value={formData.useCase}
                             onChange={handleInputChange}
                             placeholder="How would you use this tool? What problem does it solve?"
-                            className="mt-1 min-h-[60px]"
+                            className="mt-1 min-h-[60px] dark:text-zinc-300"
                         />
                     </div>
 
