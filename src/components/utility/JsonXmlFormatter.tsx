@@ -173,9 +173,9 @@ export default function JsonXmlFormatter() {
 
     return (
         <div className="space-y-6">
-            <Card className="bg-zinc-800 border-zinc-700">
+            <Card className="dark:bg-zinc-800 dark:border-zinc-700">
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
+                    <CardTitle className="flex  items-center gap-2">
                         <Code2 className="h-5 w-5" />
                         JSON/XML Formatter & Validator
                     </CardTitle>
@@ -184,8 +184,8 @@ export default function JsonXmlFormatter() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                    <Tabs value={formatType} onValueChange={(v) => setFormatType(v as FormatType)}>
-                        <TabsList className="grid w-full grid-cols-2">
+                    <Tabs value={formatType} onValueChange={(v) => setFormatType(v as FormatType)} >
+                        <TabsList className="grid w-full grid-cols-2 dark:bg-zinc-900">
                             <TabsTrigger value="json" className="flex items-center gap-2">
                                 <FileJson className="h-4 w-4" />
                                 JSON
@@ -228,7 +228,7 @@ export default function JsonXmlFormatter() {
                                 setIsValid(null);
                                 setError("");
                             }}
-                            className="min-h-[200px] font-mono text-sm bg-zinc-900 border-zinc-700"
+                            className="min-h-[200px] font-mono text-sm  dark:bg-zinc-900 dark:border-zinc-700"
                         />
                     </div>
 

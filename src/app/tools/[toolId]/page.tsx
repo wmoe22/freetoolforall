@@ -108,7 +108,6 @@ export default function ToolPage() {
     // State for various tools
     const [textInput, setTextInput] = useState('');
     const [selectedVoiceModel, setSelectedVoiceModel] = useState<VoiceModel | null>(null);
-    const [showVoiceSelector, setShowVoiceSelector] = useState(false);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [isTranscribing, setIsTranscribing] = useState(false);
     const [speechCompleted, setSpeechCompleted] = useState(false);
@@ -291,8 +290,6 @@ export default function ToolPage() {
                         setTextInput={setTextInput}
                         selectedVoiceModel={selectedVoiceModel}
                         setSelectedVoiceModel={setSelectedVoiceModel}
-                        showVoiceSelector={showVoiceSelector}
-                        setShowVoiceSelector={setShowVoiceSelector}
                         isPlaying={isPlaying}
                         speechCompleted={speechCompleted}
                         handleTextToSpeech={handleTextToSpeech}
