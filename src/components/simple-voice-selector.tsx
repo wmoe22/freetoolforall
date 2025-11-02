@@ -38,8 +38,7 @@ const SimpleVoiceSelector = ({ onModelSelect, selectedModel }: SimpleVoiceSelect
     const getDisplayName = (model: VoiceModel) => {
         const name = model.metadata?.display_name || model.name || 'Unknown'
         const gender = model.gender ? ` (${model.gender})` : ''
-        const provider = model.provider ? ` - ${model.provider}` : ''
-        return `${name}${gender}${provider}`
+        return `${name}${gender}`
     }
 
     if (isLoading) {
@@ -51,6 +50,8 @@ const SimpleVoiceSelector = ({ onModelSelect, selectedModel }: SimpleVoiceSelect
             </Select>
         )
     }
+
+    console.log(data, "data")
 
     return (
         <div className="space-y-2">
